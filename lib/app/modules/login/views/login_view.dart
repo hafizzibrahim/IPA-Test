@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:maritimmuda_connect/app/modules/forgot_password/bindings/forgot_password_binding.dart';
+import 'package:maritimmuda_connect/app/modules/forgot_password/views/forgot_password_view.dart';
 import 'package:maritimmuda_connect/app/modules/main/bindings/main_binding.dart';
 import 'package:maritimmuda_connect/app/modules/main/views/main_view.dart';
 import 'package:maritimmuda_connect/app/modules/main_drawer/bindings/main_drawer_binding.dart';
@@ -121,10 +124,20 @@ class LoginView extends GetView<LoginController> {
                         const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: Text(
-                            "Forgot Password?",
-                            style:
-                                regulerText12.copyWith(color: primaryBlueColor),
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(
+                                () => const ForgotPasswordView(),
+                                transition: Transition.rightToLeft,
+                                duration: const Duration(milliseconds: 100),
+                                binding: ForgotPasswordBinding(),
+                              );
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: regulerText12.copyWith(
+                                  color: primaryBlueColor),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 35),
