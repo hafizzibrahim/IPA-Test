@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/member/views/member_view.dart';
 
 import '../../../themes.dart';
 
@@ -18,7 +20,9 @@ class ProgramCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => MemberView());
+      },
       borderRadius: BorderRadius.circular(15),
       child: Card(
         elevation: 1,

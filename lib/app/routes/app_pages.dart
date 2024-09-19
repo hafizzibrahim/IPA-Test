@@ -1,19 +1,21 @@
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/main_drawer/bindings/main_drawer_binding.dart';
-import 'package:maritimmuda_connect/app/modules/main_drawer/views/main_drawer_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/main/bindings/main_binding.dart';
+import '../modules/main/views/main_view.dart';
+import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/main_drawer/views/main_drawer_view.dart';
+import '../modules/member/bindings/member_binding.dart';
+import '../modules/member/views/member_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
-import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/views/main_view.dart';
 
 part 'app_routes.dart';
 
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.MAIN,
       page: () => const MainView(),
       binding: MainBinding(),
+    ),
+    GetPage(
+      name: _Paths.MEMBER,
+      page: () => const MemberView(),
+      binding: MemberBinding(),
     ),
   ];
 }
