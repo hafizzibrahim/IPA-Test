@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Color neutral01Color = const Color(0xFFEBEBEB);
+Color neutral01Color = const Color(0xFFFFFFFF);
 Color neutral02Color = const Color(0xFFEFEFEF);
 Color neutral03Color = const Color(0xFFB3B3B3);
 Color neutral04Color = const Color(0xFF000000);
@@ -19,6 +19,7 @@ TextStyle lightText12 = GoogleFonts.poppins(fontSize: 12, fontWeight: reguler);
 TextStyle lightText14 = GoogleFonts.poppins(fontSize: 14, fontWeight: reguler);
 
 // REGULER TEXT
+TextStyle regulerText8 = GoogleFonts.poppins(fontSize: 8, fontWeight: reguler);
 TextStyle regulerText9 = GoogleFonts.poppins(fontSize: 9, fontWeight: reguler);
 TextStyle regulerText10 =
     GoogleFonts.poppins(fontSize: 10, fontWeight: reguler);
