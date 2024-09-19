@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/main/bindings/main_binding.dart';
-import 'package:maritimmuda_connect/app/modules/main/views/main_view.dart';
-import 'package:maritimmuda_connect/app/modules/main_drawer/bindings/main_drawer_binding.dart';
-import 'package:maritimmuda_connect/app/modules/main_drawer/views/main_drawer_view.dart';
-import 'package:maritimmuda_connect/app/modules/register/bindings/register_binding.dart';
-import 'package:maritimmuda_connect/app/modules/register/views/register_view.dart';
-import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
+import 'package:maritimmuda_connect/app/modules/login/bindings/login_binding.dart';
+import 'package:maritimmuda_connect/app/modules/login/views/login_view.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_button.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_dropdown.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/themes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../controllers/login_controller.dart';
+import '../controllers/register_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+class RegisterView extends GetView<RegisterController> {
+  const RegisterView({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,18 +26,18 @@ class LoginView extends GetView<LoginController> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: neutral01Color,
+                    border: Border.all(color: neutral03Color, width: 1),
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10),
                     ),
-                    border: Border.all(color: neutral03Color, width: 1),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(13),
                     child: Image.asset("assets/images/maritimmuda_connect.png"),
                   ),
                 ),
-                const SizedBox(height: 80),
+                const SizedBox(height: 55),
                 Container(
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -59,19 +55,39 @@ class LoginView extends GetView<LoginController> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Hi, Welcome!",
+                            "Register",
                             style: mediumText30,
                           ),
                         ),
+                        const SizedBox(height: 7),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Enter your email and password to login",
+                            "Enter a few details below",
                             style:
                                 regulerText10.copyWith(color: neutral03Color),
                           ),
                         ),
-                        const SizedBox(height: 50),
+                        const SizedBox(height: 30),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Name"),
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          controller: controller.nameC,
+                          hintText: "Name",
+                          keyboardType: TextInputType.name,
+                          onChanged: (value) {
+                            controller.validateName(value);
+                          },
+                          validator: controller.validateNameField,
+                          preffixIcon: Icon(
+                            Icons.person,
+                            color: neutral03Color,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                         const Align(
                           alignment: Alignment.centerLeft,
                           child: Text("Email"),
@@ -85,9 +101,44 @@ class LoginView extends GetView<LoginController> {
                             controller.validateEmail(value);
                           },
                           validator: controller.validateEmailField,
-                          preffixIcon: Icon(Icons.email, color: neutral03Color),
+                          preffixIcon: Icon(
+                            Icons.email,
+                            color: neutral03Color,
+                          ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 10),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Gender"),
+                        ),
+                        const SizedBox(height: 10),
+                        Obx(
+                          () => CustomDropdown(
+                            options: controller.genderOptions,
+                            selectedOption:
+                                controller.selectedGender.value ?? "",
+                            onSelected: (String? value) {
+                              controller.setSelectedGender(value);
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Province"),
+                        ),
+                        const SizedBox(height: 10),
+                        Obx(
+                          () => CustomDropdown(
+                            options: controller.provinceOptions,
+                            selectedOption:
+                                controller.selectedProvince.value ?? "",
+                            onSelected: (String? value) {
+                              controller.setSelectedProvince(value);
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                         const Align(
                           alignment: Alignment.centerLeft,
                           child: Text("Password"),
@@ -103,8 +154,10 @@ class LoginView extends GetView<LoginController> {
                               controller.validatePassword(value);
                             },
                             validator: controller.validatePasswordField,
-                            preffixIcon:
-                                Icon(Icons.lock, color: neutral03Color),
+                            preffixIcon: Icon(
+                              Icons.lock,
+                              color: neutral03Color,
+                            ),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 controller.toggleObscureText();
@@ -118,39 +171,60 @@ class LoginView extends GetView<LoginController> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "Forgot Password?",
-                            style:
-                                regulerText12.copyWith(color: primaryBlueColor),
+                        const SizedBox(height: 10),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Confirm Password"),
+                        ),
+                        const SizedBox(height: 10),
+                        Obx(
+                          () => CustomTextField(
+                            controller: controller.confirmPassC,
+                            hintText: "Confirm Password",
+                            keyboardType: TextInputType.text,
+                            obscureText: controller.obscureText.value,
+                            onChanged: (value) {
+                              controller.validateConfirmPass(value);
+                            },
+                            validator: controller.validateConfirmPassField,
+                            preffixIcon: Icon(
+                              Icons.lock,
+                              color: neutral03Color,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                controller.toggleObscureText();
+                              },
+                              icon: Icon(
+                                controller.obscureText.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: neutral03Color,
+                              ),
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 35),
+                        const SizedBox(height: 30),
                         CustomButton(
-                          onPressed: () async {
+                          onPressed: () {
                             if (controller.validateForm()) {
-                              final SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              // await prefs.setBool("loggedIn", true);
                               Get.offAll(
-                                () => const MainView(),
-                                binding: MainBinding(),
-                                transition: Transition.rightToLeft,
-                                duration: const Duration(milliseconds: 100),
+                                () => const LoginView(),
+                                binding: LoginBinding(),
+                                transition: Transition.leftToRight,
+                                duration: const Duration(milliseconds: 1000),
                               );
                             }
                           },
-                          text: "Login",
+                          text: "Register",
                         ),
                         const SizedBox(height: 15),
                         InkWell(
                           onTap: () {
                             Get.offAll(
-                              () => const RegisterView(),
-                              binding: RegisterBinding(),
-                              transition: Transition.rightToLeft,
+                              () => const LoginView(),
+                              binding: LoginBinding(),
+                              transition: Transition.leftToRight,
                               duration: const Duration(milliseconds: 100),
                             );
                           },
@@ -159,11 +233,11 @@ class LoginView extends GetView<LoginController> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                "Don't have an account? ",
+                                "Already have an account? ",
                                 style: regulerText10,
                               ),
                               Text(
-                                "Register",
+                                "Login",
                                 style: regulerText10.copyWith(
                                     color: primaryBlueColor),
                               ),
@@ -175,6 +249,7 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 30),
               ],
             ),
           ),

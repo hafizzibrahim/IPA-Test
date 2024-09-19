@@ -3,9 +3,15 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/home/views/home_view.dart';
 import 'package:maritimmuda_connect/app/modules/login/views/login_view.dart';
+import 'package:maritimmuda_connect/app/modules/main_drawer/controllers/main_drawer_controller.dart';
+import 'package:maritimmuda_connect/app/modules/main_drawer/views/main_drawer_view.dart';
 
 class MainController extends GetxController with GetTickerProviderStateMixin {
   var bottomNavIndex = 0.obs;
+
+  MainController() {
+    Get.put(MainDrawerController());
+  }
 
   late AnimationController fabAnimationController;
   late AnimationController borderRadiusAnimationController;
@@ -33,7 +39,7 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
     HomeView(),
     HomeView(),
     HomeView(),
-    LoginView(),
+    MainDrawerView(),
   ];
 
   @override
