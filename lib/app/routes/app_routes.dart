@@ -11,6 +11,9 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const MAIN = _Paths.MAIN;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+  static const EDUCATIONS = _Paths.EDUCATIONS;
+  static const WORK_EXPERIENCES = _Paths.WORK_EXPERIENCES;
+  static const ORGANIZATIONS = _Paths.ORGANIZATIONS;
 }
 
 abstract class _Paths {
@@ -23,4 +26,7 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const MAIN = '/main';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const EDUCATIONS = '/educations';
+  static const WORK_EXPERIENCES = '/work-experiences';
+  static const ORGANIZATIONS = '/organizations';
 }

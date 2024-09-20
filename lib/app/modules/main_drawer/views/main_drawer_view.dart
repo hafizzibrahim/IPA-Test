@@ -22,7 +22,7 @@ class MainDrawerView extends GetView<MainDrawerController> {
               );
             },
           ),
-          title: const Text('General'),
+          title: Obx(() => Text(controller.currentTitle.value)),
         ),
         drawer: CustomDrawer(controller: controller),
         body: Obx(
