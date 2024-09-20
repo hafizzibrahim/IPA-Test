@@ -11,18 +11,9 @@ class MainDrawerView extends GetView<MainDrawerController> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0.0,
           backgroundColor: neutral02Color,
-          leading: Builder(
-            builder: (context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-            },
-          ),
-          title: const Text('General'),
+          title: Obx(() => Text(controller.title[controller.selectedIndex.value])),
         ),
         drawer: CustomDrawer(controller: controller),
         body: Obx(

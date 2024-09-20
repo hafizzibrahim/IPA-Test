@@ -160,11 +160,11 @@ class LoginView extends GetView<LoginController> {
                         const SizedBox(height: 15),
                         InkWell(
                           onTap: () {
-                            Get.offAll(
+                            Get.to(
                               () => const RegisterView(),
                               binding: RegisterBinding(),
                               transition: Transition.rightToLeft,
-                              duration: const Duration(milliseconds: 100),
+                              duration: const Duration(milliseconds: 300),
                             );
                           },
                           child: Row(
