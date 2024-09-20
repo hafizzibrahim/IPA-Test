@@ -11,9 +11,10 @@ class MainDrawerView extends GetView<MainDrawerController> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0.0,
+          scrolledUnderElevation: 0.0,
           backgroundColor: neutral02Color,
-          title: Obx(() => Text(controller.title[controller.selectedIndex.value])),
+          title:
+              Obx(() => Text(controller.title[controller.selectedIndex.value])),
         ),
         drawer: CustomDrawer(controller: controller),
         body: Obx(
