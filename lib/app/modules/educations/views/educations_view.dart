@@ -68,7 +68,6 @@ class EducationsView extends GetView<EducationsController> {
               onTap: () => controller.selectDate(context),
               child: AbsorbPointer(
                 child: CustomTextField(
-                  keyboardType: TextInputType.emailAddress,
                   controller: controller.gradController,
                   hintText: 'Select your graduation date',
                   suffixIcon: Icon(Icons.calendar_today, color: primaryBlueColor),

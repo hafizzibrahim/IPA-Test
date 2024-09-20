@@ -46,6 +46,7 @@ class GeneralProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 8),
             CustomTextField(
+              keyboardType: TextInputType.emailAddress,
               controller: controller.emailController,
               hintText: 'Enter your email',
             ),
@@ -92,7 +93,6 @@ class GeneralProfileView extends GetView<ProfileController> {
               onTap: () => controller.selectDate(context),
               child: AbsorbPointer(
                 child: CustomTextField(
-                  keyboardType: TextInputType.emailAddress,
                   controller: controller.dateOfBirthController,
                   hintText: 'Select date of birth',
                   suffixIcon: Icon(Icons.calendar_today, color: primaryBlueColor),

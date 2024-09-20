@@ -54,7 +54,6 @@ class OrganizationsView extends GetView<OrganizationsController> {
             onTap: () => controller.selectStartDate(context),
             child: AbsorbPointer(
               child: CustomTextField(
-                keyboardType: TextInputType.emailAddress,
                 controller: controller.startDateController,
                 hintText: 'Select start date',
                 suffixIcon: Icon(Icons.calendar_today, color: primaryBlueColor),
@@ -71,7 +70,6 @@ class OrganizationsView extends GetView<OrganizationsController> {
             onTap: () => controller.selectEndDate(context),
             child: AbsorbPointer(
               child: CustomTextField(
-                keyboardType: TextInputType.emailAddress,
                 controller: controller.endDateController,
                 hintText: 'Select end date',
                 suffixIcon: Icon(Icons.calendar_today, color: primaryBlueColor),
