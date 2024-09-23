@@ -12,6 +12,7 @@ abstract class Routes {
   static const MAIN = _Paths.MAIN;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const MEMBER = _Paths.MEMBER;
+  static const JOB = _Paths.JOB;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const MAIN = '/main';
   static const MEMBER = '/member';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const JOB = '/job';
 }
