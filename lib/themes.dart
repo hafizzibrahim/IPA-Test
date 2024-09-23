@@ -27,6 +27,8 @@ TextStyle regulerText11 =
     GoogleFonts.poppins(fontSize: 11, fontWeight: reguler);
 TextStyle regulerText12 =
     GoogleFonts.poppins(fontSize: 12, fontWeight: reguler);
+TextStyle regulerText14 =
+GoogleFonts.poppins(fontSize: 14, fontWeight: reguler);
 TextStyle regulerText15 =
     GoogleFonts.poppins(fontSize: 15, fontWeight: reguler);
 TextStyle regulerText16 =
@@ -59,6 +61,7 @@ TextStyle semiBoldText24 =
 // BOLD TEXT
 TextStyle boldText12 = GoogleFonts.poppins(fontSize: 12, fontWeight: bold);
 TextStyle boldText14 = GoogleFonts.poppins(fontSize: 14, fontWeight: bold);
+TextStyle boldText16 = GoogleFonts.poppins(fontSize: 16, fontWeight: bold);
 TextStyle boldText20 = GoogleFonts.poppins(fontSize: 20, fontWeight: bold);
 TextStyle boldText24 = GoogleFonts.poppins(fontSize: 24, fontWeight: bold);
 TextStyle boldText32 = GoogleFonts.poppins(fontSize: 32, fontWeight: bold);

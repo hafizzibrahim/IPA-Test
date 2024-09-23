@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/data/models/category_data.dart';
 
 import '../modules/achievement/bindings/achievement_binding.dart';
 import '../modules/achievement/views/achievement_view.dart';
+import '../modules/event/bindings/event_binding.dart';
+import '../modules/event/views/event_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -9,12 +12,12 @@ import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/views/main_view.dart';
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/main/views/main_view.dart';
 import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/member/bindings/member_binding.dart';
 import '../modules/member/views/member_view.dart';
@@ -24,6 +27,8 @@ import '../modules/publication/bindings/publication_binding.dart';
 import '../modules/publication/views/publication_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/scholarship/bindings/scholarship_binding.dart';
+import '../modules/scholarship/views/scholarship_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -89,6 +94,16 @@ class AppPages {
       name: _Paths.PUBLICATION,
       page: () => const PublicationView(),
       binding: PublicationBinding(),
+    ),
+    GetPage(
+      name: _Paths.EVENT,
+      page: () => EventView(categoryList),
+      binding: EventBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHOLARSHIP,
+      page: () => const ScholarshipView(),
+      binding: ScholarshipBinding(),
     ),
   ];
 }

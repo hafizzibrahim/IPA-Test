@@ -14,6 +14,8 @@ abstract class Routes {
   static const PUBLICATION = _Paths.PUBLICATION;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const MEMBER = _Paths.MEMBER;
+  static const EVENT = _Paths.EVENT;
+  static const SCHOLARSHIP = _Paths.SCHOLARSHIP;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const PUBLICATION = '/publication';
   static const MEMBER = '/member';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const EVENT = '/event';
+  static const SCHOLARSHIP = '/scholarship';
 }
