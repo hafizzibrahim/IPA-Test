@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/home/widget/home_card.dart';
-import 'package:maritimmuda_connect/app/modules/login/views/login_view.dart';
+import 'package:maritimmuda_connect/app/modules/member/views/member_view.dart';
 
 import '../controllers/home_controller.dart';
 import 'package:maritimmuda_connect/themes.dart';
@@ -123,7 +123,7 @@ class HomeView extends GetView<HomeController> {
               }).toList(),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Center(
@@ -138,7 +138,9 @@ class HomeView extends GetView<HomeController> {
                   child: HomeCard(
                     icon: 'assets/icons/member_icon.svg',
                     title: 'Member',
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => MemberView());
+                    },
                   ),
                 ),
                 SizedBox(
