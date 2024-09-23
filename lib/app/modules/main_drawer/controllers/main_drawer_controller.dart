@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:maritimmuda_connect/app/modules/achievement/controllers/achievement_controller.dart';
+import 'package:maritimmuda_connect/app/modules/achievement/views/achievement_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/controllers/home_controller.dart';
 import 'package:maritimmuda_connect/app/modules/home/views/home_view.dart';
+import 'package:maritimmuda_connect/app/modules/publication/views/publication_view.dart';
 
 class MainDrawerController extends GetxController {
   var selectedIndex = 0.obs;
 
   MainDrawerController() {
     Get.put(HomeController());
+    Get.put(AchievementController());
   }
 
   List<Widget> screens = [
     // Taruh halaman contoh const ProfileView() di sini
     HomeView(),
+    HomeView(),
+    HomeView(),
+    HomeView(),
+    AchievementView(),
+    PublicationView()
   ];
 
   List<String> title = [

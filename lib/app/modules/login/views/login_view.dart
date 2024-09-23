@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:maritimmuda_connect/app/modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -88,7 +89,8 @@ class LoginView extends GetView<LoginController> {
                             controller.validateEmail(value);
                           },
                           validator: controller.validateEmailField,
-                          preffixIcon: Icon(Icons.email, color: neutral03Color),
+                          preffixIcon:
+                              Icon(Icons.email_outlined, color: neutral03Color),
                         ),
                         const SizedBox(height: 30),
                         const Align(
@@ -106,8 +108,10 @@ class LoginView extends GetView<LoginController> {
                               controller.validatePassword(value);
                             },
                             validator: controller.validatePasswordField,
-                            preffixIcon:
-                                Icon(Icons.lock, color: neutral03Color),
+                            preffixIcon: Icon(
+                              Icons.lock_outline_rounded,
+                              color: neutral03Color,
+                            ),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 controller.toggleObscureText();
@@ -160,11 +164,11 @@ class LoginView extends GetView<LoginController> {
                         const SizedBox(height: 15),
                         InkWell(
                           onTap: () {
-                            Get.offAll(
+                            Get.to(
                               () => const RegisterView(),
                               binding: RegisterBinding(),
                               transition: Transition.rightToLeft,
-                              duration: const Duration(milliseconds: 100),
+                              duration: const Duration(milliseconds: 300),
                             );
                           },
                           child: Row(

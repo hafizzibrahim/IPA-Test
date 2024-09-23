@@ -82,10 +82,8 @@ class RegisterView extends GetView<RegisterController> {
                             controller.validateName(value);
                           },
                           validator: controller.validateNameField,
-                          preffixIcon: Icon(
-                            Icons.person,
-                            color: neutral03Color,
-                          ),
+                          preffixIcon: Icon(Icons.person_outline_sharp,
+                              color: neutral03Color),
                         ),
                         const SizedBox(height: 10),
                         const Align(
@@ -101,10 +99,8 @@ class RegisterView extends GetView<RegisterController> {
                             controller.validateEmail(value);
                           },
                           validator: controller.validateEmailField,
-                          preffixIcon: Icon(
-                            Icons.email,
-                            color: neutral03Color,
-                          ),
+                          preffixIcon:
+                              Icon(Icons.email_outlined, color: neutral03Color),
                         ),
                         const SizedBox(height: 10),
                         const Align(
@@ -155,7 +151,7 @@ class RegisterView extends GetView<RegisterController> {
                             },
                             validator: controller.validatePasswordField,
                             preffixIcon: Icon(
-                              Icons.lock,
+                              Icons.lock_outline_rounded,
                               color: neutral03Color,
                             ),
                             suffixIcon: IconButton(
@@ -188,7 +184,7 @@ class RegisterView extends GetView<RegisterController> {
                             },
                             validator: controller.validateConfirmPassField,
                             preffixIcon: Icon(
-                              Icons.lock,
+                              Icons.lock_outline_rounded,
                               color: neutral03Color,
                             ),
                             suffixIcon: IconButton(
