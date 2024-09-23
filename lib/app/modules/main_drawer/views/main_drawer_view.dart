@@ -24,8 +24,6 @@ class MainDrawerView extends GetView<MainDrawerController> {
             },
           ),
           title: Obx(() => Text(controller.currentTitle.value)),
-          title:
-              Obx(() => Text(controller.title[controller.selectedIndex.value])),
         ),
         drawer: CustomDrawer(controller: controller),
         body: Obx(

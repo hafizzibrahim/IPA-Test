@@ -41,6 +41,7 @@ class EducationsView extends GetView<EducationsController> {
               'Major/Field of Study',
               style: boldText12,
             ),
+            const SizedBox(height: 8,),
             CustomTextField(
               controller: controller.majorController,
               hintText: 'Enter your Major/Field Study',

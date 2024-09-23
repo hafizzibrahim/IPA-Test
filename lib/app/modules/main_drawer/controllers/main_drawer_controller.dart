@@ -25,11 +25,7 @@ class MainDrawerController extends GetxController {
     GeneralProfileView(),
     EducationsView(),
     WorkExperiencesView(),
-    OrganizationsView()
-    HomeView(),
-    HomeView(),
-    HomeView(),
-    HomeView(),
+    OrganizationsView(),
     AchievementView(),
     PublicationView()
   ];
