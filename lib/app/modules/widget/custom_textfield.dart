@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText,
     this.validator,
     this.onChanged,
+    this.maxLines,
     this.readOnly,
   });
 
@@ -27,25 +28,26 @@ class CustomTextField extends StatelessWidget {
   final bool? obscureText;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final int? maxLines;
   final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: keyboardType,
-      obscureText: obscureText ?? false,
-      maxLines: 1,
-      controller: controller,
-      validator: validator,
-      onChanged: onChanged,
-      cursorHeight: 15,
-      readOnly: readOnly ?? false,
-      style: regulerText12,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: neutral02Color,
-        hintText: hintText,
-        prefixIcon: svgIcon != null
+        keyboardType: keyboardType,
+        obscureText: obscureText ?? false,
+        maxLines: maxLines ?? 1,
+        controller: controller,
+        validator: validator,
+        onChanged: onChanged,
+        cursorHeight: 15,
+        readOnly: readOnly ?? false,
+        style: regulerText12,
+        decoration: InputDecoration(
+            filled: true,
+            fillColor: neutral02Color,
+            hintText: hintText,
+          prefixIcon: svgIcon != null
             ? Padding(
                 padding: const EdgeInsets.all(10),
                 child: SvgPicture.asset(
@@ -55,32 +57,33 @@ class CustomTextField extends StatelessWidget {
               )
             : preffixIcon,
         suffixIcon: suffixIcon,
-        hintStyle: TextStyle(
-          fontSize: 11,
-          color: neutral03Color,
-          fontWeight: FontWeight.w500,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: secondaryRedColor, width: 1.5),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: primaryBlueColor, width: 1.5),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: secondaryRedColor, width: 1.5),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: neutral03Color, width: 1.5),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: neutral03Color, width: 1.5),
-        ),
-      ),
-    );
-  }
+            isDense: true,
+            hintStyle: TextStyle(
+              fontSize: 11,
+              color: neutral03Color,
+              fontWeight: FontWeight.w500,
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: secondaryRedColor, width: 1.5),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: primaryBlueColor, width: 1.5),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: secondaryRedColor, width: 1.5),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: neutral03Color, width: 1.5),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: neutral03Color, width: 1.5),
+            ),
+            ),
+        );
+    }
 }
