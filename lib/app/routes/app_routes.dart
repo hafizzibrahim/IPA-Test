@@ -17,6 +17,7 @@ abstract class Routes {
   static const WORK_EXPERIENCES = _Paths.WORK_EXPERIENCES;
   static const ORGANIZATIONS = _Paths.ORGANIZATIONS;
   static const MEMBER = _Paths.MEMBER;
+  static const JOB = _Paths.JOB;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const EDUCATIONS = '/educations';
   static const WORK_EXPERIENCES = '/work-experiences';
   static const ORGANIZATIONS = '/organizations';
+  static const JOB = '/job';
 }

@@ -5,6 +5,7 @@ Color neutral01Color = const Color(0xFFFFFFFF);
 Color neutral02Color = const Color(0xFFEFEFEF);
 Color neutral03Color = const Color(0xFFB3B3B3);
 Color neutral04Color = const Color(0xFF000000);
+Color subTitleColor = const Color(0xFFB3B3B3);
 Color primaryBlueColor = const Color(0xFF12AEC7);
 Color primaryDarkBlueColor = const Color(0xFF086C9E);
 Color secondaryRedColor = const Color(0xFFDE5859);

@@ -1,6 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/themes.dart';
@@ -17,13 +16,13 @@ class MainView extends GetView<MainController> {
     return Scaffold(
       extendBody: true,
       body: Obx(
-        // Menampilkan halaman berdasarkan bottomNavIndex
         () => controller.viewList[controller.bottomNavIndex.value],
       ),
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryDarkBlueColor,
-        shape: CircleBorder(),
-        child: Icon(
+        shape: const CircleBorder(),
+        child: const Icon(
           Icons.credit_card,
           color: Colors.white,
         ),
