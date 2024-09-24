@@ -6,6 +6,8 @@ import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/job/bindings/job_binding.dart';
+import '../modules/job/views/job_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
@@ -89,6 +91,11 @@ class AppPages {
       name: _Paths.PUBLICATION,
       page: () => const PublicationView(),
       binding: PublicationBinding(),
+    ),
+    GetPage(
+      name: _Paths.JOB,
+      page: () => const JobView(),
+      binding: JobBinding(),
     ),
   ];
 }

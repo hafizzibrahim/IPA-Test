@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/member/views/member_detail_view.dart';
 import 'package:maritimmuda_connect/app/modules/widget/searchbar_widget.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
@@ -28,7 +29,9 @@ class MemberView extends GetView<MemberController> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
                       child: ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => MemberDetailView());
+                        },
                         leading: const CircleAvatar(
                           backgroundImage:
                               AssetImage("assets/images/profile.png"),
