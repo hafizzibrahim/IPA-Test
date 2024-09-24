@@ -70,7 +70,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const GeneralProfileView(),
+      page: () => GeneralProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(

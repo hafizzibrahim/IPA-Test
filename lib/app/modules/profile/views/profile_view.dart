@@ -5,6 +5,7 @@ import 'package:maritimmuda_connect/themes.dart';
 import '../controllers/profile_controller.dart';
 import '../../widget/custom_textfield.dart';
 import '../../widget/custom_dropdown.dart';
+import '../../widget/profile_button.dart';
 
 class GeneralProfileView extends GetView<ProfileController> {
   GeneralProfileView({super.key});
@@ -178,17 +179,26 @@ class GeneralProfileView extends GetView<ProfileController> {
               controller: controller.bioController,
               hintText: 'Enter your bio',
             ),
-            const SizedBox(height: 24),
-            CustomButton(
-              text: 'Save',
-              onPressed: () {
-                // Save logic can be implemented here
-              },
-              color: primaryBlueColor,
-              radius: 10,
-              width: double.infinity,
-              textSize: boldText14,
+            const SizedBox(height: 8,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ProfileButton(
+                    icon: Icon(Icons.save_outlined, color: neutral01Color,),
+                    color: primaryDarkBlueColor,
+                    text: 'Save',
+                  ),
+                ),
+                ProfileButton(
+                  icon: Icon(Icons.close, color: neutral01Color,),
+                  color: secondaryRedColor,
+                  text: 'Clear',
+                )
+              ],
             ),
+            const SizedBox(height: 24),
             const SizedBox(height: 24),
           ],
         ),
