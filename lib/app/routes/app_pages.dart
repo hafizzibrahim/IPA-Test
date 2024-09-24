@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/achievement/bindings/achievement_binding.dart';
 import '../modules/achievement/views/achievement_view.dart';
+import '../modules/educations/bindings/educations_binding.dart';
+import '../modules/educations/views/educations_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -20,6 +22,8 @@ import '../modules/main_drawer/bindings/main_drawer_binding.dart';
 import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/member/bindings/member_binding.dart';
 import '../modules/member/views/member_view.dart';
+import '../modules/organizations/bindings/organizations_binding.dart';
+import '../modules/organizations/views/organizations_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/publication/bindings/publication_binding.dart';
@@ -28,6 +32,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/work_experiences/bindings/work_experiences_binding.dart';
+import '../modules/work_experiences/views/work_experiences_view.dart';
 
 part 'app_routes.dart';
 
@@ -64,7 +70,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () => GeneralProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -96,6 +102,21 @@ class AppPages {
       name: _Paths.JOB,
       page: () => const JobView(),
       binding: JobBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDUCATIONS,
+      page: () => EducationsView(),
+      binding: EducationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.WORK_EXPERIENCES,
+      page: () => WorkExperiencesView(),
+      binding: WorkExperiencesBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORGANIZATIONS,
+      page: () => OrganizationsView(),
+      binding: OrganizationsBinding(),
     ),
   ];
 }
