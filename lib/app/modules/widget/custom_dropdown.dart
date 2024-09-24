@@ -32,7 +32,7 @@ class CustomDropdown extends StatelessWidget {
         }).toList(),
         onSelected: onSelected,
         textStyle: regulerText12,
-        width: 340,
+        width: 380,
         menuStyle: MenuStyle(
           elevation: const WidgetStatePropertyAll(0),
           backgroundColor:

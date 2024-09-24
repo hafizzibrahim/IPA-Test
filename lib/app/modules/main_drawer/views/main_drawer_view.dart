@@ -13,8 +13,17 @@ class MainDrawerView extends GetView<MainDrawerController> {
         appBar: AppBar(
           scrolledUnderElevation: 0.0,
           backgroundColor: neutral02Color,
-          title:
-              Obx(() => Text(controller.title[controller.selectedIndex.value])),
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
+          title: Obx(() => Text(controller.currentTitle.value)),
         ),
         drawer: CustomDrawer(controller: controller),
         body: Obx(
