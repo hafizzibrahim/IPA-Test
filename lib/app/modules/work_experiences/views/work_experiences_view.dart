@@ -8,10 +8,7 @@ import '../controllers/work_experiences_controller.dart';
 import '../../widget/profile_button.dart';
 
 class WorkExperiencesView extends GetView<WorkExperiencesController> {
-  WorkExperiencesView({super.key});
-
-  @override
-  final WorkExperiencesController controller = Get.put(WorkExperiencesController());
+  const WorkExperiencesView({super.key});
 
   @override
   Widget build(BuildContext context) {
