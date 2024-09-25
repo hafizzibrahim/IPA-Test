@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +19,8 @@ class ProfileController extends GetxController {
   final bioController = TextEditingController();
 
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  final Rx<File?> identityCardFile = Rx<File?>(null);
+  final Rx<File?> studentCardFile = Rx<File?>(null);
 
   String get formattedDate {
     return selectedDate.value != null
@@ -134,5 +138,13 @@ class ProfileController extends GetxController {
       selectedSecondExpertise.value = secondExpertise;
       secondExpertiseController.text = secondExpertise;
     }
+  }
+
+  void setIdentityCardFile(File file) {
+    identityCardFile.value = file;
+  }
+
+  void setStudentCardFile(File file) {
+    studentCardFile.value = file;
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/widget/custom_button.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../controllers/profile_controller.dart';
 import '../../widget/custom_textfield.dart';
 import '../../widget/custom_dropdown.dart';
 import '../../widget/profile_button.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
@@ -37,6 +39,86 @@ class ProfileView extends GetView<ProfileController> {
                 ],
               ),
             ),
+            const SizedBox(height: 24,),
+            Text(
+              'Identity Card',
+              style: boldText12,
+            ),
+            const SizedBox(height: 8,),
+            Obx(() => DottedBorder(
+              borderType: BorderType.RRect,
+              radius: const Radius.circular(20),
+              padding: const EdgeInsets.all(6),
+              child: InkWell(
+                onTap: () async {
+                  FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                  if (result != null) {
+                    controller.setIdentityCardFile(File(result.files.single.path!));
+                  } else {
+                    print('User canceled the picker');
+                  }
+                },
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: neutral02Color,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: controller.identityCardFile.value != null
+                      ? ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.file(
+                      controller.identityCardFile.value!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  )
+                      : const Center(
+                    child: Icon(Icons.add_photo_alternate, size: 50, color: Colors.grey),
+                  ),
+                ),
+              ),
+            )),
+            const SizedBox(height: 16,),
+            Text(
+              'Student Card',
+              style: boldText12,
+            ),
+            const SizedBox(height: 8,),
+            Obx(() => DottedBorder(
+              borderType: BorderType.RRect,
+              radius: const Radius.circular(20),
+              padding: const EdgeInsets.all(6),
+              child: InkWell(
+                onTap: () async {
+                  FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                  if (result != null) {
+                    controller.setStudentCardFile(File(result.files.single.path!));
+                  } else {
+                    print('User canceled the picker');
+                  }
+                },
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: neutral02Color,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: controller.studentCardFile.value != null
+                      ? ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.file(
+                      controller.studentCardFile.value!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  )
+                      : const Center(
+                    child: Icon(Icons.add_photo_alternate, size: 50, color: Colors.grey),
+                  ),
+                ),
+              ),
+            )),
             const SizedBox(height: 24),
             Text(
               'Email',
