@@ -15,7 +15,7 @@ class ScholarshipView extends GetView<ScholarshipController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: neutral02Color,
-        body: ListView(
+        body: Column(
             children: <Widget>[
 
 
@@ -53,45 +53,49 @@ class ScholarshipView extends GetView<ScholarshipController> {
               ),
 
 
-              Padding(
-                padding: EdgeInsets.only(left: 30.0, right: 30.0,bottom: 30.0),
-                // child:Expanded(
+              Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0,bottom: 30.0),
+                    // child:Expanded(
 
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  // physics: NeverScrollableScrollPhysics(),
-                  // scrollDirection: Axis.vertical,
-                  itemCount: scholarshipList.length,
-                  itemBuilder: (context, index) {
-                    final ScholarshipData scholarship = scholarshipList[index];
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                            DetailScholarshipView(scholarshipData: scholarship,)
-                        ));
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      // physics: NeverScrollableScrollPhysics(),
+                      // scrollDirection: Axis.vertical,
+                      itemCount: scholarshipList.length,
+                      itemBuilder: (context, index) {
+                        final ScholarshipData scholarship = scholarshipList[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                DetailScholarshipView(scholarshipData: scholarship,)
+                            ));
+                          },
+                          child:  Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.0),
+                            child: ProgramCard(
+                              image: scholarship.imageUrl,
+                              date: scholarship.date,
+                              textTitle: scholarship.title,
+                              textSubTitle: scholarship.description!,
+                              views: scholarship.views,
+                              likes: scholarship.likes,
+                              send: scholarship.send,
+
+                            ),
+                          ),
+
+                        ) ;
+
                       },
-                      child:  Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        child: ProgramCard(
-                          image: scholarship.imageUrl,
-                          date: scholarship.date,
-                          textTitle: scholarship.title,
-                          textSubTitle: scholarship.description!,
-                          views: scholarship.views,
-                          likes: scholarship.likes,
-                          send: scholarship.send,
-
-                        ),
-                      ),
-
-                    ) ;
-
-                  },
 
 
-                ),
+                    ),
+                  )
+
               )
-              // )
+
+
 
             ]
         )

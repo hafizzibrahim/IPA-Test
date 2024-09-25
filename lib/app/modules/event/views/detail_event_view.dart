@@ -112,10 +112,14 @@ class DetailEventView extends StatelessWidget {
                   children: [
                     Icon(Icons.location_on_outlined,color: primaryBlueColor,),
                     SizedBox(width: 8.0,),
-                    Text(
-                        style: regulerText14,
-                        'Golden Ballroom - The Sultan Hotel & Residence, Jakarta'
-                    ),
+                    Expanded(
+                        child: Text(
+                            style: regulerText14,
+                            'Golden Ballroom - The Sultan Hotel & Residence, Jakarta'
+                        ),
+
+                    )
+
                   ],
                 )
             ),
