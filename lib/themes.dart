@@ -32,6 +32,8 @@ TextStyle regulerText15 =
     GoogleFonts.poppins(fontSize: 15, fontWeight: reguler);
 TextStyle regulerText16 =
     GoogleFonts.poppins(fontSize: 16, fontWeight: reguler);
+TextStyle regulerText20 =
+    GoogleFonts.poppins(fontSize: 20, fontWeight: reguler);
 TextStyle regulerText24 =
     GoogleFonts.poppins(fontSize: 24, fontWeight: reguler);
 

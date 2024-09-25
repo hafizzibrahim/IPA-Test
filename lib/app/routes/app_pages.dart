@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/achievement/bindings/achievement_binding.dart';
 import '../modules/achievement/views/achievement_view.dart';
+import '../modules/e_kta/bindings/e_kta_binding.dart';
+import '../modules/e_kta/views/e_kta_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -11,12 +13,12 @@ import '../modules/job/views/job_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/views/main_view.dart';
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/main/views/main_view.dart';
 import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/member/bindings/member_binding.dart';
 import '../modules/member/views/member_view.dart';
@@ -96,6 +98,11 @@ class AppPages {
       name: _Paths.JOB,
       page: () => const JobView(),
       binding: JobBinding(),
+    ),
+    GetPage(
+      name: _Paths.E_KTA,
+      page: () => const EKtaView(),
+      binding: EKtaBinding(),
     ),
   ];
 }
