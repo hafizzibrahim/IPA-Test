@@ -70,7 +70,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => GeneralProfileView(),
+      page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -105,17 +105,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EDUCATIONS,
-      page: () => EducationsView(),
+      page: () => const EducationsView(),
       binding: EducationsBinding(),
     ),
     GetPage(
       name: _Paths.WORK_EXPERIENCES,
-      page: () => WorkExperiencesView(),
+      page: () => const WorkExperiencesView(),
       binding: WorkExperiencesBinding(),
     ),
     GetPage(
       name: _Paths.ORGANIZATIONS,
-      page: () => OrganizationsView(),
+      page: () => const OrganizationsView(),
       binding: OrganizationsBinding(),
     ),
   ];

@@ -7,11 +7,8 @@ import '../../widget/custom_textfield.dart';
 import '../../widget/custom_dropdown.dart';
 import '../../widget/profile_button.dart';
 
-class GeneralProfileView extends GetView<ProfileController> {
-  GeneralProfileView({super.key});
-
-  @override
-  final ProfileController controller = Get.put(ProfileController());
+class ProfileView extends GetView<ProfileController> {
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,11 +8,7 @@ import '../controllers/organizations_controller.dart';
 import '../../widget/profile_button.dart';
 
 class OrganizationsView extends GetView<OrganizationsController> {
-  OrganizationsView({super.key});
-
-  @override
-  final OrganizationsController controller = Get.put(OrganizationsController());
-
+  const OrganizationsView({super.key});
 
   @override
   Widget build(BuildContext context) {

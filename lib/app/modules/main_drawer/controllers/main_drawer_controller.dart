@@ -10,6 +10,10 @@ import 'package:maritimmuda_connect/app/modules/publication/views/publication_vi
 import 'package:maritimmuda_connect/app/modules/organizations/views/organizations_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/views/profile_view.dart';
 import 'package:maritimmuda_connect/app/modules/work_experiences/views/work_experiences_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/controllers/profile_controller.dart';
+import 'package:maritimmuda_connect/app/modules/educations/controllers/educations_controller.dart';
+import 'package:maritimmuda_connect/app/modules/work_experiences/controllers/work_experiences_controller.dart';
+import 'package:maritimmuda_connect/app/modules/organizations/controllers/organizations_controller.dart';
 
 class MainDrawerController extends GetxController {
   var selectedIndex = 0.obs;
@@ -17,12 +21,16 @@ class MainDrawerController extends GetxController {
 
   MainDrawerController() {
     Get.put(HomeController());
+    Get.put(ProfileController());
+    Get.put(EducationsController());
+    Get.put(WorkExperiencesController());
+    Get.put(OrganizationsController());
     Get.put(AchievementController());
   }
 
   List<Widget> screens = [
     // Taruh halaman contoh const ProfileView() di sini
-    GeneralProfileView(),
+    ProfileView(),
     EducationsView(),
     WorkExperiencesView(),
     OrganizationsView(),
