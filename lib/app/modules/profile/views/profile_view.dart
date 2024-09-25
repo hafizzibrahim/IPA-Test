@@ -55,12 +55,12 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 8),
             Obx(() => CustomDropdown(
-              options: controller.genderOptions,
-              selectedOption: controller.selectedGender.value,
-              onSelected: (String? newGender) {
-                controller.setGender(newGender);
-              },
-            )),
+                  options: controller.genderOptions,
+                  selectedOption: controller.selectedGender.value,
+                  onSelected: (String? newGender) {
+                    controller.setGender(newGender);
+                  },
+                )),
             const SizedBox(height: 16),
             Text(
               'Provincial Organization',
@@ -93,7 +93,8 @@ class ProfileView extends GetView<ProfileController> {
                 child: CustomTextField(
                   controller: controller.dateOfBirthController,
                   hintText: 'Select date of birth',
-                  suffixIcon: Icon(Icons.calendar_today, color: primaryBlueColor),
+                  suffixIcon:
+                      Icon(Icons.calendar_today, color: primaryBlueColor),
                 ),
               ),
             ),
@@ -124,12 +125,12 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 8),
             Obx(() => CustomDropdown(
-              options: controller.firstExpertise,
-              selectedOption: controller.selectedFirstExpertise.value,
-              onSelected: (String? newFirstExpertise) {
-                controller.setFirstExpertise(newFirstExpertise);
-              },
-            )),
+                  options: controller.firstExpertise,
+                  selectedOption: controller.selectedFirstExpertise.value,
+                  onSelected: (String? newFirstExpertise) {
+                    controller.setFirstExpertise(newFirstExpertise);
+                  },
+                )),
             const SizedBox(height: 16),
             Text(
               'Second Expertise',
@@ -137,12 +138,12 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 8),
             Obx(() => CustomDropdown(
-              options: controller.secondExpertise,
-              selectedOption: controller.selectedSecondExpertise.value,
-              onSelected: (String? newSecondExpertise) {
-                controller.setSecondExpertise(newSecondExpertise);
-              },
-            )),
+                  options: controller.secondExpertise,
+                  selectedOption: controller.selectedSecondExpertise.value,
+                  onSelected: (String? newSecondExpertise) {
+                    controller.setSecondExpertise(newSecondExpertise);
+                  },
+                )),
             const SizedBox(height: 16),
             Text(
               'Address',
@@ -176,20 +177,28 @@ class ProfileView extends GetView<ProfileController> {
               controller: controller.bioController,
               hintText: 'Enter your bio',
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ProfileButton(
-                    icon: Icon(Icons.save_outlined, color: neutral01Color,),
+                    icon: Icon(
+                      Icons.save_outlined,
+                      color: neutral01Color,
+                    ),
                     color: primaryDarkBlueColor,
                     text: 'Save',
                   ),
                 ),
                 ProfileButton(
-                  icon: Icon(Icons.close, color: neutral01Color,),
+                  icon: Icon(
+                    Icons.close,
+                    color: neutral01Color,
+                  ),
                   color: secondaryRedColor,
                   text: 'Clear',
                 )

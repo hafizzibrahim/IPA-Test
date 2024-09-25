@@ -217,12 +217,7 @@ class RegisterView extends GetView<RegisterController> {
                         const SizedBox(height: 15),
                         InkWell(
                           onTap: () {
-                            Get.offAll(
-                              () => const LoginView(),
-                              binding: LoginBinding(),
-                              transition: Transition.leftToRight,
-                              duration: const Duration(milliseconds: 100),
-                            );
+                            Get.back();
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
