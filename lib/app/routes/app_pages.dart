@@ -2,6 +2,10 @@ import 'package:get/get.dart';
 
 import '../modules/achievement/bindings/achievement_binding.dart';
 import '../modules/achievement/views/achievement_view.dart';
+import '../modules/all_catalog/bindings/all_catalog_binding.dart';
+import '../modules/all_catalog/views/all_catalog_view.dart';
+import '../modules/catalog/bindings/catalog_binding.dart';
+import '../modules/catalog/views/catalog_view.dart';
 import '../modules/educations/bindings/educations_binding.dart';
 import '../modules/educations/views/educations_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -13,12 +17,12 @@ import '../modules/job/views/job_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/views/main_view.dart';
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/main/views/main_view.dart';
 import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/member/bindings/member_binding.dart';
 import '../modules/member/views/member_view.dart';
@@ -32,6 +36,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/sub_catalog/bindings/sub_catalog_binding.dart';
+import '../modules/sub_catalog/views/sub_catalog_view.dart';
 import '../modules/work_experiences/bindings/work_experiences_binding.dart';
 import '../modules/work_experiences/views/work_experiences_view.dart';
 
@@ -117,6 +123,21 @@ class AppPages {
       name: _Paths.ORGANIZATIONS,
       page: () => OrganizationsView(),
       binding: OrganizationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CATALOG,
+      page: () => const CatalogView(),
+      binding: CatalogBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALL_CATALOG,
+      page: () => const AllCatalogView(),
+      binding: AllCatalogBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUB_CATALOG,
+      page: () => const SubCatalogView(),
+      binding: SubCatalogBinding(),
     ),
   ];
 }
