@@ -128,7 +128,7 @@ class CatalogView extends GetView<CatalogController> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: Get.height + 400,
+                                  height: Get.height - 200,
                                   child: TabBarView(
                                     controller: controller.tabController,
                                     children: controller.screens,

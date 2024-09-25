@@ -7,12 +7,22 @@ class AllCatalogView extends GetView<AllCatalogController> {
   const AllCatalogView({super.key});
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: 4,
-      itemBuilder: (context, index) {
-        return const CatalogCard();
-      },
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 160),
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: 4,
+        itemBuilder: (context, index) {
+          return CatalogCard(
+            onTap: () {},
+            company: "Fajar Elektronik",
+            image: "assets/images/catalog_image.jpeg",
+            desc:
+                "Menyediakan peralatan-peralatan elektronik mutakhir dan terbaik",
+            time: "2 days ago",
+          );
+        },
+      ),
     );
   }
 }

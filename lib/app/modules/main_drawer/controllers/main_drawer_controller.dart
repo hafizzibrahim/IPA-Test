@@ -21,7 +21,6 @@ class MainDrawerController extends GetxController {
   }
 
   List<Widget> screens = [
-    // Taruh halaman contoh const ProfileView() di sini
     GeneralProfileView(),
     EducationsView(),
     WorkExperiencesView(),
