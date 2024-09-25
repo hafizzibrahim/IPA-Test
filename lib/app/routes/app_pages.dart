@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/achievement/bindings/achievement_binding.dart';
 import '../modules/achievement/views/achievement_view.dart';
+import '../modules/analytics/bindings/analytics_binding.dart';
+import '../modules/analytics/views/analytics_view.dart';
 import '../modules/educations/bindings/educations_binding.dart';
 import '../modules/educations/views/educations_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -12,10 +14,6 @@ import '../modules/job/bindings/job_binding.dart';
 import '../modules/job/views/job_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/views/main_view.dart';
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
 import '../modules/main_drawer/bindings/main_drawer_binding.dart';
@@ -40,7 +38,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.MAIN;
 
   static final routes = [
     GetPage(
@@ -117,6 +115,11 @@ class AppPages {
       name: _Paths.ORGANIZATIONS,
       page: () => OrganizationsView(),
       binding: OrganizationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ANALYTICS,
+      page: () => const AnalyticsView(),
+      binding: AnalyticsBinding(),
     ),
   ];
 }
