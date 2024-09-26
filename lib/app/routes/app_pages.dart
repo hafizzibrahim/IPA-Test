@@ -101,7 +101,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.E_KTA,
-      page: () => const EKtaView(),
+      page: () => EKtaView(),
       binding: EKtaBinding(),
     ),
   ];

@@ -1,23 +1,14 @@
 import 'package:get/get.dart';
 
 class EKtaController extends GetxController {
-  //TODO: Implement EKtaController
+  var sliderValue = 0.0.obs;
+  final RxInt currentPage = 0.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void updateSliderValue(double value) {
+    sliderValue.value = value;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void onPageChanged(int index) {
+    currentPage.value = index;
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

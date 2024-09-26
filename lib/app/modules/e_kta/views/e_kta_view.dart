@@ -1,80 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// import 'package:get/get.dart';
-// import 'package:maritimmuda_connect/app/modules/e_kta/views/e_kta_detail_view.dart';
-// import 'package:maritimmuda_connect/themes.dart';
-
-// import '../controllers/e_kta_controller.dart';
-
-// class EKtaView extends GetView<EKtaController> {
-//   const EKtaView({super.key});
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: ,
-//       appBar: AppBar(
-//         title: const Text('EKtaView'),
-//         centerTitle: true,
-//         scrolledUnderElevation: 0.0,
-//       ),
-//       body: SafeArea(
-//         child: Stack(
-//           children: [
-//             Expanded(
-//               child: Container(
-//                 decoration: BoxDecoration(
-//                     gradient: LinearGradient(
-//                         colors: [primaryBlueColor, primaryDarkBlueColor],
-//                         begin: Alignment.topLeft,
-//                         end: Alignment.bottomRight)),
-//               ),
-//             ),
-//             Center(
-//               child: Container(
-//                 // height: 335,
-//                 width: double.infinity,
-//                 padding: const EdgeInsets.all(12),
-//                 margin: const EdgeInsets.all(30),
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(25),
-//                   color: neutral04Color.withOpacity(0.1),
-//                 ),
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.end,
-//                   children: [
-//                     Image.asset("assets/images/qrcode.png", scale: 4),
-//                     const SizedBox(height: 15),
-//                     Text("Fajar genthur ilham",
-//                         style: regulerText20.copyWith(color: neutral01Color)),
-//                     IconButton(
-//                         onPressed: () {
-//                           Get.to(() => EKtaDetailView());
-//                         },
-//                         icon: Icon(Icons.abc))
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             Positioned(
-//               top: 80,
-//               left: 150,
-//               child: Container(
-//                 height: 100,
-//                 width: 100,
-//                 decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(50),
-//                     image: const DecorationImage(
-//                         fit: BoxFit.cover,
-//                         image: AssetImage("assets/images/profile.png"))),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -83,70 +6,92 @@ import 'package:maritimmuda_connect/app/modules/widget/custom_button.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 import '../controllers/e_kta_controller.dart';
+import '../widgets/custom_indicator.dart';
+import '../widgets/custom_slide_card.dart';
 
 class EKtaView extends GetView<EKtaController> {
   const EKtaView({super.key});
+
   @override
   Widget build(BuildContext context) {
+    Get.put(EKtaController());
     return Scaffold(
+      backgroundColor: neutral02Color,
       appBar: AppBar(
-        title: const Text('EKtaView'),
+        title: Text('E-KTA',
+            style: semiBoldText16.copyWith(color: neutral04Color)),
         centerTitle: true,
         scrolledUnderElevation: 0.0,
       ),
       body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [primaryBlueColor, primaryDarkBlueColor],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight)),
-          child: Stack(
-            children: [
-              Center(
-                child: Container(
-                  height: 425,
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  margin: const EdgeInsets.all(30),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: neutral04Color.withOpacity(0.1),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("Fajar genthur ilham",
-                          style: regulerText20.copyWith(color: neutral01Color)),
-                      const SizedBox(height: 10),
-                      Image.asset("assets/images/qrcode.png", scale: 4),
-                      const SizedBox(height: 15),
-                      CustomButton(
-                          text: "Show E-KTA",
-                          onPressed: () {
-                            Get.to(() => EKtaDetailView());
-                          })
+          child: Padding(
+        padding:
+            const EdgeInsets.only(left: 21, top: 20, right: 21, bottom: 21),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Hello,",
+                    style: regulerText26.copyWith(color: neutral04Color)),
+                Text("Komeng Uhuy",
+                    style: semiBoldText32.copyWith(color: neutral04Color))
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  height: 237,
+                  child: PageView(
+                    onPageChanged: controller.onPageChanged,
+                    children: const [
+                      CustomCardSlider(),
+                      CustomCardSlider(),
                     ],
                   ),
                 ),
-              ),
-              Positioned(
-                top: 30,
-                left: 150,
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage("assets/images/profile.png"))),
+                const SizedBox(height: 10),
+                CustomIndicator(controller: controller)
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomButton(
+                  text: "Download",
+                  textSize: boldText16.copyWith(color: neutral01Color),
+                  radius: 50,
+                  onPressed: () {},
+                  height: 43,
+                  width: 130,
+                  gradient: LinearGradient(
+                    colors: [primaryDarkBlueColor, primaryBlueColor],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                 ),
-              ),
-            ],
-          ),
+                CustomButton(
+                  text: "Show QR",
+                  textSize: boldText16.copyWith(color: neutral01Color),
+                  radius: 50,
+                  onPressed: () {
+                    Get.to(() => EKtaDetailView());
+                  },
+                  height: 43,
+                  width: 130,
+                  gradient: LinearGradient(
+                    colors: [primaryDarkBlueColor, primaryBlueColor],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-      ),
+      )),
     );
   }
 }
