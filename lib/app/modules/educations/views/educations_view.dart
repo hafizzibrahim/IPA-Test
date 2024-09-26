@@ -9,10 +9,7 @@ import '../controllers/educations_controller.dart';
 import '../../widget/profile_button.dart';
 
 class EducationsView extends GetView<EducationsController> {
-  EducationsView({super.key});
-
-  @override
-  final EducationsController controller = Get.put(EducationsController());
+  const EducationsView({super.key});
 
   @override
   Widget build(BuildContext context) {
