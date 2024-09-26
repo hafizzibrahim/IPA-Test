@@ -23,17 +23,31 @@ class ProfileView extends GetView<ProfileController> {
             Center(
               child: Stack(
                 children: [
-                  const CircleAvatar(
+                  Obx(() => CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/profile.png'),
-                  ),
+                    backgroundImage: controller.profileImagePath.value != null
+                        ? FileImage(File(controller.profileImagePath.value!))
+                        : const AssetImage('assets/images/profile.png') as ImageProvider,
+                  )),
                   Positioned(
                     bottom: 0,
                     right: 0,
-                    child: CircleAvatar(
-                      backgroundColor: primaryBlueColor,
-                      radius: 18,
-                      child: Icon(Icons.edit, color: neutral01Color, size: 18),
+                    child: GestureDetector(
+                      onTap: () async {
+                        FilePickerResult? result = await FilePicker.platform.pickFiles(
+                          type: FileType.image,
+                          allowMultiple: false,
+                        );
+
+                        if (result != null && result.files.isNotEmpty) {
+                          controller.setProfileImagePath(result.files.single.path!);
+                        }
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: primaryBlueColor,
+                        radius: 18,
+                        child: Icon(Icons.edit, color: neutral01Color, size: 18),
+                      ),
                     ),
                   ),
                 ],

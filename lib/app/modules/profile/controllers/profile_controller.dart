@@ -21,6 +21,7 @@ class ProfileController extends GetxController {
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   final Rx<File?> identityCardFile = Rx<File?>(null);
   final Rx<File?> studentCardFile = Rx<File?>(null);
+  Rx<String?> profileImagePath = Rx<String?>(null);
 
   String get formattedDate {
     return selectedDate.value != null
@@ -146,5 +147,9 @@ class ProfileController extends GetxController {
 
   void setStudentCardFile(File file) {
     studentCardFile.value = file;
+  }
+
+  void setProfileImagePath(String path) {
+    profileImagePath.value = path;
   }
 }
