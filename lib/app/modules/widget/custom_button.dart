@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.height,
     this.textSize,
+    this.gradient,
   });
 
   final String text;
@@ -20,8 +21,35 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double? height;
   final TextStyle? textSize;
+  final LinearGradient? gradient;
 
   @override
+  // tadinya pake button yang ini
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: width ?? double.infinity,
+//       height: height ?? 55,
+//       child: ElevatedButton(
+//         onPressed: onPressed,
+//         style: ElevatedButton.styleFrom(
+//           foregroundColor: neutral01Color,
+//           backgroundColor: color ?? primaryBlueColor,
+//           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(radius ?? 10),
+//           ),
+//           elevation: 5,
+//         ),
+//         child: Text(
+//           text,
+//           style: textSize ?? boldText20,
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+  // gua ganti code buttonnya soalnya butuh linear gradient di button e-kta
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
@@ -29,17 +57,30 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          foregroundColor: neutral01Color,
-          backgroundColor: color ?? primaryBlueColor,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          padding: EdgeInsets.zero, // Hapus padding default
+          backgroundColor: primaryBlueColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius ?? 10),
           ),
           elevation: 5,
         ),
-        child: Text(
-          text,
-          style: textSize ?? boldText20,
+        child: Ink(
+          decoration: BoxDecoration(
+            gradient: gradient,
+            borderRadius: BorderRadius.circular(radius ?? 10),
+          ),
+          child: Container(
+            constraints:
+                const BoxConstraints(minWidth: double.infinity, minHeight: 55),
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              child: Text(
+                text,
+                style: textSize ?? boldText20.copyWith(color: neutral01Color),
+              ),
+            ),
+          ),
         ),
       ),
     );

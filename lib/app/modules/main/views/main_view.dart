@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/e_kta/views/e_kta_view.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 import '../controllers/main_controller.dart';
@@ -27,6 +28,7 @@ class MainView extends GetView<MainController> {
           color: Colors.white,
         ),
         onPressed: () {
+          Get.to(EKtaView());
           controller.fabAnimationController.reset();
           controller.borderRadiusAnimationController.reset();
           controller.borderRadiusAnimationController.forward();
