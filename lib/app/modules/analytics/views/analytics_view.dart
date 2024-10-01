@@ -12,7 +12,6 @@ class AnalyticsView extends GetView<AnalyticsController> {
   const AnalyticsView({super.key});
   @override
   Widget build(BuildContext context) {
-
     final List<Map<String, dynamic>> cardsData = [
       {
         'title': 'Member Growth',
@@ -27,6 +26,7 @@ class AnalyticsView extends GetView<AnalyticsController> {
     ];
 
     return Scaffold(
+      backgroundColor: neutral02Color,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,25 +145,34 @@ class AnalyticsView extends GetView<AnalyticsController> {
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 16,),
+            SizedBox(
+              height: 16,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   menuBar(),
-                  SizedBox(height: 16,),
-                  Text('About Growth', style: semiBoldText22.copyWith(color: neutral04Color),),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    'About Growth',
+                    style: semiBoldText22.copyWith(color: neutral04Color),
+                  ),
                   GridView.builder(
-                    physics: NeverScrollableScrollPhysics(), // Nonaktifkan scrolling di GridView
-                    shrinkWrap: true, // Mengatur agar GridView menyesuaikan dengan tinggi
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    physics:
+                        NeverScrollableScrollPhysics(), // Nonaktifkan scrolling di GridView
+                    shrinkWrap:
+                        true, // Mengatur agar GridView menyesuaikan dengan tinggi
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, // Jumlah kolom
                       childAspectRatio: 1, // Rasio lebar dan tinggi untuk kartu
                       crossAxisSpacing: 16, // Jarak horizontal antar kartu
@@ -181,8 +190,6 @@ class AnalyticsView extends GetView<AnalyticsController> {
                 ],
               ),
             ),
-
-
           ],
         ),
       ),
