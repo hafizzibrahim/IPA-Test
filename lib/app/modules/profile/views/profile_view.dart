@@ -38,7 +38,6 @@ class ProfileView extends GetView<ProfileController> {
                           type: FileType.image,
                           allowMultiple: false,
                         );
-
                         if (result != null && result.files.isNotEmpty) {
                           controller.setProfileImagePath(result.files.single.path!);
                         }
@@ -151,6 +150,7 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 8),
             Obx(() => CustomDropdown(
+                  hintText: 'Choose your gender',
                   options: controller.genderOptions,
                   selectedOption: controller.selectedGender.value,
                   onSelected: (String? newGender) {
@@ -221,6 +221,7 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 8),
             Obx(() => CustomDropdown(
+                  hintText: 'Choose your first expertise',
                   options: controller.firstExpertise,
                   selectedOption: controller.selectedFirstExpertise.value,
                   onSelected: (String? newFirstExpertise) {
@@ -234,6 +235,7 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 8),
             Obx(() => CustomDropdown(
+                  hintText: 'Choose your second expertise',
                   options: controller.secondExpertise,
                   selectedOption: controller.selectedSecondExpertise.value,
                   onSelected: (String? newSecondExpertise) {

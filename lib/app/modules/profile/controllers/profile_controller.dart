@@ -42,10 +42,11 @@ class ProfileController extends GetxController {
     }
   }
 
-  final List<String> genderOptions = ['Male', 'Female'];
-  var selectedGender = 'Male'.obs;
+  final List<String> genderOptions = ['Choose your gender','Male', 'Female'];
+  var selectedGender = ''.obs;
 
   final List<String> firstExpertise = [
+    'Choose your first expertise',
     'Arkeologi, Sejarah, dan Budaya Maritim',
     'Bioteknologi, Biokimia, dan Pengolahan Produk Kelautan',
     'Bisnis Kelautan dan Perikanan',
@@ -72,9 +73,10 @@ class ProfileController extends GetxController {
     'Teknik Perkapalan, Sistem Perkapalan',
     'Transportasi Laut dan Pelayaran',
   ];
-  var selectedFirstExpertise = 'Arkeologi, Sejarah, dan Budaya Maritim'.obs;
+  var selectedFirstExpertise = ''.obs;
 
   final List<String> secondExpertise = [
+    'Choose your second expertise',
     'Arkeologi, Sejarah, dan Budaya Maritim',
     'Bioteknologi, Biokimia, dan Pengolahan Produk Kelautan',
     'Bisnis Kelautan dan Perikanan',
@@ -101,7 +103,7 @@ class ProfileController extends GetxController {
     'Teknik Perkapalan, Sistem Perkapalan',
     'Transportasi Laut dan Pelayaran',
   ];
-  var selectedSecondExpertise = 'Arkeologi, Sejarah, dan Budaya Maritim'.obs;
+  var selectedSecondExpertise = ''.obs;
 
 
 
