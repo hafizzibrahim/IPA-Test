@@ -2,10 +2,17 @@ import 'package:get/get.dart';
 
 import '../modules/achievement/bindings/achievement_binding.dart';
 import '../modules/achievement/views/achievement_view.dart';
+import '../modules/e_kta/bindings/e_kta_binding.dart';
+import '../modules/e_kta/views/e_kta_view.dart';
+
+import '../modules/analytics/bindings/analytics_binding.dart';
+import '../modules/analytics/views/analytics_view.dart';
+
 import '../modules/all_catalog/bindings/all_catalog_binding.dart';
 import '../modules/all_catalog/views/all_catalog_view.dart';
 import '../modules/catalog/bindings/catalog_binding.dart';
 import '../modules/catalog/views/catalog_view.dart';
+
 import '../modules/educations/bindings/educations_binding.dart';
 import '../modules/educations/views/educations_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -17,13 +24,11 @@ import '../modules/job/views/job_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
-import '../modules/main/views/main_view.dart';
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
+
 import '../modules/main_drawer/bindings/main_drawer_binding.dart';
 import '../modules/main_drawer/views/main_drawer_view.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
+
 import '../modules/member/bindings/member_binding.dart';
 import '../modules/member/views/member_view.dart';
 import '../modules/organizations/bindings/organizations_binding.dart';
@@ -46,7 +51,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.MAIN;
 
   static final routes = [
     GetPage(
@@ -110,6 +115,11 @@ class AppPages {
       binding: JobBinding(),
     ),
     GetPage(
+      name: _Paths.E_KTA,
+      page: () => EKtaView(),
+      binding: EKtaBinding(),
+    ),
+    GetPage(
       name: _Paths.EDUCATIONS,
       page: () => const EducationsView(),
       binding: EducationsBinding(),
@@ -123,6 +133,11 @@ class AppPages {
       name: _Paths.ORGANIZATIONS,
       page: () => const OrganizationsView(),
       binding: OrganizationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ANALYTICS,
+      page: () => const AnalyticsView(),
+      binding: AnalyticsBinding(),
     ),
     GetPage(
       name: _Paths.CATALOG,

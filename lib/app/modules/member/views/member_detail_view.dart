@@ -11,7 +11,7 @@ class MemberDetailView extends GetView<MemberController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: neutral02Color,
-      appBar: AppBar(),
+      appBar: AppBar(scrolledUnderElevation: 0.0),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -38,7 +38,7 @@ class MemberDetailView extends GetView<MemberController> {
                                   bottomRight: Radius.circular(16)),
                               color: primaryDarkBlueColor,
                               image: const DecorationImage(
-                                  fit: BoxFit.fitWidth,
+                                  fit: BoxFit.cover,
                                   image: AssetImage(
                                       "assets/images/paternkartu.png"))),
                         ),
