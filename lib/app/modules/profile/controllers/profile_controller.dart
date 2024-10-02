@@ -31,6 +31,7 @@ class ProfileController extends GetxController {
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
+
       context: context,
       initialDate: selectedDate.value ?? DateTime.now(),
       firstDate: DateTime(1900),
@@ -130,12 +131,14 @@ class ProfileController extends GetxController {
       genderController.text = gender;
     }
   }
+
   void setFirstExpertise(String? firstExpertise) {
     if (firstExpertise != null) {
       selectedFirstExpertise.value = firstExpertise;
       firstExpertiseController.text = firstExpertise;
     }
   }
+
   void setSecondExpertise(String? secondExpertise) {
     if (secondExpertise != null) {
       selectedSecondExpertise.value = secondExpertise;

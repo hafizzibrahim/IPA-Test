@@ -155,12 +155,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.WORK_EXPERIENCES,
-      page: () => const WorkExperiencesView(),
+      page: () => WorkExperiencesView(),
       binding: WorkExperiencesBinding(),
     ),
     GetPage(
       name: _Paths.ORGANIZATIONS,
-      page: () => const OrganizationsView(),
+      page: () => OrganizationsView(),
       binding: OrganizationsBinding(),
     ),
     GetPage(
