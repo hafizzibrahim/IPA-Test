@@ -6,9 +6,14 @@ import 'package:maritimmuda_connect/app/modules/achievement/views/achievement_vi
 import 'package:maritimmuda_connect/app/modules/educations/views/educations_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/controllers/home_controller.dart';
 import 'package:maritimmuda_connect/app/modules/home/views/home_view.dart';
+import 'package:maritimmuda_connect/app/modules/publication/controllers/publication_controller.dart';
 import 'package:maritimmuda_connect/app/modules/publication/views/publication_view.dart';
 import 'package:maritimmuda_connect/app/modules/organizations/views/organizations_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/views/profile_view.dart';
+import 'package:maritimmuda_connect/app/modules/researches/controllers/researches_controller.dart';
+import 'package:maritimmuda_connect/app/modules/researches/views/researches_view.dart';
+import 'package:maritimmuda_connect/app/modules/social_activity/controllers/social_activity_controller.dart';
+import 'package:maritimmuda_connect/app/modules/social_activity/views/social_activity_view.dart';
 import 'package:maritimmuda_connect/app/modules/work_experiences/views/work_experiences_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/controllers/profile_controller.dart';
 import 'package:maritimmuda_connect/app/modules/educations/controllers/educations_controller.dart';
@@ -26,6 +31,9 @@ class MainDrawerController extends GetxController {
     Get.put(WorkExperiencesController());
     Get.put(OrganizationsController());
     Get.put(AchievementController());
+    Get.put(PublicationController());
+    Get.put(SocialActivityController());
+    Get.put(ResearchesController());
   }
 
   List<Widget> screens = [
@@ -35,7 +43,9 @@ class MainDrawerController extends GetxController {
     WorkExperiencesView(),
     OrganizationsView(),
     AchievementView(),
-    PublicationView()
+    PublicationView(),
+    SocialActivityView(),
+    ResearchesView()
   ];
 
   List<String> title = [

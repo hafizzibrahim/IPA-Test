@@ -39,6 +39,7 @@ TextStyle regulerText24 =
 TextStyle mediumText11 = GoogleFonts.poppins(fontSize: 11, fontWeight: medium);
 TextStyle mediumText12 = GoogleFonts.poppins(fontSize: 12, fontWeight: medium);
 TextStyle mediumText16 = GoogleFonts.poppins(fontSize: 16, fontWeight: medium);
+TextStyle mediumText24 = GoogleFonts.poppins(fontSize: 24, fontWeight: medium);
 TextStyle mediumText28 = GoogleFonts.poppins(fontSize: 28, fontWeight: medium);
 TextStyle mediumText30 = GoogleFonts.poppins(fontSize: 30, fontWeight: medium);
 TextStyle mediumText41 = GoogleFonts.poppins(fontSize: 41, fontWeight: medium);
