@@ -67,9 +67,15 @@ class AchievementView extends GetView<AchievementController> {
                         const SizedBox(height: 16),
                          Text('Date of Achievement', style: boldText12,),
                         const SizedBox(height: 8),
-                        CustomTextField(
-                          readOnly: true,
-                          controller: controller.dateC,
+                        GestureDetector(
+                          onTap: () => controller.selectDate(context),
+                          child: AbsorbPointer(
+                            child: CustomTextField(
+                              controller: controller.dateC,
+                              hintText: 'Select date of achievement',
+                              suffixIcon: Icon(Icons.calendar_today, color: primaryBlueColor),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 15),
                         Row(

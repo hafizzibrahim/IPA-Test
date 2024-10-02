@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/social_activity/controllers/social_activity_controller.dart';
+import 'package:maritimmuda_connect/app/modules/profile/social_activity/controllers/social_activity_controller.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
@@ -61,15 +61,30 @@ class SocialActivityView extends GetView<SocialActivityController> {
                         const SizedBox(height: 16),
                         Text('Start Date', style: boldText12,),
                         const SizedBox(height: 8),
-                        CustomTextField(
-                          controller: controller.eventLevelC,
+                        GestureDetector(
+                          onTap: () => controller.selectStartDate(context),
+                          child: AbsorbPointer(
+                            child: CustomTextField(
+                              controller: controller.startDateController,
+                              hintText: 'Select start date',
+                              suffixIcon:
+                              Icon(Icons.calendar_today, color: primaryBlueColor),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 16),
                         Text('End Date', style: boldText12,),
                         const SizedBox(height: 8),
-                        CustomTextField(
-                          readOnly: true,
-                          controller: controller.dateC,
+                        GestureDetector(
+                          onTap: () => controller.selectEndDate(context),
+                          child: AbsorbPointer(
+                            child: CustomTextField(
+                              controller: controller.endDateController,
+                              hintText: 'Select end date',
+                              suffixIcon:
+                              Icon(Icons.calendar_today, color: primaryBlueColor),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 15),
                         Row(

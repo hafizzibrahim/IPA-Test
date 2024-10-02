@@ -71,14 +71,20 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   const SizedBox(height: 8),
                   Obx(() => DottedBorder(
+                    dashPattern: [10],
                     borderType: BorderType.RRect,
                     radius: const Radius.circular(20),
                     padding: const EdgeInsets.all(6),
                     child: InkWell(
                       onTap: () async {
-                        FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                        FilePickerResult? result = await FilePicker
+                            .platform
+                            .pickFiles(type: FileType.image);
                         if (result != null) {
-                          controller.setIdentityCardFile(File(result.files.single.path!));
+                          controller.setIdentityCardFile(
+                              File(result.files.single.path!));
+                        } else {
+                          print('User canceled the picker');
                         }
                       },
                       child: Container(
@@ -97,7 +103,8 @@ class ProfileView extends GetView<ProfileController> {
                           ),
                         )
                             : const Center(
-                          child: Icon(Icons.add_photo_alternate, size: 50, color: Colors.grey),
+                          child: Icon(Icons.add_photo_alternate,
+                              size: 50, color: Colors.grey),
                         ),
                       ),
                     ),
@@ -109,14 +116,20 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   const SizedBox(height: 8),
                   Obx(() => DottedBorder(
+                    dashPattern: [10],
                     borderType: BorderType.RRect,
                     radius: const Radius.circular(20),
                     padding: const EdgeInsets.all(6),
                     child: InkWell(
                       onTap: () async {
-                        FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                        FilePickerResult? result = await FilePicker
+                            .platform
+                            .pickFiles(type: FileType.image);
                         if (result != null) {
-                          controller.setStudentCardFile(File(result.files.single.path!));
+                          controller.setStudentCardFile(
+                              File(result.files.single.path!));
+                        } else {
+                          print('User canceled the picker');
                         }
                       },
                       child: Container(
@@ -135,7 +148,8 @@ class ProfileView extends GetView<ProfileController> {
                           ),
                         )
                             : const Center(
-                          child: Icon(Icons.add_photo_alternate, size: 50, color: Colors.grey),
+                          child: Icon(Icons.add_photo_alternate,
+                              size: 50, color: Colors.grey),
                         ),
                       ),
                     ),

@@ -11,10 +11,10 @@ import 'package:maritimmuda_connect/app/modules/profile/organizations/views/orga
 import 'package:maritimmuda_connect/app/modules/profile/publication/views/publication_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/organizations/views/organizations_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/views/profile_view.dart';
-import 'package:maritimmuda_connect/app/modules/researches/controllers/researches_controller.dart';
-import 'package:maritimmuda_connect/app/modules/researches/views/researches_view.dart';
-import 'package:maritimmuda_connect/app/modules/social_activity/controllers/social_activity_controller.dart';
-import 'package:maritimmuda_connect/app/modules/social_activity/views/social_activity_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/researches/controllers/researches_controller.dart';
+import 'package:maritimmuda_connect/app/modules/profile/researches/views/researches_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/social_activity/controllers/social_activity_controller.dart';
+import 'package:maritimmuda_connect/app/modules/profile/social_activity/views/social_activity_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/work_experiences/views/work_experiences_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/work_experiences/views/work_experiences_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/controllers/profile_controller.dart';

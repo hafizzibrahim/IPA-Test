@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AchievementController extends GetxController {
   //TODO: Implement AchievementController
@@ -9,7 +10,27 @@ class AchievementController extends GetxController {
   final TextEditingController eventNameC = TextEditingController();
   final TextEditingController eventLevelC = TextEditingController();
   final TextEditingController dateC = TextEditingController();
+  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
+  String get formattedDate {
+    return selectedDate.value != null
+        ? DateFormat('yyyy-MM-dd').format(selectedDate.value!)
+        : '';
+  }
+
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+
+      context: context,
+      initialDate: selectedDate.value ?? DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate.value) {
+      selectedDate.value = picked;
+      dateC.text = formattedDate;
+    }
+  }
 
   final count = 0.obs;
 
