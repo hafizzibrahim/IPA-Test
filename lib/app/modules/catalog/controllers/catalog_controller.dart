@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/all_catalog/views/all_catalog_view.dart';
-import 'package:maritimmuda_connect/app/modules/sub_catalog/views/sub_catalog_view.dart';
+import 'package:maritimmuda_connect/app/modules/catalog/all_catalog/views/all_catalog_view.dart';
+import 'package:maritimmuda_connect/app/modules/catalog/sub_catalog/views/sub_catalog_view.dart';
 
 class CatalogController extends GetxController
     with GetSingleTickerProviderStateMixin {
