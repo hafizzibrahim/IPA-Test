@@ -5,6 +5,7 @@ Color neutral01Color = const Color(0xFFFFFFFF);
 Color neutral02Color = const Color(0xFFEFEFEF);
 Color neutral03Color = const Color(0xFFB3B3B3);
 Color neutral04Color = const Color(0xFF000000);
+Color subTitleColor = const Color(0xFFB3B3B3);
 Color primaryBlueColor = const Color(0xFF12AEC7);
 Color primaryDarkBlueColor = const Color(0xFF086C9E);
 Color secondaryRedColor = const Color(0xFFDE5859);
@@ -33,8 +34,12 @@ TextStyle regulerText15 =
     GoogleFonts.poppins(fontSize: 15, fontWeight: reguler);
 TextStyle regulerText16 =
     GoogleFonts.poppins(fontSize: 16, fontWeight: reguler);
+TextStyle regulerText20 =
+    GoogleFonts.poppins(fontSize: 20, fontWeight: reguler);
 TextStyle regulerText24 =
     GoogleFonts.poppins(fontSize: 24, fontWeight: reguler);
+TextStyle regulerText26 =
+    GoogleFonts.poppins(fontSize: 26, fontWeight: reguler);
 
 // MEDIUM TEXT
 TextStyle mediumText11 = GoogleFonts.poppins(fontSize: 11, fontWeight: medium);
@@ -57,6 +62,8 @@ TextStyle semiBoldText22 =
     GoogleFonts.poppins(fontSize: 22, fontWeight: semiBold);
 TextStyle semiBoldText24 =
     GoogleFonts.poppins(fontSize: 24, fontWeight: semiBold);
+TextStyle semiBoldText32 =
+    GoogleFonts.poppins(fontSize: 32, fontWeight: semiBold);
 
 // BOLD TEXT
 TextStyle boldText12 = GoogleFonts.poppins(fontSize: 12, fontWeight: bold);

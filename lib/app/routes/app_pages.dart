@@ -1,43 +1,76 @@
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/models/category_data.dart';
 
-import '../modules/achievement/bindings/achievement_binding.dart';
-import '../modules/achievement/views/achievement_view.dart';
+
+
 import '../modules/event/bindings/event_binding.dart';
 import '../modules/event/views/event_view.dart';
-import '../modules/forgot_password/bindings/forgot_password_binding.dart';
-import '../modules/forgot_password/views/forgot_password_view.dart';
+
+
+
+
+import '../modules/profile/achievement/bindings/achievement_binding.dart';
+import '../modules/profile/achievement/views/achievement_view.dart';
+import '../modules/e_kta/bindings/e_kta_binding.dart';
+import '../modules/e_kta/views/e_kta_view.dart';
+
+import '../modules/analytics/bindings/analytics_binding.dart';
+import '../modules/analytics/views/analytics_view.dart';
+
+import '../modules/catalog/all_catalog/bindings/all_catalog_binding.dart';
+import '../modules/catalog/all_catalog/views/all_catalog_view.dart';
+import '../modules/catalog/bindings/catalog_binding.dart';
+import '../modules/catalog/views/catalog_view.dart';
+
+import '../modules/profile/educations/bindings/educations_binding.dart';
+import '../modules/profile/educations/views/educations_view.dart';
+import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
+import '../modules/auth/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
-import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/bindings/main_binding.dart';
-import '../modules/main/views/main_view.dart';
-import '../modules/main/views/main_view.dart';
+import '../modules/home/job/bindings/job_binding.dart';
+import '../modules/home/job/views/job_view.dart';
+import '../modules/auth/login/bindings/login_binding.dart';
+import '../modules/auth/login/views/login_view.dart';
+import '../modules/navbar/bindings/main_binding.dart';
+import '../modules/navbar/views/main_view.dart';
+
+
 import '../modules/main_drawer/bindings/main_drawer_binding.dart';
 import '../modules/main_drawer/bindings/main_drawer_binding.dart';
 import '../modules/main_drawer/views/main_drawer_view.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
-import '../modules/member/bindings/member_binding.dart';
-import '../modules/member/views/member_view.dart';
-import '../modules/profile/bindings/profile_binding.dart';
-import '../modules/profile/views/profile_view.dart';
-import '../modules/publication/bindings/publication_binding.dart';
-import '../modules/publication/views/publication_view.dart';
-import '../modules/register/bindings/register_binding.dart';
-import '../modules/register/views/register_view.dart';
+
+
+
+
 import '../modules/scholarship/bindings/scholarship_binding.dart';
 import '../modules/scholarship/views/scholarship_view.dart';
-import '../modules/splash/bindings/splash_binding.dart';
-import '../modules/splash/views/splash_view.dart';
+
+
+import '../modules/home/member/bindings/member_binding.dart';
+import '../modules/home/member/views/member_view.dart';
+import '../modules/profile/organizations/bindings/organizations_binding.dart';
+import '../modules/profile/organizations/views/organizations_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
+import '../modules/profile/publication/bindings/publication_binding.dart';
+import '../modules/profile/publication/views/publication_view.dart';
+import '../modules/auth/register/bindings/register_binding.dart';
+import '../modules/auth/register/views/register_view.dart';
+import '../modules/auth/splash/bindings/splash_binding.dart';
+import '../modules/auth/splash/views/splash_view.dart';
+import '../modules/catalog/sub_catalog/bindings/sub_catalog_binding.dart';
+import '../modules/catalog/sub_catalog/views/sub_catalog_view.dart';
+import '../modules/profile/work_experiences/bindings/work_experiences_binding.dart';
+import '../modules/profile/work_experiences/views/work_experiences_view.dart';
+
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.MAIN;
 
   static final routes = [
     GetPage(
@@ -96,6 +129,7 @@ class AppPages {
       binding: PublicationBinding(),
     ),
     GetPage(
+
       name: _Paths.EVENT,
       page: () => EventView(categoryList),
       binding: EventBinding(),
@@ -104,6 +138,51 @@ class AppPages {
       name: _Paths.SCHOLARSHIP,
       page: () => const ScholarshipView(),
       binding: ScholarshipBinding(),
+
+      name: _Paths.JOB,
+      page: () => const JobView(),
+      binding: JobBinding(),
+    ),
+    GetPage(
+      name: _Paths.E_KTA,
+      page: () => EKtaView(),
+      binding: EKtaBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDUCATIONS,
+      page: () => const EducationsView(),
+      binding: EducationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.WORK_EXPERIENCES,
+      page: () => const WorkExperiencesView(),
+      binding: WorkExperiencesBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORGANIZATIONS,
+      page: () => const OrganizationsView(),
+      binding: OrganizationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ANALYTICS,
+      page: () => const AnalyticsView(),
+      binding: AnalyticsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CATALOG,
+      page: () => const CatalogView(),
+      binding: CatalogBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALL_CATALOG,
+      page: () => const AllCatalogView(),
+      binding: AllCatalogBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUB_CATALOG,
+      page: () => const SubCatalogView(),
+      binding: SubCatalogBinding(),
+
     ),
   ];
 }
