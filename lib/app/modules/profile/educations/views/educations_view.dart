@@ -56,6 +56,7 @@ class EducationsView extends GetView<EducationsController> {
               height: 8,
             ),
             Obx(() => CustomDropdown(
+                  hintText: 'Choose your education level',
                   options: controller.levelOptions,
                   selectedOption: controller.selectedLevel.value,
                   onSelected: (String? newLevel) {

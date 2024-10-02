@@ -30,6 +30,7 @@ class EducationsController extends GetxController {
   }
 
   final List<String> levelOptions = [
+    'Choose your education level',
     'Junior High School',
     'Senior High School',
     'Vocational High School',
@@ -40,7 +41,7 @@ class EducationsController extends GetxController {
     'Master\'s Degree',
     'Doctoral Degree'
   ];
-  var selectedLevel = 'Junior High School'.obs;
+  var selectedLevel = ''.obs;
 
   @override
   void onClose() {
