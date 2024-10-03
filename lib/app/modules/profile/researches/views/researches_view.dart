@@ -46,6 +46,7 @@ class ResearchesView extends GetView<ResearchesController> {
                     ),
                     const SizedBox(height: 8),
                     CustomTextField(
+                      hintText: 'Enter title of research name',
                       controller: controller.researchTitleC,
                     ),
                     const SizedBox(height: 16),
@@ -55,6 +56,7 @@ class ResearchesView extends GetView<ResearchesController> {
                     ),
                     const SizedBox(height: 8),
                     CustomTextField(
+                      hintText: 'Enter role name',
                       controller: controller.roleC,
                     ),
                     const SizedBox(height: 16),
@@ -64,6 +66,7 @@ class ResearchesView extends GetView<ResearchesController> {
                     ),
                     const SizedBox(height: 8),
                     CustomTextField(
+                      hintText: 'Enter affiliation name',
                       controller: controller.affiliationC,
                     ),
                     const SizedBox(height: 16),
@@ -73,6 +76,7 @@ class ResearchesView extends GetView<ResearchesController> {
                     ),
                     const SizedBox(height: 8),
                     CustomTextField(
+                      hintText: 'Enter sponsor name',
                       controller: controller.sponsorC,
                     ),
                     const SizedBox(height: 16),

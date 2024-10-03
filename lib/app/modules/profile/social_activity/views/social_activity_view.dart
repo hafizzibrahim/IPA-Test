@@ -46,18 +46,21 @@ class SocialActivityView extends GetView<SocialActivityController> {
                         Text('Program Name', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          hintText: 'Enter program name',
                           controller: controller.awardC,
                         ),
                         const SizedBox(height: 16),
                         Text('Institution Name', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          hintText: 'Enter institution name',
                           controller: controller.appreciatorC,
                         ),
                         const SizedBox(height: 16),
                         Text('Role', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          hintText: 'Enter role name',
                           controller: controller.eventNameC,
                         ),
                         const SizedBox(height: 16),

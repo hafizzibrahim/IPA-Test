@@ -45,24 +45,28 @@ class AchievementView extends GetView<AchievementController> {
                         Text('Award/accomplishment', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          hintText: 'Enter award name',
                           controller: controller.awardC,
                         ),
                         const SizedBox(height: 16),
                         Text('Appreciator/Organizer', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          hintText: 'Enter appreciator name',
                           controller: controller.appreciatorC,
                         ),
                         const SizedBox(height: 16),
                         Text('Event Name', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          hintText: 'Enter event name',
                           controller: controller.eventNameC,
                         ),
                         const SizedBox(height: 16),
                         Text('Event Level', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          hintText: 'Enter event level',
                           controller: controller.eventLevelC,
                         ),
                         const SizedBox(height: 16),
