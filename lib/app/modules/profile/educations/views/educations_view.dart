@@ -25,7 +25,7 @@ class EducationsView extends GetView<EducationsController> {
             Padding(
               padding: const EdgeInsets.only(left: 18),
               child: Text(
-                'Add Education History',
+                  'Add Education History',
                   style: regulerText24
               ),
             ),
@@ -73,13 +73,13 @@ class EducationsView extends GetView<EducationsController> {
                       height: 8,
                     ),
                     Obx(() => CustomDropdown(
-                          hintText: 'Choose your education level',
-                          options: controller.levelOptions,
-                          selectedOption: controller.selectedLevel.value,
-                          onSelected: (String? newLevel) {
-                            controller.setLevel(newLevel);
-                          },
-                        )),
+                      hintText: 'Choose your education level',
+                      options: controller.levelOptions,
+                      selectedOption: controller.selectedLevel.value,
+                      onSelected: (String? newLevel) {
+                        controller.setLevel(newLevel);
+                      },
+                    )),
                     const SizedBox(
                       height: 16,
                     ),

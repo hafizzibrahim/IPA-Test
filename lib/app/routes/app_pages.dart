@@ -48,6 +48,8 @@ import '../modules/scholarship/views/scholarship_view.dart';
 
 import '../modules/home/member/bindings/member_binding.dart';
 import '../modules/home/member/views/member_view.dart';
+import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/profile/main_drawer/views/main_drawer_view.dart';
 import '../modules/profile/organizations/bindings/organizations_binding.dart';
 import '../modules/profile/organizations/views/organizations_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';

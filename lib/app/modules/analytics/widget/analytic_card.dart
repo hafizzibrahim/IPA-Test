@@ -27,6 +27,9 @@ class AnalyticCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon as IconData?),
+              SizedBox(
+                width: 8,
+              ),
               Text(
                 title,
                 style: regulerText10.copyWith(color: neutral04Color),
