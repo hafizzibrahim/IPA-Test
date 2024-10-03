@@ -1,19 +1,11 @@
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/models/category_data.dart';
-
-
-
 import '../modules/event/bindings/event_binding.dart';
 import '../modules/event/views/event_view.dart';
-
-
-
-
 import '../modules/profile/achievement/bindings/achievement_binding.dart';
 import '../modules/profile/achievement/views/achievement_view.dart';
 import '../modules/e_kta/bindings/e_kta_binding.dart';
 import '../modules/e_kta/views/e_kta_view.dart';
-
 import '../modules/analytics/bindings/analytics_binding.dart';
 import '../modules/analytics/views/analytics_view.dart';
 
@@ -34,18 +26,10 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/navbar/bindings/main_binding.dart';
 import '../modules/navbar/views/main_view.dart';
-
-
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
-
-
-
-
+import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/profile/main_drawer/views/main_drawer_view.dart';
 import '../modules/scholarship/bindings/scholarship_binding.dart';
 import '../modules/scholarship/views/scholarship_view.dart';
-
 
 import '../modules/home/member/bindings/member_binding.dart';
 import '../modules/home/member/views/member_view.dart';
@@ -63,7 +47,6 @@ import '../modules/catalog/sub_catalog/bindings/sub_catalog_binding.dart';
 import '../modules/catalog/sub_catalog/views/sub_catalog_view.dart';
 import '../modules/profile/work_experiences/bindings/work_experiences_binding.dart';
 import '../modules/profile/work_experiences/views/work_experiences_view.dart';
-
 
 part 'app_routes.dart';
 
@@ -129,7 +112,6 @@ class AppPages {
       binding: PublicationBinding(),
     ),
     GetPage(
-
       name: _Paths.EVENT,
       page: () => EventView(categoryList),
       binding: EventBinding(),
@@ -138,7 +120,8 @@ class AppPages {
       name: _Paths.SCHOLARSHIP,
       page: () => const ScholarshipView(),
       binding: ScholarshipBinding(),
-
+    ),
+    GetPage(
       name: _Paths.JOB,
       page: () => const JobView(),
       binding: JobBinding(),
@@ -182,7 +165,6 @@ class AppPages {
       name: _Paths.SUB_CATALOG,
       page: () => const SubCatalogView(),
       binding: SubCatalogBinding(),
-
     ),
   ];
 }
