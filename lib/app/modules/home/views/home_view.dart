@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/models/category_data.dart';
 import 'package:maritimmuda_connect/app/modules/event/views/event_view.dart';
+import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
 import 'package:maritimmuda_connect/app/modules/scholarship/views/scholarship_view.dart';
 import 'package:maritimmuda_connect/app/modules/catalog/views/catalog_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/widget/home_card.dart';
@@ -178,7 +179,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 SizedBox(
                   width: (MediaQuery.of(context).size.width / 2) -
-                      24, // Lebar HomeCard
+                      24,
                   child: HomeCard(
                     icon: 'assets/icons/job_icon.svg',
                     title: 'Jobs',
