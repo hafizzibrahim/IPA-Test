@@ -7,7 +7,11 @@ class AnalyticCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final String image;
-  const AnalyticCard({super.key, required this.title, required this.icon, required this.image});
+  const AnalyticCard(
+      {super.key,
+      required this.title,
+      required this.icon,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +21,21 @@ class AnalyticCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon as IconData?),
-              Text(title, style: regulerText10.copyWith(color: neutral04Color),),
+              Text(
+                title,
+                style: regulerText10.copyWith(color: neutral04Color),
+              ),
             ],
           ),
-          SizedBox(height: 16,),
+          SizedBox(
+            height: 16,
+          ),
           SvgPicture.asset(image)
         ],
       ),

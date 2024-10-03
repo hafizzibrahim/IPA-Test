@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/member/controllers/member_controller.dart';
+import 'package:maritimmuda_connect/app/modules/home/member/controllers/member_controller.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 class SearchbarWidget extends StatelessWidget {

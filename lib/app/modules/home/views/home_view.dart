@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/data/models/category_data.dart';
+import 'package:maritimmuda_connect/app/modules/event/views/event_view.dart';
+import 'package:maritimmuda_connect/app/modules/scholarship/views/scholarship_view.dart';
+import 'package:maritimmuda_connect/app/modules/catalog/views/catalog_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/widget/home_card.dart';
-import 'package:maritimmuda_connect/app/modules/member/views/member_view.dart';
- 
+import 'package:maritimmuda_connect/app/modules/home/member/views/member_view.dart';
 
 import '../controllers/home_controller.dart';
 import 'package:maritimmuda_connect/themes.dart';
@@ -124,9 +126,7 @@ class HomeView extends GetView<HomeController> {
               }).toList(),
             ),
           ),
-
           SizedBox(
-
             height: 16,
           ),
           Center(
@@ -141,11 +141,9 @@ class HomeView extends GetView<HomeController> {
                   child: HomeCard(
                     icon: 'assets/icons/member_icon.svg',
                     title: 'Member',
-
                     onTap: () {
                       Get.to(() => MemberView());
                     },
-
                   ),
                 ),
                 SizedBox(
@@ -154,7 +152,12 @@ class HomeView extends GetView<HomeController> {
                   child: HomeCard(
                     icon: 'assets/icons/event_icon.svg',
                     title: 'Event',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventView(categoryList)));
+                    },
                   ),
                 ),
                 SizedBox(
@@ -163,7 +166,14 @@ class HomeView extends GetView<HomeController> {
                   child: HomeCard(
                     icon: 'assets/icons/scholarship_icon.svg',
                     title: 'Scholarship',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ScholarshipView()));
+
+//                       Get.to(ScholarshipView());
+                    },
                   ),
                 ),
                 SizedBox(
@@ -172,7 +182,9 @@ class HomeView extends GetView<HomeController> {
                   child: HomeCard(
                     icon: 'assets/icons/job_icon.svg',
                     title: 'Jobs',
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(CatalogView());
+                    },
                   ),
                 ),
               ],
