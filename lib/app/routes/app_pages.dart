@@ -26,12 +26,10 @@ import '../modules/auth/login/views/login_view.dart';
 import '../modules/navbar/bindings/main_binding.dart';
 import '../modules/navbar/views/main_view.dart';
 
-import '../modules/main/views/main_view.dart';
-import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/main_drawer/views/main_drawer_view.dart';
-
 import '../modules/home/member/bindings/member_binding.dart';
 import '../modules/home/member/views/member_view.dart';
+import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/profile/main_drawer/views/main_drawer_view.dart';
 import '../modules/profile/organizations/bindings/organizations_binding.dart';
 import '../modules/profile/organizations/views/organizations_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -52,7 +50,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.MAIN;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(

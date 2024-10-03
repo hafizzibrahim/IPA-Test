@@ -53,7 +53,7 @@ class EKtaDetailView extends GetView<EKtaController> {
                 top: 65,
                 left: 150,
                 child: Hero(
-                  tag: 'test',
+                  tag: 'Hero',
                   child: Container(
                     height: 100,
                     width: 100,
