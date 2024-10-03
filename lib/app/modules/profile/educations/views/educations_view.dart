@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_dropdown.dart';
 import 'package:maritimmuda_connect/themes.dart';
-import '../../../widget/custom_button.dart';
 import '../../../widget/custom_textfield.dart';
 import '../controllers/educations_controller.dart';
 import '../../../widget/profile_button.dart';
