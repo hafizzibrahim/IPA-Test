@@ -47,6 +47,17 @@ class PublicationController extends GetxController {
     }
   }
 
+  void clearAll() {
+    titleC.clear();
+    authorC.clear();
+    pubTypeC.clear();
+    publisherC.clear();
+    dateC.clear();
+
+    selectedDate.value = null;
+    selectedFileName.value = 'No File Chosen';
+  }
+
   @override
   void onClose() {
     titleC.dispose();

@@ -66,6 +66,18 @@ class ResearchesController extends GetxController {
     super.onReady();
   }
 
+  void clearAll() {
+    researchTitleC.clear();
+    roleC.clear();
+    affiliationC.clear();
+    sponsorC.clear();
+    startDateController.clear();
+    endDateController.clear();
+
+    selectedStartDate.value = null;
+    selectedEndDate.value = null;
+  }
+
   @override
   void onClose() {
     super.onClose();

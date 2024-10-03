@@ -6,6 +6,7 @@ import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+import '../../../widget/custom_dialog.dart';
 import '../controllers/achievement_controller.dart';
 
 
@@ -77,7 +78,7 @@ class AchievementView extends GetView<AchievementController> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -90,9 +91,29 @@ class AchievementView extends GetView<AchievementController> {
                                 color: primaryDarkBlueColor),
                             const SizedBox(width: 10),
                             ProfileButton(
-                                icon: Icon(Icons.close, color: neutral01Color),
-                                text: 'Cancel',
-                                color: secondaryRedColor),
+                                icon: Icon(
+                                  Icons.close,
+                                  color: neutral01Color,
+                                ),
+                                color: secondaryRedColor,
+                                text: 'Clear',
+                                onTap: () {
+                                  showCustomDialog(
+                                      content: 'Are you sure you want to clear all data entered?',
+                                      onConfirm: () {
+                                        controller.clearAll();
+                                        Get.back();
+                                        Get.snackbar(
+                                            'Cleared',
+                                            'All data has been deleted successfully',
+                                            snackPosition: SnackPosition.BOTTOM
+                                        );
+                                      },
+                                      onCancel: (){
+                                        Get.back();
+                                      });
+                                }
+                            )
                           ],
                         ),
                         const SizedBox(height: 30),

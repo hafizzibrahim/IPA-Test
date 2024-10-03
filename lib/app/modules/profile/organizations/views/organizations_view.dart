@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
+import '../../../widget/custom_dialog.dart';
 import '../../../widget/custom_textfield.dart';
 import '../../../widget/profile_button.dart';
 import '../controllers/organizations_controller.dart';
@@ -110,7 +111,7 @@ class OrganizationsView extends GetView<OrganizationsController> {
                       ),
                     ),
                     const SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -127,12 +128,28 @@ class OrganizationsView extends GetView<OrganizationsController> {
                           width: 10,
                         ),
                         ProfileButton(
-                          icon: Icon(
-                            Icons.close,
-                            color: neutral01Color,
-                          ),
-                          color: secondaryRedColor,
-                          text: 'Cancel',
+                            icon: Icon(
+                              Icons.close,
+                              color: neutral01Color,
+                            ),
+                            color: secondaryRedColor,
+                            text: 'Clear',
+                            onTap: () {
+                              showCustomDialog(
+                                  content: 'Are you sure you want to clear all data entered?',
+                                  onConfirm: () {
+                                    controller.clearAll();
+                                    Get.back();
+                                    Get.snackbar(
+                                        'Cleared',
+                                        'All data has been deleted successfully',
+                                        snackPosition: SnackPosition.BOTTOM
+                                    );
+                                  },
+                                  onCancel: (){
+                                    Get.back();
+                                  });
+                            }
                         )
                       ],
                     ),

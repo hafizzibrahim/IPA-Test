@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_dialog.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../../../widget/custom_textfield.dart';
@@ -109,9 +110,7 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  const SizedBox(height: 16,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -123,16 +122,30 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                         color: primaryDarkBlueColor,
                         text: 'Save',
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
+                      const SizedBox(width: 8,),
                       ProfileButton(
                         icon: Icon(
                           Icons.close,
                           color: neutral01Color,
                         ),
                         color: secondaryRedColor,
-                        text: 'Cancel',
+                        text: 'Clear',
+                        onTap: () {
+                          showCustomDialog(
+                              content: 'Are you sure you want to clear all data entered?',
+                              onConfirm: () {
+                                controller.clearAll();
+                                Get.back();
+                                Get.snackbar(
+                                  'Cleared',
+                                  'All data has been deleted successfully',
+                                  snackPosition: SnackPosition.BOTTOM
+                                );
+                              },
+                              onCancel: (){
+                                Get.back();
+                              });
+                        }
                       )
                     ],
                   ),

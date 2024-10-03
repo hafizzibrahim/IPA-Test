@@ -54,6 +54,18 @@ class SocialActivityController extends GetxController {
 
   final count = 0.obs;
 
+  void clearAll() {
+    awardC.clear();
+    appreciatorC.clear();
+    eventLevelC.clear();
+    eventNameC.clear();
+    startDateController.clear();
+    endDateController.clear();
+
+    selectedStartDate.value = null;
+    selectedStartDate.value = null;
+  }
+
   @override
   void onInit() {
     super.onInit();

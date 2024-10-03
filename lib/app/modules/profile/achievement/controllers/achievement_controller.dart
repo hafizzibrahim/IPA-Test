@@ -32,6 +32,16 @@ class AchievementController extends GetxController {
     }
   }
 
+  void clearAll() {
+    awardC.clear();
+    appreciatorC.clear();
+    eventNameC.clear();
+    eventLevelC.clear();
+    dateC.clear();
+
+    selectedDate.value = null;
+  }
+
   final count = 0.obs;
 
   @override

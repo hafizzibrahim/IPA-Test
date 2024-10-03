@@ -7,6 +7,8 @@ import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+import '../../../widget/custom_dialog.dart';
+
 class ResearchesView extends GetView<ResearchesController> {
   const ResearchesView({super.key});
 
@@ -122,9 +124,29 @@ class ResearchesView extends GetView<ResearchesController> {
                             color: primaryDarkBlueColor),
                         const SizedBox(width: 10),
                         ProfileButton(
-                            icon: Icon(Icons.close, color: neutral01Color),
-                            text: 'Cancel',
-                            color: secondaryRedColor),
+                            icon: Icon(
+                              Icons.close,
+                              color: neutral01Color,
+                            ),
+                            color: secondaryRedColor,
+                            text: 'Clear',
+                            onTap: () {
+                              showCustomDialog(
+                                  content: 'Are you sure you want to clear all data entered?',
+                                  onConfirm: () {
+                                    controller.clearAll();
+                                    Get.back();
+                                    Get.snackbar(
+                                        'Cleared',
+                                        'All data has been deleted successfully',
+                                        snackPosition: SnackPosition.BOTTOM
+                                    );
+                                  },
+                                  onCancel: (){
+                                    Get.back();
+                                  });
+                            }
+                        )
                       ],
                     ),
                     const SizedBox(height: 30),

@@ -125,6 +125,31 @@ class ProfileController extends GetxController {
     super.onClose();
   }
 
+  void clearAll() {
+    emailController.clear();
+    genderController.clear();
+    provincialOrgController.clear();
+    placeOfBirthController.clear();
+    dateOfBirthController.clear();
+    linkedInController.clear();
+    instagramController.clear();
+    firstExpertiseController.clear();
+    secondExpertiseController.clear();
+    addressController.clear();
+    residenceAddressController.clear();
+    bioController.clear();
+
+    selectedGender.value = '';
+    selectedFirstExpertise.value = '';
+    selectedSecondExpertise.value = '';
+
+    selectedDate.value = null;
+
+    identityCardFile.value = null;
+    studentCardFile.value = null;
+    profileImagePath.value = null;
+  }
+
   void setGender(String? gender) {
     if (gender != null) {
       selectedGender.value = gender;

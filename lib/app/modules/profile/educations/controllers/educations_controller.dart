@@ -52,6 +52,16 @@ class EducationsController extends GetxController {
     super.onClose();
   }
 
+  void clearAll() {
+    institutionController.clear();
+    majorController.clear();
+    gradController.clear();
+    levelController.clear();
+
+    selectedLevel.value = '';
+    selectedDate.value = null;
+  }
+
   void setLevel(String? level) {
     if (level != null) {
       selectedLevel.value = level;
