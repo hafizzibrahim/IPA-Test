@@ -42,6 +42,15 @@ class OrganizationsController extends GetxController {
     }
   }
 
+  void clearAll() {
+    organizationController.clear();
+    positionController.clear();
+    startDateController.clear();
+    endDateController.clear();
+
+    selectedDate.value = null;
+  }
+
   @override
   void onClose() {
     organizationController.dispose();

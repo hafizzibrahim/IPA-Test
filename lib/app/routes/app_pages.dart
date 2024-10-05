@@ -36,9 +36,10 @@ import '../modules/navbar/bindings/main_binding.dart';
 import '../modules/navbar/views/main_view.dart';
 
 
-// import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-// import '../modules/main_drawer/bindings/main_drawer_binding.dart';
-// import '../modules/main_drawer/views/main_drawer_view.dart';
+
+import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/profile/main_drawer/views/main_drawer_view.dart';
+
 
 
 
@@ -49,6 +50,8 @@ import '../modules/scholarship/views/scholarship_view.dart';
 
 import '../modules/home/member/bindings/member_binding.dart';
 import '../modules/home/member/views/member_view.dart';
+import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
+import '../modules/profile/main_drawer/views/main_drawer_view.dart';
 import '../modules/profile/organizations/bindings/organizations_binding.dart';
 import '../modules/profile/organizations/views/organizations_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -138,9 +141,9 @@ class AppPages {
       name: _Paths.SCHOLARSHIP,
       page: () => const ScholarshipView(),
       binding: ScholarshipBinding(),
-  ),
-  GetPage(
+    ),
 
+    GetPage(
       name: _Paths.JOB,
       page: () => const JobView(),
       binding: JobBinding(),
@@ -157,12 +160,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.WORK_EXPERIENCES,
-      page: () => const WorkExperiencesView(),
+      page: () => WorkExperiencesView(),
       binding: WorkExperiencesBinding(),
     ),
     GetPage(
       name: _Paths.ORGANIZATIONS,
-      page: () => const OrganizationsView(),
+      page: () => OrganizationsView(),
       binding: OrganizationsBinding(),
     ),
     GetPage(

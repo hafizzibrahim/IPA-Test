@@ -29,7 +29,10 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: neutral02Color),
+        decoration: BoxDecoration(
+          color: neutral02Color,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Column(children: [
           Align(
             alignment: Alignment.centerLeft,
@@ -53,7 +56,7 @@ class ProfileCard extends StatelessWidget {
                 width: 3,
               ),
               Text(
-                rightSubTitle != null ? '| $rightSubTitle}' : "",
+                rightSubTitle != null ? '| $rightSubTitle' : "",
               )
             ],
           ),
@@ -63,14 +66,14 @@ class ProfileCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     '${startDate ?? ''} ',
-                    style: boldText12,
+                    style: semiBoldText12,
                   )),
               const SizedBox(
                 width: 3,
               ),
               Text(
-                endDate != null ? '- $endDate}' : "",
-                style: boldText12,
+                endDate != null ? '- $endDate' : "",
+                style: semiBoldText12,
               )
             ],
           ),
