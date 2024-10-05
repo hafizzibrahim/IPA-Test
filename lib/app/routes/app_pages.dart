@@ -36,8 +36,10 @@ import '../modules/navbar/bindings/main_binding.dart';
 import '../modules/navbar/views/main_view.dart';
 
 
+
 import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
 import '../modules/profile/main_drawer/views/main_drawer_view.dart';
+
 
 
 
@@ -89,11 +91,11 @@ class AppPages {
       page: () => const RegisterView(),
       binding: RegisterBinding(),
     ),
-    GetPage(
-      name: _Paths.MAIN_DRAWER,
-      page: () => const MainDrawerView(),
-      binding: MainDrawerBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.MAIN_DRAWER,
+    //   page: () => const MainDrawerView(),
+    //   binding: MainDrawerBinding(),
+    // ),
     GetPage(
       name: _Paths.SPLASH,
       page: () => const SplashView(),
@@ -140,7 +142,8 @@ class AppPages {
       page: () => const ScholarshipView(),
       binding: ScholarshipBinding(),
     ),
-      GetPage(
+
+    GetPage(
       name: _Paths.JOB,
       page: () => const JobView(),
       binding: JobBinding(),
