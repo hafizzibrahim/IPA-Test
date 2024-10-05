@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/event/controllers/event_controller.dart';
 import 'package:maritimmuda_connect/app/modules/profile/achievement/controllers/achievement_controller.dart';
 import 'package:maritimmuda_connect/app/modules/analytics/views/analytics_view.dart';
 import 'package:maritimmuda_connect/app/modules/catalog/controllers/catalog_controller.dart';
@@ -17,6 +18,7 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
     Get.put(MainDrawerController());
     Get.put(AchievementController());
     Get.put(CatalogController());
+    Get.put(EventController());
   }
 
   late AnimationController fabAnimationController;
