@@ -45,6 +45,8 @@ import '../modules/catalog/sub_catalog/bindings/sub_catalog_binding.dart';
 import '../modules/catalog/sub_catalog/views/sub_catalog_view.dart';
 import '../modules/profile/work_experiences/bindings/work_experiences_binding.dart';
 import '../modules/profile/work_experiences/views/work_experiences_view.dart';
+import '../modules/scholarship/bindings/scholarship_binding.dart';
+import '../modules/scholarship/views/scholarship_view.dart';
 
 part 'app_routes.dart';
 
