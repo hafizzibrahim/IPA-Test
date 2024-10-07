@@ -4,9 +4,18 @@ import 'package:maritimmuda_connect/app/modules/profile/achievement/controllers/
 import 'package:maritimmuda_connect/app/modules/profile/achievement/views/achievement_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/educations/views/educations_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/controllers/home_controller.dart';
+import 'package:maritimmuda_connect/app/modules/home/views/home_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/publication/controllers/publication_controller.dart';
+import 'package:maritimmuda_connect/app/modules/profile/publication/views/publication_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/organizations/views/organizations_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/publication/views/publication_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/organizations/views/organizations_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/views/profile_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/researches/controllers/researches_controller.dart';
+import 'package:maritimmuda_connect/app/modules/profile/researches/views/researches_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/social_activity/controllers/social_activity_controller.dart';
+import 'package:maritimmuda_connect/app/modules/profile/social_activity/views/social_activity_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/work_experiences/views/work_experiences_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/work_experiences/views/work_experiences_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/controllers/profile_controller.dart';
 import 'package:maritimmuda_connect/app/modules/profile/educations/controllers/educations_controller.dart';
@@ -24,6 +33,9 @@ class MainDrawerController extends GetxController {
     Get.put(WorkExperiencesController());
     Get.put(OrganizationsController());
     Get.put(AchievementController());
+    Get.put(PublicationController());
+    Get.put(SocialActivityController());
+    Get.put(ResearchesController());
   }
 
   List<Widget> screens = [
@@ -33,7 +45,9 @@ class MainDrawerController extends GetxController {
     WorkExperiencesView(),
     OrganizationsView(),
     AchievementView(),
-    PublicationView()
+    PublicationView(),
+    SocialActivityView(),
+    ResearchesView()
   ];
 
   List<String> title = [

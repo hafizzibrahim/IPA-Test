@@ -42,6 +42,15 @@ class WorkExperiencesController extends GetxController {
    }
  }
 
+ void clearAll() {
+   positionController.clear();
+   institutionController.clear();
+   startDateController.clear();
+   endDateController.clear();
+
+   selectedDate.value = null;
+ }
+
  @override
   void onClose() {
     positionController.dispose();

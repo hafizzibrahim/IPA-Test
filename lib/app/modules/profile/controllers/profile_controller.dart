@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +19,9 @@ class ProfileController extends GetxController {
   final bioController = TextEditingController();
 
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  final Rx<File?> identityCardFile = Rx<File?>(null);
+  final Rx<File?> studentCardFile = Rx<File?>(null);
+  Rx<String?> profileImagePath = Rx<String?>(null);
 
   String get formattedDate {
     return selectedDate.value != null
@@ -26,6 +31,7 @@ class ProfileController extends GetxController {
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
+
       context: context,
       initialDate: selectedDate.value ?? DateTime.now(),
       firstDate: DateTime(1900),
@@ -37,10 +43,11 @@ class ProfileController extends GetxController {
     }
   }
 
-  final List<String> genderOptions = ['Male', 'Female'];
-  var selectedGender = 'Male'.obs;
+  final List<String> genderOptions = ['Choose your gender','Male', 'Female'];
+  var selectedGender = ''.obs;
 
   final List<String> firstExpertise = [
+    'Choose your first expertise',
     'Arkeologi, Sejarah, dan Budaya Maritim',
     'Bioteknologi, Biokimia, dan Pengolahan Produk Kelautan',
     'Bisnis Kelautan dan Perikanan',
@@ -67,9 +74,10 @@ class ProfileController extends GetxController {
     'Teknik Perkapalan, Sistem Perkapalan',
     'Transportasi Laut dan Pelayaran',
   ];
-  var selectedFirstExpertise = 'Arkeologi, Sejarah, dan Budaya Maritim'.obs;
+  var selectedFirstExpertise = ''.obs;
 
   final List<String> secondExpertise = [
+    'Choose your second expertise',
     'Arkeologi, Sejarah, dan Budaya Maritim',
     'Bioteknologi, Biokimia, dan Pengolahan Produk Kelautan',
     'Bisnis Kelautan dan Perikanan',
@@ -96,7 +104,7 @@ class ProfileController extends GetxController {
     'Teknik Perkapalan, Sistem Perkapalan',
     'Transportasi Laut dan Pelayaran',
   ];
-  var selectedSecondExpertise = 'Arkeologi, Sejarah, dan Budaya Maritim'.obs;
+  var selectedSecondExpertise = ''.obs;
 
 
 
@@ -117,22 +125,61 @@ class ProfileController extends GetxController {
     super.onClose();
   }
 
+  void clearAll() {
+    emailController.clear();
+    genderController.clear();
+    provincialOrgController.clear();
+    placeOfBirthController.clear();
+    dateOfBirthController.clear();
+    linkedInController.clear();
+    instagramController.clear();
+    firstExpertiseController.clear();
+    secondExpertiseController.clear();
+    addressController.clear();
+    residenceAddressController.clear();
+    bioController.clear();
+
+    selectedGender.value = '';
+    selectedFirstExpertise.value = '';
+    selectedSecondExpertise.value = '';
+
+    selectedDate.value = null;
+
+    identityCardFile.value = null;
+    studentCardFile.value = null;
+    profileImagePath.value = null;
+  }
+
   void setGender(String? gender) {
     if (gender != null) {
       selectedGender.value = gender;
       genderController.text = gender;
     }
   }
+
   void setFirstExpertise(String? firstExpertise) {
     if (firstExpertise != null) {
       selectedFirstExpertise.value = firstExpertise;
       firstExpertiseController.text = firstExpertise;
     }
   }
+
   void setSecondExpertise(String? secondExpertise) {
     if (secondExpertise != null) {
       selectedSecondExpertise.value = secondExpertise;
       secondExpertiseController.text = secondExpertise;
     }
+  }
+
+  void setIdentityCardFile(File file) {
+    identityCardFile.value = file;
+  }
+
+  void setStudentCardFile(File file) {
+    studentCardFile.value = file;
+  }
+
+  void setProfileImagePath(String path) {
+    profileImagePath.value = path;
   }
 }

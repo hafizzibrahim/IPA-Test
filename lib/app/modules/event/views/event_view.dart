@@ -18,124 +18,111 @@ class EventView extends GetView<EventController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: neutral02Color,
-        body: Column(
-            children: <Widget>[
-
-
-              Container(
-                color: primaryBlueColor,
-                child: Padding(
-                  padding: EdgeInsets.all(30.0),
-                  child: SearchbarWidget(),
-                  // child: TextField(
-                  //
-                  //   decoration: InputDecoration(
-                  //       filled: true,
-                  //       fillColor: Colors.white,
-                  //       contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(30.0),
-                  //         borderSide: BorderSide(width: 20.0, color: Colors.white),
-                  //       ),
-                  //       hintText: 'Search Event',
-                  //       prefixIcon: Icon(
-                  //         Icons.search,
-                  //         size: 30.0,
-                  //       ),
-                  //       suffixIcon: IconButton(
-                  //           icon: Icon(Icons.filter_alt_outlined),
-                  //           onPressed: () {
-                  //
-                  //           }
-                  //       )
-                  //
-                  //   ),
-                  // ),
-                ),
-              ),
-
-              // 2. Category
-              SizedBox(
-                height: 70,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: category.category.length,
-                    itemBuilder: (context, index) {
-                      final textCategory = category.category[index];
-                      return Padding(
-                          padding:  EdgeInsets.symmetric( vertical: 15.0, horizontal: 10.0),
-                          child:
-                          SizedBox(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                elevation: 3,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    side:  BorderSide(color: Color(0xFF086C9E))
-                                ),
-
-                                backgroundColor: Colors.white, // Set background color
-                              ),
-
-                              onPressed: () {
-                                // Action when button is pressed
-                              },
-                              child: Text(textCategory, style: regulerText16,),
-                            ),
-                          )
-
-                      );
-                    }
-
-                ),
-              ),
-
-              Expanded(
+        appBar: AppBar(
+          backgroundColor: neutral02Color,
+            title: Text('Event List',style: boldText24,),
+            centerTitle:true,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+                },
+            )
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+              children: <Widget>[
+          
+          
+                Container(
+                  color: primaryBlueColor,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 30.0, right: 30.0,bottom: 30.0),
-                    // child:Expanded(
-
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      // physics: NeverScrollableScrollPhysics(),
-                      // scrollDirection: Axis.vertical,
-                      itemCount: eventList.length,
-                      itemBuilder: (context, index) {
-                        final EventData event = eventList[index];
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                DetailEventView(eventData: event,)
-                            ));
-                          },
-                          child:  Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10.0),
-                            child: ProgramCard(
-                              image: event.imageUrl,
-                              date: event.date,
-                              textTitle: event.title,
-                              textSubTitle: event.description!,
-                              views: event.views,
-                              likes: event.likes,
-                              send: event.send,
-
-                            ),
-                          ),
-
-                        ) ;
-
-                      },
-
+                    padding: EdgeInsets.all(30.0),
+                    child: SearchbarWidget(),
+          
+                  ),
+                ),
+          
+                // 2. Category
+                Container(
+                  width: double.infinity,
+                  color: primaryDarkBlueColor,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: neutral02Color,
 
                     ),
-                  )
-
-              )
-
-
-
-            ]
+                    child: GetBuilder<EventController>(
+                      builder: (controller) {
+                        return Column(
+                          children: [
+                            Container(
+                              padding:
+                              const EdgeInsets.symmetric(vertical: 10),
+                              color: Colors.transparent,
+                              child: TabBar(
+                                physics: const BouncingScrollPhysics(),
+                                controller: controller.tabController,
+                                isScrollable: true,
+                                tabAlignment: TabAlignment.start,
+                                dividerColor: Colors.transparent,
+                                indicatorPadding: EdgeInsets.zero,
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                labelStyle: semiBoldText11.copyWith(
+                                    color: neutral01Color),
+                                indicator: BoxDecoration(
+                                  border:
+                                  Border.all(color: Colors.transparent),
+                                ),
+                                tabs: List.generate(
+                                  7,
+                                      (index) {
+                                    return Obx(
+                                          () {
+                                        return Container(
+                                          padding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color:
+                                            controller.selectedIndex.value == index ? primaryDarkBlueColor : neutral01Color,
+                                            borderRadius:
+                                            BorderRadius.circular(25),
+                                            border: Border.all(width: 1.0, color: primaryDarkBlueColor)
+                                          ),
+                                          child: Tab(
+                                            text: controller.title[index],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: Get.height - 100,
+                              child: TabBarView(
+                                controller: controller.tabController,
+                                children: controller.screens,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ),
+          
+          
+          
+          
+          
+              ]
+          ),
         )
+
     );
   }
 }

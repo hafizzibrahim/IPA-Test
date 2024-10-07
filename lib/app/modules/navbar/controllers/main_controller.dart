@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+
+import 'package:maritimmuda_connect/app/modules/event/controllers/event_controller.dart';
+
+import 'package:maritimmuda_connect/app/modules/analytics/controllers/analytics_controller.dart';
+
 import 'package:maritimmuda_connect/app/modules/profile/achievement/controllers/achievement_controller.dart';
 import 'package:maritimmuda_connect/app/modules/analytics/views/analytics_view.dart';
 import 'package:maritimmuda_connect/app/modules/catalog/controllers/catalog_controller.dart';
 import 'package:maritimmuda_connect/app/modules/catalog/views/catalog_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/views/home_view.dart';
-import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
 import 'package:maritimmuda_connect/app/modules/profile/main_drawer/controllers/main_drawer_controller.dart';
 import 'package:maritimmuda_connect/app/modules/profile/main_drawer/views/main_drawer_view.dart';
 
@@ -17,6 +21,11 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
     Get.put(MainDrawerController());
     Get.put(AchievementController());
     Get.put(CatalogController());
+
+    Get.put(EventController());
+
+    Get.put(AnalyticsController());
+
   }
 
   late AnimationController fabAnimationController;
@@ -42,10 +51,10 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
   ];
 
   final List<Widget> viewList = [
-    HomeView(),
-    AnalyticsView(),
-    CatalogView(),
-    MainDrawerView(),
+    const HomeView(),
+    const AnalyticsView(),
+    const CatalogView(),
+    const MainDrawerView(),
   ];
 
   @override

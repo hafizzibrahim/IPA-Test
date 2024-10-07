@@ -140,6 +140,10 @@ class CatalogView extends GetView<CatalogController> {
                         ),
                       ),
                     ),
+
+
+
+
                   ],
                 ),
               ],
