@@ -9,7 +9,9 @@ import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart
 import 'package:maritimmuda_connect/app/modules/scholarship/views/scholarship_view.dart';
 import 'package:maritimmuda_connect/app/modules/catalog/views/catalog_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/widget/home_card.dart';
+
 import 'package:maritimmuda_connect/app/modules/home/member/views/member_view.dart';
+
 
 import '../controllers/home_controller.dart';
 import 'package:maritimmuda_connect/themes.dart';
@@ -186,7 +188,9 @@ class HomeView extends GetView<HomeController> {
                     icon: 'assets/icons/job_icon.svg',
                     title: 'Jobs',
                     onTap: () {
-                      Get.to(CatalogView());
+
+                      Get.to(() => JobView());
+
                     },
                   ),
                 ),
