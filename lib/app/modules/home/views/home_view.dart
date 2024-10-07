@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/models/category_data.dart';
 import 'package:maritimmuda_connect/app/modules/event/views/event_view.dart';
-
+import 'package:maritimmuda_connect/app/modules/job/views/job_view.dart';
 import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
 
 import 'package:maritimmuda_connect/app/modules/scholarship/views/scholarship_view.dart';
