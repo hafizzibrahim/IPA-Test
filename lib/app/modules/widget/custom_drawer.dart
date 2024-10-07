@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/utils/user_preference.dart';
-import 'package:maritimmuda_connect/app/modules/login/bindings/login_binding.dart';
-import 'package:maritimmuda_connect/app/modules/login/views/login_view.dart';
-import 'package:maritimmuda_connect/app/modules/main_drawer/controllers/main_drawer_controller.dart';
+import 'package:maritimmuda_connect/app/modules/auth/login/bindings/login_binding.dart';
+import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
+import 'package:maritimmuda_connect/app/modules/profile/main_drawer/controllers/main_drawer_controller.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_dialog.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -48,11 +49,19 @@ class CustomDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
             child: InkWell(
-              onTap: () async {
-                await UserPreferences().logout();
-                Get.offAll(
-                  () => const LoginView(),
-                  binding: LoginBinding(),
+              onTap: () {
+                showCustomDialog(
+                  content: "Are you sure want to logout?",
+                  onConfirm: () async {
+                    await UserPreferences().logout();
+                    Get.offAll(
+                      () => const LoginView(),
+                      binding: LoginBinding(),
+                    );
+                  },
+                  onCancel: () {
+                    Get.back();
+                  },
                 );
               },
               child: Row(

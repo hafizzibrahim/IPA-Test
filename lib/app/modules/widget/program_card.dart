@@ -1,35 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/member/views/member_view.dart';
+import 'package:maritimmuda_connect/app/modules/home/member/views/member_view.dart';
 
 import '../../../themes.dart';
 
 class ProgramCard extends StatelessWidget {
   const ProgramCard(
       {super.key,
-      required this.image,
-      required this.date,
-      required this.textTitle,
-      required this.textSubTitle});
+      this.image,
+      this.date,
+      this.textTitle,
+      this.textSubTitle,
+        this.views,
+        this.likes,
+        this.send,
+      });
 
-  final String image;
-  final String date;
-  final String textTitle;
-  final String textSubTitle;
+  final String? image;
+  final String? date;
+  final String? textTitle;
+  final String? textSubTitle;
+  final String? views;
+  final String? likes;
+  final String? send;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.to(() => MemberView());
-      },
+      // onTap: () {
+      //   Get.to(() => MemberView());
+      // },
       borderRadius: BorderRadius.circular(15),
       child: Card(
         elevation: 1,
         child: Container(
           width: 378,
           decoration: BoxDecoration(
-              color: neutral01Color, borderRadius: BorderRadius.circular(15)),
+              color: neutral01Color,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: primaryBlueColor, width: 2.0)
+
+          ),
           padding:
               const EdgeInsets.only(left: 23, top: 19, right: 23, bottom: 19),
           child: Column(
@@ -40,15 +51,15 @@ class ProgramCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
-                        image: AssetImage(image), fit: BoxFit.cover)),
+                        image: NetworkImage(image!), fit: BoxFit.cover)),
               ),
               const SizedBox(height: 10),
-              Text(textTitle, style: boldText12),
+              Text(textTitle!, style: boldText12),
               const SizedBox(height: 5),
               Opacity(
                 opacity: 0.76,
                 child: Text(
-                  textSubTitle,
+                  textSubTitle!,
                   style: regulerText8.copyWith(color: neutral04Color),
                 ),
               ),
@@ -61,7 +72,7 @@ class ProgramCard extends StatelessWidget {
                       Icon(Icons.calendar_month, color: primaryDarkBlueColor),
                       const SizedBox(width: 4),
                       Text(
-                        date,
+                        date!,
                         style: regulerText10,
                       )
                     ],
@@ -72,7 +83,7 @@ class ProgramCard extends StatelessWidget {
                           color: primaryDarkBlueColor),
                       const SizedBox(width: 4),
                       Text(
-                        "2100",
+                        views!,
                         style: regulerText10,
                       )
                     ],
@@ -82,7 +93,7 @@ class ProgramCard extends StatelessWidget {
                       Icon(Icons.favorite, color: primaryDarkBlueColor),
                       const SizedBox(width: 4),
                       Text(
-                        "79",
+                        likes!,
                         style: regulerText10,
                       )
                     ],
@@ -92,7 +103,7 @@ class ProgramCard extends StatelessWidget {
                       Icon(Icons.send, color: primaryDarkBlueColor),
                       const SizedBox(width: 4),
                       Text(
-                        "3",
+                        send!,
                         style: regulerText10,
                       )
                     ],
