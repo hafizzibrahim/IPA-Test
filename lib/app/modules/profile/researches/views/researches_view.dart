@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/profile/researches/controllers/researches_controller.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
+import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
-import '../../../widget/custom_dialog.dart';
-import '../../../widget/custom_textfield.dart';
-import '../../../widget/profile_button.dart';
-import '../controllers/organizations_controller.dart';
 
-class OrganizationsView extends GetView<OrganizationsController> {
-  OrganizationsView({super.key});
+import '../../../widget/custom_dialog.dart';
+
+class ResearchesView extends GetView<ResearchesController> {
+  const ResearchesView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: neutral02Color,
       resizeToAvoidBottomInset: false,
+      backgroundColor: neutral02Color,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -23,15 +24,10 @@ class OrganizationsView extends GetView<OrganizationsController> {
           children: [
             const SizedBox(height: 24),
             Padding(
-              padding: const EdgeInsets.only(left: 18),
-              child: Text(
-                'Add Organization Experience',
-                style: regulerText24,
-              ),
+              padding: const EdgeInsets.only(left: 15),
+              child: Text('Add Researches', style: regulerText24),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
                   color: neutral01Color,
@@ -40,93 +36,97 @@ class OrganizationsView extends GetView<OrganizationsController> {
               width: double.infinity,
               margin: const EdgeInsets.symmetric(horizontal: 13),
               child: Form(
+                key: controller.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Organization Name',
+                      'Title of Research',
                       style: boldText12,
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
+                    const SizedBox(height: 8),
                     CustomTextField(
-                      controller: controller.organizationController,
-                      hintText: 'Enter your organization name',
+                      hintText: 'Enter title of research name',
+                      controller: controller.researchTitleC,
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const SizedBox(height: 16),
                     Text(
-                      'Position',
+                      'Role',
                       style: boldText12,
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
+                    const SizedBox(height: 8),
                     CustomTextField(
-                      controller: controller.positionController,
-                      hintText: 'Enter your position',
+                      hintText: 'Enter role name',
+                      controller: controller.roleC,
                     ),
-                    const SizedBox(
-                      height: 16,
+                    const SizedBox(height: 16),
+                    Text(
+                      'Affiliation Name',
+                      style: boldText12,
                     ),
+                    const SizedBox(height: 8),
+                    CustomTextField(
+                      hintText: 'Enter affiliation name',
+                      controller: controller.affiliationC,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Sponsor Name',
+                      style: boldText12,
+                    ),
+                    const SizedBox(height: 8),
+                    CustomTextField(
+                      hintText: 'Enter sponsor name',
+                      controller: controller.sponsorC,
+                    ),
+                    const SizedBox(height: 16),
                     Text(
                       'Start Date',
                       style: boldText12,
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
+                    const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () => controller.selectStartDate(context),
                       child: AbsorbPointer(
                         child: CustomTextField(
                           controller: controller.startDateController,
                           hintText: 'Select start date',
-                          suffixIcon: Icon(Icons.calendar_today,
-                              color: primaryBlueColor),
+                          suffixIcon:
+                          Icon(Icons.calendar_today, color: primaryBlueColor),
                         ),
                       ),
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 8,
                     ),
                     Text(
                       'End Date',
                       style: boldText12,
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
+                    const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () => controller.selectEndDate(context),
                       child: AbsorbPointer(
                         child: CustomTextField(
                           controller: controller.endDateController,
                           hintText: 'Select end date',
-                          suffixIcon: Icon(Icons.calendar_today,
-                              color: primaryBlueColor),
+                          suffixIcon:
+                          Icon(Icons.calendar_today, color: primaryBlueColor),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         ProfileButton(
-                          icon: Icon(
-                            Icons.save_outlined,
-                            color: neutral01Color,
-                          ),
-                          color: primaryDarkBlueColor,
-                          text: 'Save',
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
+                            icon: Icon(
+                              Icons.save_outlined,
+                              color: neutral01Color,
+                            ),
+                            text: 'Save',
+                            color: primaryDarkBlueColor),
+                        const SizedBox(width: 10),
                         ProfileButton(
                             icon: Icon(
                               Icons.close,
@@ -153,17 +153,16 @@ class OrganizationsView extends GetView<OrganizationsController> {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+                    const SizedBox(height: 30),
                     ProfileCard(
-                        title: 'Bangkit Academy',
-                        leftSubTitle: 'Mobile Development Cohort',
-                        startDate: 'September 2024',
-                        endDate: 'December 2024',
+                        title: 'Mobile Apps',
+                        leftSubTitle: 'Finalist',
                         onTap1: () {},
                         onTap2: () {},
                         onTap3: () {}),
+                    const SizedBox(
+                      height: 5,
+                    ),
                   ],
                 ),
               ),

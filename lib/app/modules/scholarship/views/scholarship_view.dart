@@ -15,6 +15,17 @@ class ScholarshipView extends GetView<ScholarshipController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: neutral02Color,
+        appBar: AppBar(
+          backgroundColor: neutral02Color,
+          title: Text('Scholarship List',style: boldText24,),
+          centerTitle:true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+              },
+          ),
+        ),
         body: Column(
             children: <Widget>[
 
