@@ -21,8 +21,8 @@ import '../modules/catalog/detail_catalog/bindings/detail_catalog_binding.dart';
 import '../modules/catalog/detail_catalog/views/detail_catalog_view.dart';
 import '../modules/e_kta/bindings/e_kta_binding.dart';
 import '../modules/e_kta/views/e_kta_view.dart';
-import '../modules/event/bindings/event_binding.dart';
-import '../modules/event/views/event_view.dart';
+import '../modules/home/event/bindings/event_binding.dart';
+import '../modules/home/event/views/event_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/job/bindings/job_binding.dart';
 import '../modules/home/job/views/job_view.dart';
@@ -47,15 +47,15 @@ import '../modules/profile/publication/views/publication_view.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile/work_experiences/bindings/work_experiences_binding.dart';
 import '../modules/profile/work_experiences/views/work_experiences_view.dart';
-import '../modules/scholarship/bindings/scholarship_binding.dart';
-import '../modules/scholarship/views/scholarship_view.dart';
+import '../modules/home/scholarship/bindings/scholarship_binding.dart';
+import '../modules/home/scholarship/views/scholarship_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.MAIN;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
