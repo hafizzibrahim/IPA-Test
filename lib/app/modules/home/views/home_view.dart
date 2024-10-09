@@ -2,16 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/models/category_data.dart';
-import 'package:maritimmuda_connect/app/modules/event/views/event_view.dart';
-import 'package:maritimmuda_connect/app/modules/job/views/job_view.dart';
+import 'package:maritimmuda_connect/app/modules/home/event/views/event_view.dart';
+import 'package:maritimmuda_connect/app/modules/home/job/views/job_view.dart';
 import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
 
-import 'package:maritimmuda_connect/app/modules/scholarship/views/scholarship_view.dart';
+import 'package:maritimmuda_connect/app/modules/home/scholarship/views/scholarship_view.dart';
 import 'package:maritimmuda_connect/app/modules/catalog/views/catalog_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/widget/home_card.dart';
 
 import 'package:maritimmuda_connect/app/modules/home/member/views/member_view.dart';
-
 
 import '../controllers/home_controller.dart';
 import 'package:maritimmuda_connect/themes.dart';
@@ -182,15 +181,12 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 SizedBox(
-                  width: (MediaQuery.of(context).size.width / 2) -
-                      24,
+                  width: (MediaQuery.of(context).size.width / 2) - 24,
                   child: HomeCard(
                     icon: 'assets/icons/job_icon.svg',
                     title: 'Jobs',
                     onTap: () {
-
                       Get.to(() => JobView());
-
                     },
                   ),
                 ),
