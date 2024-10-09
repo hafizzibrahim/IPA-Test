@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/catalog/detail_catalog/views/detail_catalog_view.dart';
 import 'package:maritimmuda_connect/app/modules/catalog/sub_catalog/widget/list_catalog.dart';
 import '../controllers/sub_catalog_controller.dart';
 
@@ -14,7 +15,9 @@ class SubCatalogView extends GetView<SubCatalogController> {
         itemCount: 5,
         itemBuilder: (context, index) {
           return ListCatalog(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const DetailCatalogView());
+            },
             image: "assets/images/catalog_image.jpeg",
             category: "Electronics",
             company: "Fajar Elektronik",
