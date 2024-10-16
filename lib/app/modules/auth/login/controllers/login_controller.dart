@@ -9,6 +9,7 @@ class LoginController extends GetxController {
   var isLoading = false.obs;
   var isAuthenticated = false.obs;
   var obscureText = true.obs;
+  var isCheckField = false.obs;
 
   void toggleObscureText() {
     obscureText.value = !obscureText.value;
@@ -20,10 +21,20 @@ class LoginController extends GetxController {
 
   void validateEmail(String value) {
     formKey.currentState!.validate();
+    checkField();
   }
 
   void validatePassword(String value) {
     formKey.currentState!.validate();
+    checkField();
+  }
+
+  void checkField() {
+    if (emailC.text.isEmpty && passwordC.text.isEmpty) {
+      isCheckField.value = false;
+    } else {
+      isCheckField.value = true;
+    }
   }
 
   bool isValidEmail(String email) {

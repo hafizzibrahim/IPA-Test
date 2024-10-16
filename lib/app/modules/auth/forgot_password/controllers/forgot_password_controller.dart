@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class ForgotPasswordController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailC = TextEditingController();
+  var isCheckField = false.obs;
 
   bool validateForm() {
     return formKey.currentState!.validate();
@@ -11,6 +12,15 @@ class ForgotPasswordController extends GetxController {
 
   void validateEmail(String value) {
     formKey.currentState!.validate();
+    checkField();
+  }
+
+  void checkField() {
+    if (emailC.text.isEmpty) {
+      isCheckField.value = false;
+    } else {
+      isCheckField.value = true;
+    }
   }
 
   bool isValidEmail(String email) {
