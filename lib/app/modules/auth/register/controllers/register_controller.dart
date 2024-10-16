@@ -23,6 +23,7 @@ class RegisterController extends GetxController {
   var obscureText = true.obs;
   var selectedGender = RxnString();
   var selectedProvince = RxnString();
+  var isCheckField = false.obs;
 
   @override
   void onInit() {
@@ -49,18 +50,33 @@ class RegisterController extends GetxController {
 
   void validateName(String value) {
     formKey.currentState!.validate();
+    checkField();
   }
 
   void validateEmail(String value) {
     formKey.currentState!.validate();
+    checkField();
   }
 
   void validatePassword(String value) {
     formKey.currentState!.validate();
+    checkField();
   }
 
   void validateConfirmPass(String value) {
     formKey.currentState!.validate();
+    checkField();
+  }
+
+  void checkField() {
+    if (nameC.text.isEmpty &&
+        emailC.text.isEmpty &&
+        passwordC.text.isEmpty &&
+        confirmPassC.text.isEmpty) {
+      isCheckField.value = false;
+    } else {
+      isCheckField.value = true;
+    }
   }
 
   bool isValidEmail(String email) {

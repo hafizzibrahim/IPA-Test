@@ -24,32 +24,6 @@ class CustomButton extends StatelessWidget {
   final LinearGradient? gradient;
 
   @override
-  // tadinya pake button yang ini
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       width: width ?? double.infinity,
-//       height: height ?? 55,
-//       child: ElevatedButton(
-//         onPressed: onPressed,
-//         style: ElevatedButton.styleFrom(
-//           foregroundColor: neutral01Color,
-//           backgroundColor: color ?? primaryBlueColor,
-//           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(radius ?? 10),
-//           ),
-//           elevation: 5,
-//         ),
-//         child: Text(
-//           text,
-//           style: textSize ?? boldText20,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-  // gua ganti code buttonnya soalnya butuh linear gradient di button e-kta
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
@@ -57,8 +31,8 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.zero, // Hapus padding default
-          backgroundColor: primaryBlueColor,
+          padding: EdgeInsets.zero,
+          backgroundColor: color ?? primaryBlueColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius ?? 10),
           ),

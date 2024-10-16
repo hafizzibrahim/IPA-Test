@@ -141,21 +141,34 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                         const SizedBox(height: 35),
-                        CustomButton(
-                          onPressed: () async {
-                            if (controller.validateForm()) {
-                              final SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              // await prefs.setBool("loggedIn", true);
-                              Get.offAll(
-                                () => const MainView(),
-                                binding: MainBinding(),
-                                transition: Transition.rightToLeft,
-                                duration: const Duration(milliseconds: 100),
+                        Obx(
+                          () {
+                            if (controller.isCheckField.value) {
+                              return CustomButton(
+                                onPressed: () async {
+                                  if (controller.validateForm()) {
+                                    final SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    // await prefs.setBool("loggedIn", true);
+                                    Get.offAll(
+                                      () => const MainView(),
+                                      binding: MainBinding(),
+                                      transition: Transition.rightToLeft,
+                                      duration:
+                                          const Duration(milliseconds: 100),
+                                    );
+                                  }
+                                },
+                                text: "Login",
+                              );
+                            } else {
+                              return CustomButton(
+                                onPressed: () {},
+                                text: "Login",
+                                color: neutral03Color,
                               );
                             }
                           },
-                          text: "Login",
                         ),
                         const SizedBox(height: 15),
                         InkWell(
