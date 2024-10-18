@@ -29,7 +29,7 @@ abstract class Routes {
   static const CATALOG = _Paths.CATALOG;
   static const ALL_CATALOG = _Paths.ALL_CATALOG;
   static const SUB_CATALOG = _Paths.SUB_CATALOG;
-
+  static const DETAIL_CATALOG = _Paths.DETAIL_CATALOG;
 }
 
 abstract class _Paths {
@@ -58,5 +58,5 @@ abstract class _Paths {
   static const CATALOG = '/catalog';
   static const ALL_CATALOG = '/all-catalog';
   static const SUB_CATALOG = '/sub-catalog';
-
+  static const DETAIL_CATALOG = '/detail-catalog';
 }

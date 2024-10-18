@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/models/event_data.dart';
-import '../../widget/program_card.dart';
+import '../../../../data/models/event_data.dart';
+import '../../../widget/program_card.dart';
 import 'detail_event_view.dart';
 
-class CategoryEvent extends StatelessWidget {
-  const CategoryEvent({super.key});
+class ListEventView extends StatelessWidget {
+  const ListEventView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/event/views/category_event.dart';
-import 'package:maritimmuda_connect/app/modules/event/views/list_event_view.dart';
+import 'package:maritimmuda_connect/app/modules/home/event/views/category_event.dart';
+import 'package:maritimmuda_connect/app/modules/home/event/views/list_event_view.dart';
 
 class EventController extends GetxController
-    with GetSingleTickerProviderStateMixin
-{
-
+    with GetSingleTickerProviderStateMixin {
   late TabController tabController;
   var selectedIndex = 0.obs;
 
@@ -28,7 +26,6 @@ class EventController extends GetxController
     const CategoryEvent(),
     const CategoryEvent(),
     const CategoryEvent(),
-
   ];
 
   @override
@@ -50,14 +47,6 @@ class EventController extends GetxController
     super.onClose();
   }
 
-
-
-
-
-
-
-
-
 // final count = 0.obs;
 //   @override
 //   void onInit() {
@@ -75,6 +64,4 @@ class EventController extends GetxController
 //   }
 //
 //   void increment() => count.value++;
-
-
 }
