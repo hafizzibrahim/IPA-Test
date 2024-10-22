@@ -36,10 +36,6 @@ import '../modules/profile/achievement/views/achievement_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/educations/bindings/educations_binding.dart';
 import '../modules/profile/educations/views/educations_view.dart';
-import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/profile/main_drawer/bindings/main_drawer_binding.dart';
-import '../modules/profile/main_drawer/views/main_drawer_view.dart';
-import '../modules/profile/main_drawer/views/main_drawer_view.dart';
 import '../modules/profile/organizations/bindings/organizations_binding.dart';
 import '../modules/profile/organizations/views/organizations_view.dart';
 import '../modules/profile/publication/bindings/publication_binding.dart';
@@ -55,7 +51,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.MAIN  ;
 
   static final routes = [
     GetPage(
@@ -90,7 +86,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MAIN,
-      page: () => const MainView(),
+      page: () => MainView(),
       binding: MainBinding(),
     ),
     GetPage(

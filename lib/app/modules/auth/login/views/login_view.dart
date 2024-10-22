@@ -151,7 +151,7 @@ class LoginView extends GetView<LoginController> {
                                         await SharedPreferences.getInstance();
                                     // await prefs.setBool("loggedIn", true);
                                     Get.offAll(
-                                      () => const MainView(),
+                                      () => MainView(),
                                       binding: MainBinding(),
                                       transition: Transition.rightToLeft,
                                       duration:
