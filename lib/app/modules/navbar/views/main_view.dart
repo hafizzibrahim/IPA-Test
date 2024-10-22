@@ -1,85 +1,99 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/e_kta/views/e_kta_view.dart';
 import 'package:maritimmuda_connect/themes.dart';
-
+import '../../e_kta/views/e_kta_view.dart';
 import '../controllers/main_controller.dart';
 
-class MainView extends GetView<MainController> {
-  const MainView({super.key});
+class MainView extends StatelessWidget {
+  final MainController controller = Get.put(MainController());
+
+  MainView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-
     return Scaffold(
       extendBody: true,
-      body: Obx(
-        () => controller.viewList[controller.bottomNavIndex.value],
-      ),
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: primaryDarkBlueColor,
-        shape: const CircleBorder(),
-        child: const Icon(
-          Icons.credit_card,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Get.to(EKtaView());
-          controller.fabAnimationController.reset();
-          controller.borderRadiusAnimationController.reset();
-          controller.borderRadiusAnimationController.forward();
-          controller.fabAnimationController.forward();
+      backgroundColor: Colors.transparent,
+      body: PageView(
+        controller: controller.pageController,
+        onPageChanged: (index) {
+          controller.updateIndex(index);
         },
+        physics: const BouncingScrollPhysics(),
+        children: controller.views,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Obx(
-        () => AnimatedBottomNavigationBar.builder(
-          itemCount: controller.iconList.length,
-          tabBuilder: (int index, bool isActive) {
-            final color = isActive ? colors.primary : Colors.grey;
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  controller.iconList[index],
-                  size: 24,
-                  color: primaryDarkBlueColor,
-                ),
-                const SizedBox(height: 4),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(
-                    controller.titleList[index],
-                    maxLines: 1,
-                    style: TextStyle(color: color),
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+        child: BottomAppBar(
+          color: neutral01Color,
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8,
+          elevation: 4,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(controller.iconList.length + 1, (index) {
+                if (index == 2) return const SizedBox(width: 40);
+
+                return GetBuilder<MainController>(
+                  builder: (_) => _buildNavItem(
+                    controller.iconList[index < 2 ? index : index - 1],
+                    controller.iconTitles[index < 2 ? index : index - 1],
+                    index,
                   ),
-                )
-              ],
-            );
-          },
-          backgroundColor: Colors.white,
-          activeIndex: controller.bottomNavIndex.value,
-          splashColor: colors.primary,
-          notchAndCornersAnimation: controller.borderRadiusAnimation,
-          splashSpeedInMilliseconds: 300,
-          notchSmoothness: NotchSmoothness.defaultEdge,
-          gapLocation: GapLocation.center,
-          leftCornerRadius: 16,
-          rightCornerRadius: 16,
-          onTap: controller.onBottomNavTap,
-          hideAnimationController: controller.hideBottomBarAnimationController,
-          shadow: BoxShadow(
-            offset: const Offset(0, 1),
-            blurRadius: 12,
-            spreadRadius: 0.5,
-            color: colors.primary,
+                );
+              }),
+            ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(const EKtaView());
+        },
+        backgroundColor: primaryDarkBlueColor,
+        shape: const CircleBorder(),
+        child: Icon(
+          Icons.credit_card,
+          color: neutral01Color,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label, int index) {
+    int selectedIndex = controller.bottomNavIndex;
+
+    Color iconColor = selectedIndex == (index < 2 ? index : index - 1)
+        ? primaryDarkBlueColor
+        : neutral03Color;
+
+    return GestureDetector(
+      onTap: () {
+        controller.updateIndex(index < 2 ? index : index - 1);
+        controller.pageController.animateToPage(
+          controller.bottomNavIndex,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            icon,
+            color: iconColor,
+            size: 30,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: regulerText10.copyWith(color: iconColor),
+          ),
+        ],
       ),
     );
   }
