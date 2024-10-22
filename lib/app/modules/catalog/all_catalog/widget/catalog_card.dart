@@ -55,7 +55,7 @@ class _CatalogCardState extends State<CatalogCard> {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              margin: const EdgeInsets.only(left: 25, right: 25, bottom: 15),
               padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 20),
               width: double.infinity,
               decoration: BoxDecoration(

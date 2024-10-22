@@ -24,10 +24,7 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
             const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.only(left: 18),
-              child: Text(
-                'Add Work Experience',
-                  style: regulerText24
-              ),
+              child: Text('Add Work Experience', style: regulerText24),
             ),
             const SizedBox(
               height: 16,
@@ -110,7 +107,9 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -122,31 +121,31 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                         color: primaryDarkBlueColor,
                         text: 'Save',
                       ),
-                      const SizedBox(width: 8,),
+                      const SizedBox(
+                        width: 8,
+                      ),
                       ProfileButton(
-                        icon: Icon(
-                          Icons.close,
-                          color: neutral01Color,
-                        ),
-                        color: secondaryRedColor,
-                        text: 'Clear',
-                        onTap: () {
-                          showCustomDialog(
-                              content: 'Are you sure you want to clear all data entered?',
-                              onConfirm: () {
-                                controller.clearAll();
-                                Get.back();
-                                Get.snackbar(
-                                  'Cleared',
-                                  'All data has been deleted successfully',
-                                  snackPosition: SnackPosition.BOTTOM
-                                );
-                              },
-                              onCancel: (){
-                                Get.back();
-                              });
-                        }
-                      )
+                          icon: Icon(
+                            Icons.close,
+                            color: neutral01Color,
+                          ),
+                          color: secondaryRedColor,
+                          text: 'Clear',
+                          onTap: () {
+                            showCustomDialog(
+                                content:
+                                    'Are you sure you want to clear all data entered?',
+                                onConfirm: () {
+                                  controller.clearAll();
+                                  Get.back();
+                                  Get.snackbar('Cleared',
+                                      'All data has been deleted successfully',
+                                      snackPosition: SnackPosition.BOTTOM);
+                                },
+                                onCancel: () {
+                                  Get.back();
+                                });
+                          })
                     ],
                   ),
                   const SizedBox(
@@ -163,7 +162,6 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                 ],
               )),
             ),
-            const SizedBox(height: 50,)
           ],
         ),
       ),
