@@ -5,10 +5,7 @@ import 'package:maritimmuda_connect/app/modules/widget/searchbar_widget.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 import '../../../../data/models/category_data.dart';
-import '../../../../data/models/event_data.dart';
-import '../../../widget/program_card.dart';
 import '../controllers/event_controller.dart';
-import 'detail_event_view.dart';
 
 class EventView extends GetView<EventController> {
   final CategoryData category;

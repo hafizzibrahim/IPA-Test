@@ -4,10 +4,8 @@ import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/models/category_data.dart';
 import 'package:maritimmuda_connect/app/modules/home/event/views/event_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/job/views/job_view.dart';
-import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
 
 import 'package:maritimmuda_connect/app/modules/home/scholarship/views/scholarship_view.dart';
-import 'package:maritimmuda_connect/app/modules/catalog/views/catalog_view.dart';
 import 'package:maritimmuda_connect/app/modules/home/widget/home_card.dart';
 
 import 'package:maritimmuda_connect/app/modules/home/member/views/member_view.dart';
@@ -37,17 +35,17 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   children: [
                     Image.asset("assets/images/logo_maritim_muda_connect.png"),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     Image.asset("assets/images/logo_maritim.png"),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                   decoration: BoxDecoration(
                     color: neutral01Color,
                     borderRadius: BorderRadius.circular(15),
@@ -56,7 +54,7 @@ class HomeView extends GetView<HomeController> {
                         color: neutral04Color.withOpacity(0.3), // Warna shadow
                         spreadRadius: 1, // Penyebaran shadow
                         blurRadius: 5, // Tingkat blur shadow
-                        offset: Offset(3, 3), // Arah dan jarak shadow (x, y)
+                        offset: const Offset(3, 3), // Arah dan jarak shadow (x, y)
                       ),
                     ],
                   ),
@@ -76,7 +74,7 @@ class HomeView extends GetView<HomeController> {
                             style: semiBoldText24.copyWith(
                                 color: primaryBlueColor),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           Row(
@@ -85,7 +83,7 @@ class HomeView extends GetView<HomeController> {
                                 "No: 0900240850",
                                 style: regulerText10.copyWith(fontSize: 9),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 16,
                               ),
                               Text(
@@ -96,7 +94,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ],
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 50, // Ukuran lingkaran
                         backgroundImage:
                             AssetImage("assets/images/profile.png"),
@@ -107,7 +105,7 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           Container(
@@ -120,7 +118,7 @@ class HomeView extends GetView<HomeController> {
               items: listImage.map((item) {
                 return Container(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                     child: Image.asset(
                       item, // Mengambil path dari listImage
                       fit: BoxFit.cover,
@@ -130,7 +128,7 @@ class HomeView extends GetView<HomeController> {
               }).toList(),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Center(
@@ -146,7 +144,7 @@ class HomeView extends GetView<HomeController> {
                     icon: 'assets/icons/member_icon.svg',
                     title: 'Member',
                     onTap: () {
-                      Get.to(() => MemberView());
+                      Get.to(() => const MemberView());
                     },
                   ),
                 ),
@@ -174,7 +172,7 @@ class HomeView extends GetView<HomeController> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ScholarshipView()));
+                              builder: (context) => const ScholarshipView()));
 
 //                       Get.to(ScholarshipView());
                     },
@@ -186,7 +184,7 @@ class HomeView extends GetView<HomeController> {
                     icon: 'assets/icons/job_icon.svg',
                     title: 'Jobs',
                     onTap: () {
-                      Get.to(() => JobView());
+                      Get.to(() => const JobView());
                     },
                   ),
                 ),

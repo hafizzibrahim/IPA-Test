@@ -1,39 +1,36 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-
-import 'package:maritimmuda_connect/app/modules/home/event/controllers/event_controller.dart';
-
-import 'package:maritimmuda_connect/app/modules/analytics/controllers/analytics_controller.dart';
-
-import 'package:maritimmuda_connect/app/modules/profile/achievement/controllers/achievement_controller.dart';
-import 'package:maritimmuda_connect/app/modules/analytics/views/analytics_view.dart';
-import 'package:maritimmuda_connect/app/modules/catalog/controllers/catalog_controller.dart';
-import 'package:maritimmuda_connect/app/modules/catalog/views/catalog_view.dart';
-import 'package:maritimmuda_connect/app/modules/home/views/home_view.dart';
-import 'package:maritimmuda_connect/app/modules/profile/main_drawer/controllers/main_drawer_controller.dart';
 import 'package:maritimmuda_connect/app/modules/profile/main_drawer/views/main_drawer_view.dart';
 
-class MainController extends GetxController with GetTickerProviderStateMixin {
-  var bottomNavIndex = 0.obs;
+import '../../analytics/controllers/analytics_controller.dart';
+import '../../analytics/views/analytics_view.dart';
+import '../../catalog/controllers/catalog_controller.dart';
+import '../../catalog/views/catalog_view.dart';
+import '../../home/event/controllers/event_controller.dart';
+import '../../home/views/home_view.dart';
+import '../../profile/achievement/controllers/achievement_controller.dart';
+import '../../profile/main_drawer/controllers/main_drawer_controller.dart';
 
+class MainController extends GetxController with GetTickerProviderStateMixin {
   MainController() {
     Get.put(MainDrawerController());
     Get.put(AchievementController());
     Get.put(CatalogController());
-
     Get.put(EventController());
-
     Get.put(AnalyticsController());
   }
 
-  late AnimationController fabAnimationController;
-  late AnimationController borderRadiusAnimationController;
-  late Animation<double> fabAnimation;
-  late Animation<double> borderRadiusAnimation;
-  late CurvedAnimation fabCurve;
-  late CurvedAnimation borderRadiusCurve;
-  late AnimationController hideBottomBarAnimationController;
+  PageController pageController = PageController();
+
+  int bottomNavIndex = 0;
+
+  final List<String> iconTitles = [
+    'Home',
+    'Analytic',
+    'Catalog',
+    'Profile',
+  ];
 
   final iconList = <IconData>[
     Icons.home,
@@ -42,80 +39,28 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
     Icons.person,
   ];
 
-  final List<String> titleList = [
-    "Home",
-    "Analytics",
-    "Catalog",
-    "Profile",
-  ];
+  final AutoSizeGroup autoSizeGroup = AutoSizeGroup();
 
-  final List<Widget> viewList = [
+  final List<Widget> views = [
     const HomeView(),
     const AnalyticsView(),
     const CatalogView(),
     const MainDrawerView(),
   ];
 
+  void updateIndex(int index) {
+    bottomNavIndex = index;
+    update(); 
+  }
+
   @override
   void onInit() {
     super.onInit();
-    fabAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
-    borderRadiusAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
-    fabCurve = CurvedAnimation(
-      parent: fabAnimationController,
-      curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
-    );
-    borderRadiusCurve = CurvedAnimation(
-      parent: borderRadiusAnimationController,
-      curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
-    );
-
-    fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
-    borderRadiusAnimation = Tween<double>(begin: 0, end: 1).animate(
-      borderRadiusCurve,
-    );
-
-    hideBottomBarAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-    );
-
-    Future.delayed(
-      const Duration(seconds: 1),
-      () => fabAnimationController.forward(),
-    );
-    Future.delayed(
-      const Duration(seconds: 1),
-      () => borderRadiusAnimationController.forward(),
-    );
   }
 
-  bool onScrollNotification(ScrollNotification notification) {
-    if (notification is UserScrollNotification &&
-        notification.metrics.axis == Axis.vertical) {
-      switch (notification.direction) {
-        case ScrollDirection.forward:
-          hideBottomBarAnimationController.reverse();
-          fabAnimationController.forward(from: 0);
-          break;
-        case ScrollDirection.reverse:
-          hideBottomBarAnimationController.forward();
-          fabAnimationController.reverse(from: 1);
-          break;
-        case ScrollDirection.idle:
-          break;
-      }
-    }
-    return false;
-  }
-
-  void onBottomNavTap(int index) {
-    bottomNavIndex.value = index;
+  @override
+  void onClose() {
+    pageController.dispose(); // Membebaskan controller ketika ditutup
+    super.onClose();
   }
 }

@@ -83,11 +83,23 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         ),
                         const SizedBox(height: 30),
                         const SizedBox(height: 35),
-                        CustomButton(
-                          onPressed: () async {
-                            if (controller.validateForm()) {}
+                        Obx(
+                          () {
+                            if (controller.isCheckField.value) {
+                              return CustomButton(
+                                onPressed: () async {
+                                  if (controller.validateForm()) {}
+                                },
+                                text: "Send",
+                              );
+                            } else {
+                              return CustomButton(
+                                onPressed: () {},
+                                text: "Send",
+                                color: neutral03Color,
+                              );
+                            }
                           },
-                          text: "Send",
                         ),
                         const SizedBox(height: 15),
                       ],

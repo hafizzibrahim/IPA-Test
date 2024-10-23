@@ -201,18 +201,31 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        CustomButton(
-                          onPressed: () {
-                            if (controller.validateForm()) {
-                              Get.offAll(
-                                () => const LoginView(),
-                                binding: LoginBinding(),
-                                transition: Transition.leftToRight,
-                                duration: const Duration(milliseconds: 1000),
+                        Obx(
+                          () {
+                            if (controller.isCheckField.value) {
+                              return CustomButton(
+                                onPressed: () {
+                                  if (controller.validateForm()) {
+                                    Get.offAll(
+                                      () => const LoginView(),
+                                      binding: LoginBinding(),
+                                      transition: Transition.leftToRight,
+                                      duration:
+                                          const Duration(milliseconds: 1000),
+                                    );
+                                  }
+                                },
+                                text: "Register",
+                              );
+                            } else {
+                              return CustomButton(
+                                onPressed: () {},
+                                text: "Register",
+                                color: neutral03Color,
                               );
                             }
                           },
-                          text: "Register",
                         ),
                         const SizedBox(height: 15),
                         InkWell(
