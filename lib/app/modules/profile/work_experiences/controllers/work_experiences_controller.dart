@@ -1,57 +1,133 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
+import 'package:maritimmuda_connect/themes.dart';
+
+class WorkExperience {
+  final String position;
+  final String institution;
+  final String startDate;
+  final String endDate;
+
+  WorkExperience({
+    required this.position,
+    required this.institution,
+    required this.startDate,
+    required this.endDate,
+  });
+}
 
 class WorkExperiencesController extends GetxController {
- final positionController = TextEditingController();
- final institutionController = TextEditingController();
- final startDateController = TextEditingController();
- final endDateController = TextEditingController();
+  final positionController = TextEditingController();
+  final institutionController = TextEditingController();
+  final startDateController = TextEditingController();
+  final endDateController = TextEditingController();
 
- Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  Rx<DateTime?> selectedStartDate = Rx<DateTime?>(null);
+  Rx<DateTime?> selectedEndDate = Rx<DateTime?>(null);
 
- String get formattedDate {
-   return selectedDate.value != null
-       ? DateFormat('yyyy-MM-dd').format(selectedDate.value!)
-       : '';
- }
+  RxList<WorkExperience> workExperiences = <WorkExperience>[].obs;
 
- Future<void> selectStartDate(BuildContext context) async {
-   final DateTime? picked = await showDatePicker(
-     context: context,
-     initialDate: selectedDate.value ?? DateTime.now(),
-     firstDate: DateTime(1900),
-     lastDate: DateTime.now(),
-   );
-   if (picked != null && picked != selectedDate.value) {
-     selectedDate.value = picked;
-     startDateController.text = formattedDate;
-   }
- }
+  String formatDate(DateTime? date) {
+    return date != null ? DateFormat('MMMM yyyy').format(date) : '';
+  }
 
- Future<void> selectEndDate(BuildContext context) async {
-   final DateTime? picked = await showDatePicker(
-     context: context,
-     initialDate: selectedDate.value ?? DateTime.now(),
-     firstDate: DateTime(1900),
-     lastDate: DateTime.now(),
-   );
-   if (picked != null && picked != selectedDate.value) {
-     selectedDate.value = picked;
-     endDateController.text = formattedDate;
-   }
- }
+  Rx<int?> selectedMonth = Rx<int?>(null);
+  Rx<int?> selectedYear = Rx<int?>(null);
 
- void clearAll() {
-   positionController.clear();
-   institutionController.clear();
-   startDateController.clear();
-   endDateController.clear();
+  String get formattedMonthYear {
+    if (selectedMonth.value != null && selectedYear.value != null) {
+      return DateFormat('MMMM yyyy')
+          .format(DateTime(selectedYear.value!, selectedMonth.value!));
+    } else {
+      return '';
+    }
+  }
 
-   selectedDate.value = null;
- }
+  Future<void> selectStartDate(BuildContext context) async {
+    showMonthPicker(
+      context,
+      initialSelectedMonth: selectedMonth.value ?? DateTime.now().month,
+      initialSelectedYear: selectedYear.value ?? DateTime.now().year,
+      firstYear: 1900,
+      lastYear: DateTime.now().year,
+      selectButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      highlightColor: primaryBlueColor,
+      textColor: Colors.black,
+      contentBackgroundColor: neutral01Color,
+      dialogBackgroundColor: Colors.white,
+      onSelected: (month, year) {
+        selectedMonth.value = month;
+        selectedYear.value = year;
+        startDateController.text = formattedMonthYear;
+      },
+    );
+  }
 
- @override
+  Future<void> selectEndDate(BuildContext context) async {
+    showMonthPicker(
+      context,
+      initialSelectedMonth: selectedMonth.value ?? DateTime.now().month,
+      initialSelectedYear: selectedYear.value ?? DateTime.now().year,
+      firstYear: 1900,
+      lastYear: DateTime.now().year,
+      selectButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      highlightColor: primaryBlueColor,
+      textColor: Colors.black,
+      contentBackgroundColor: Colors.white,
+      dialogBackgroundColor: neutral01Color,
+      onSelected: (month, year) {
+        selectedMonth.value = month;
+        selectedYear.value = year;
+        endDateController.text = formattedMonthYear;
+      },
+    );
+  }
+
+
+  void saveWorkExperience() {
+    if (positionController.text.isNotEmpty &&
+        institutionController.text.isNotEmpty &&
+        startDateController.text.isNotEmpty &&
+        endDateController.text.isNotEmpty) {
+      workExperiences.add(WorkExperience(
+        position: positionController.text,
+        institution: institutionController.text,
+        startDate: startDateController.text,
+        endDate: endDateController.text,
+      ));
+      clearAll();
+      Get.snackbar(
+        'Success',
+        'Work experience added successfully',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else {
+      Get.snackbar(
+        'Error',
+        'Please fill all fields',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void clearAll() {
+    positionController.clear();
+    institutionController.clear();
+    startDateController.clear();
+    endDateController.clear();
+    selectedStartDate.value = null;
+    selectedEndDate.value = null;
+  }
+
+  void deleteWorkExperience(int index) {
+    workExperiences.removeAt(index);
+  }
+
+  @override
   void onClose() {
     positionController.dispose();
     institutionController.dispose();

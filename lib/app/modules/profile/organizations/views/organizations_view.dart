@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/profile/organizations/controllers/organizations_controller.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../../../widget/custom_dialog.dart';
@@ -123,6 +124,7 @@ class OrganizationsView extends GetView<OrganizationsController> {
                           ),
                           color: primaryDarkBlueColor,
                           text: 'Save',
+                          onTap: controller.saveOrganizations,
                         ),
                         const SizedBox(
                           width: 10,
@@ -156,14 +158,24 @@ class OrganizationsView extends GetView<OrganizationsController> {
                     const SizedBox(
                       height: 30,
                     ),
-                    ProfileCard(
-                        title: 'Bangkit Academy',
-                        leftSubTitle: 'Mobile Development Cohort',
-                        startDate: 'September 2024',
-                        endDate: 'December 2024',
-                        onTap1: () {},
-                        onTap2: () {},
-                        onTap3: () {}),
+                    Obx(() => Column(
+                      children: controller.organizations.asMap().entries.map((entry) {
+                        int idx = entry.key;
+                        Organizations exp = entry.value;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: ProfileCard(
+                            title: exp.organization,
+                            leftSubTitle: exp.position,
+                            startDate: exp.startDate,
+                            endDate: exp.endDate,
+                            onTap1: () {}, // Edit functionality can be added here
+                            onTap2: () => controller.deleteOrganizations(idx),
+                            onTap3: () {},
+                          ),
+                        );
+                      }).toList(),
+                    )),
                   ],
                 ),
               ),

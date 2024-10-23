@@ -112,6 +112,7 @@ class EducationsView extends GetView<EducationsController> {
                           ),
                           color: primaryDarkBlueColor,
                           text: 'Save',
+                          onTap: controller.saveEducations,
                         ),
                         const SizedBox(
                           width: 10,
@@ -143,13 +144,23 @@ class EducationsView extends GetView<EducationsController> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    ProfileCard(
-                        title: 'Universitas Indonesia',
-                        leftSubTitle: 'Ilmu Komputer',
-                        rightSubTitle: 'August 2025',
-                        onTap1: () {},
-                        onTap2: () {},
-                        onTap3: () {}),
+                    Obx(() => Column(
+                      children: controller.educations.asMap().entries.map((entry) {
+                        int idx = entry.key;
+                        Educations exp = entry.value;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: ProfileCard(
+                            title: exp.institution,
+                            leftSubTitle: exp.major,
+                            rightSubTitle: exp.gradDate,
+                            onTap1: () {},
+                            onTap2: () => controller.deleteEducations(idx),
+                            onTap3: () {},
+                          ),
+                        );
+                      }).toList(),
+                    )),
                   ],
                 ),
               ),

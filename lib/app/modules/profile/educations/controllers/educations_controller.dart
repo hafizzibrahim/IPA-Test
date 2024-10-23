@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:maritimmuda_connect/themes.dart';
+
+class Educations {
+  final String institution;
+  final String major;
+  final String level;
+  final String gradDate;
+
+  Educations({
+    required this.institution,
+    required this.major,
+    required this.level,
+    required this.gradDate,
+  });
+}
 
 class EducationsController extends GetxController {
   final institutionController = TextEditingController();
@@ -8,25 +24,40 @@ class EducationsController extends GetxController {
   final levelController = TextEditingController();
   final gradController = TextEditingController();
 
-  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  RxList<Educations> educations = <Educations>[].obs;
 
-  String get formattedDate {
-    return selectedDate.value != null
-        ? DateFormat('yyyy-MM-dd').format(selectedDate.value!)
-        : '';
+  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  Rx<int?> selectedMonth = Rx<int?>(null);
+  Rx<int?> selectedYear = Rx<int?>(null);
+
+  String get formattedMonthYear {
+    if (selectedMonth.value != null && selectedYear.value != null) {
+      return DateFormat('MMMM yyyy')
+          .format(DateTime(selectedYear.value!, selectedMonth.value!));
+    } else {
+      return '';
+    }
   }
 
   Future<void> selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate.value ?? DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+    showMonthPicker(
+      context,
+      initialSelectedMonth: selectedMonth.value ?? DateTime.now().month,
+      initialSelectedYear: selectedYear.value ?? DateTime.now().year,
+      firstYear: 1900,
+      lastYear: DateTime.now().year,
+      selectButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      highlightColor: primaryBlueColor,
+      textColor: Colors.black,
+      contentBackgroundColor: neutral01Color,
+      dialogBackgroundColor: Colors.white,
+      onSelected: (month, year) {
+        selectedMonth.value = month;
+        selectedYear.value = year;
+        gradController.text = formattedMonthYear;
+      },
     );
-    if (picked != null && picked != selectedDate.value) {
-      selectedDate.value = picked;
-      gradController.text = formattedDate;
-    }
   }
 
   final List<String> levelOptions = [
@@ -42,6 +73,33 @@ class EducationsController extends GetxController {
     'Doctoral Degree'
   ];
   var selectedLevel = ''.obs;
+
+  void saveEducations () {
+    if (institutionController.text.isNotEmpty &&
+    majorController.text.isNotEmpty &&
+    levelController.text.isNotEmpty &&
+    gradController.text.isNotEmpty) {
+      educations.add(Educations(
+        institution: institutionController.text,
+        major: majorController.text,
+        level: levelController.text,
+        gradDate: gradController.text
+      ));
+      clearAll();
+      Get.snackbar(
+        'Success',
+        'Educations history added successfully',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+    else {
+      Get.snackbar(
+        'Error',
+        'Please fill all fields',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
 
   @override
   void onClose() {
@@ -60,6 +118,15 @@ class EducationsController extends GetxController {
 
     selectedLevel.value = '';
     selectedDate.value = null;
+  }
+
+  void deleteEducations(int index) {
+    educations.removeAt(index);
+    Get.snackbar(
+      'Success',
+      'Education history successfully deleted!',
+        snackPosition: SnackPosition.BOTTOM
+    );
   }
 
   void setLevel(String? level) {

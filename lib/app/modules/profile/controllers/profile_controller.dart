@@ -23,6 +23,9 @@ class ProfileController extends GetxController {
   final Rx<File?> studentCardFile = Rx<File?>(null);
   Rx<String?> profileImagePath = Rx<String?>(null);
 
+  Rx<int?> selectedMonth = Rx<int?>(null);
+  Rx<int?> selectedYear = Rx<int?>(null);
+
   String get formattedDate {
     return selectedDate.value != null
         ? DateFormat('yyyy-MM-dd').format(selectedDate.value!)

@@ -47,21 +47,21 @@ class SocialActivityView extends GetView<SocialActivityController> {
                         const SizedBox(height: 8),
                         CustomTextField(
                           hintText: 'Enter program name',
-                          controller: controller.awardC,
+                          controller: controller.programController,
                         ),
                         const SizedBox(height: 16),
                         Text('Institution Name', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
                           hintText: 'Enter institution name',
-                          controller: controller.appreciatorC,
+                          controller: controller.institutionController,
                         ),
                         const SizedBox(height: 16),
                         Text('Role', style: boldText12,),
                         const SizedBox(height: 8),
                         CustomTextField(
                           hintText: 'Enter role name',
-                          controller: controller.eventNameC,
+                          controller: controller.roleController,
                         ),
                         const SizedBox(height: 16),
                         Text('Start Date', style: boldText12,),
@@ -101,6 +101,7 @@ class SocialActivityView extends GetView<SocialActivityController> {
                                   color: neutral01Color,
                                 ),
                                 text: 'Save',
+                                onTap: controller.saveSocialActivity,
                                 color: primaryDarkBlueColor),
                             const SizedBox(width: 10),
                             ProfileButton(
@@ -130,12 +131,25 @@ class SocialActivityView extends GetView<SocialActivityController> {
                           ],
                         ),
                         const SizedBox(height: 30),
-                        ProfileCard(
-                            title: 'Mobile Apps',
-                            leftSubTitle: 'Finalist',
-                            onTap1: () {},
-                            onTap2: () {},
-                            onTap3: () {}),
+                        Obx(() => Column(
+                          children: controller.socialActivity.asMap().entries.map((entry) {
+                            int idx = entry.key;
+                            SocialActivity exp = entry.value;
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: ProfileCard(
+                                title: exp.program,
+                                leftSubTitle: exp.institution,
+                                rightSubTitle: exp.role,
+                                startDate: exp.startDate,
+                                endDate: exp.endDate,
+                                onTap1: () {},
+                                onTap2: () => controller.deleteSocialActivity(idx),
+                                onTap3: () {},
+                              ),
+                            );
+                          }).toList(),
+                        )),
                         const SizedBox(
                           height: 5,
                         ),

@@ -12,10 +12,10 @@ class JobView extends GetView<JobController> {
     return Scaffold(
       backgroundColor: neutral02Color,
       appBar: AppBar(
-        title: Text('Available Job'),
+        title: const Text('Available Job'),
         actions: [
           IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {},
           ),
         ],
@@ -32,11 +32,11 @@ class JobView extends GetView<JobController> {
 
   Widget _buildJobCard(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       color: neutral01Color,
       child: InkWell(
         onTap: () => _showJobDetails(context),
-        child: Padding(
+        child: const Padding(
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +66,7 @@ class JobView extends GetView<JobController> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (BuildContext context) {
@@ -88,55 +88,55 @@ class JobView extends GetView<JobController> {
 
   Widget _buildJobDetailsContent(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Available Job',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () => Navigator.pop(context),
               ),
             ],
           ),
-          SizedBox(height: 16),
-          Text(
+          const SizedBox(height: 16),
+          const Text(
             'Commercial Legal Partner',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
-          Text('Rp. 10.000.000 - 15.000.000'),
-          SizedBox(height: 16),
-          Text('Job Details', style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 8),
-          Text('PT Waruna Nusa Sentana • Kelapa Gading, Jakarta Utara'),
-          Chip(label: Text('Full Time')),
-          SizedBox(height: 16),
-          Text('Jobdesk:', style: TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 8),
+          const Text('Rp. 10.000.000 - 15.000.000'),
+          const SizedBox(height: 16),
+          const Text('Job Details', style: TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 8),
+          const Text('PT Waruna Nusa Sentana • Kelapa Gading, Jakarta Utara'),
+          const Chip(label: Text('Full Time')),
+          const SizedBox(height: 16),
+          const Text('Jobdesk:', style: TextStyle(fontWeight: FontWeight.bold)),
           _buildBulletPoint('Mengawasi dan memberikan tanggapan, saran, dan perbaikan aspek hukum operasional perusahaan'),
           _buildBulletPoint('Monitoring, review, dan memberikan saran terhadap semua perjanjian/kontrak dengan klien (pencharter)'),
           _buildBulletPoint('Memastikan seluruh kontrak/perjanjian sesuai dengan peraturan hukum perundang-undangan yang berlaku'),
-          SizedBox(height: 16),
-          Text('Kualifikasi:', style: TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 16),
+          const Text('Kualifikasi:', style: TextStyle(fontWeight: FontWeight.bold)),
           _buildBulletPoint('S1 / S2 Jurusan Hukum'),
           _buildBulletPoint('Minimal 5 tahun pengalaman sebagai Legal Manager'),
           _buildBulletPoint('Memiliki lisensi PERADI menjadi nilai tambah'),
           _buildBulletPoint('Familiar dengan regulasi maritim baik nasional maupun internasional'),
           _buildBulletPoint('Menguasai litigasi, drafting, dan review kontrak bisnis (komersial)'),
           _buildBulletPoint('Memiliki leadership yang kuat dan kemampuan interpersonal yang baik'),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ElevatedButton(
-            child: Text('LAMAR'),
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              minimumSize: Size(double.infinity, 50),
+              minimumSize: const Size(double.infinity, 50),
             ),
+            child: const Text('LAMAR'),
           ),
         ],
       ),
@@ -145,11 +145,11 @@ class JobView extends GetView<JobController> {
 
   Widget _buildBulletPoint(String text) {
     return Padding(
-      padding: EdgeInsets.only(left: 16, top: 4, bottom: 4),
+      padding: const EdgeInsets.only(left: 16, top: 4, bottom: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('• '),
+          const Text('• '),
           Expanded(child: Text(text)),
         ],
       ),
