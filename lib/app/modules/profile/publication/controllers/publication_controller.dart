@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+import '../../../widget/custom_snackbar.dart';
+
 class Publication {
   final String title;
   final String author;
@@ -110,22 +112,21 @@ class PublicationController extends GetxController {
         titlePage: selectedImagePath.value,
       ));
       clearAll();
-      Get.snackbar(
-        'Success',
-        'Publication history successfully added!',
-        snackPosition: SnackPosition.BOTTOM,
+      customSnackbar(
+        'Success adding publication history',
       );
     } else {
-      Get.snackbar(
-        'Error',
-        'Please fill all fields',
-        snackPosition: SnackPosition.BOTTOM,
+      customSnackbar(
+        'Please fill all fields!',
       );
     }
   }
 
   void deletePublication(int index) {
     publication.removeAt(index);
+    customSnackbar(
+      'Success deleting education history!',
+    );
   }
 
   void clearAll() {

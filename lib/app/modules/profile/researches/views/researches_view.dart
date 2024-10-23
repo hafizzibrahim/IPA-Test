@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/profile/researches/controllers/researches_controller.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
@@ -141,10 +142,8 @@ class ResearchesView extends GetView<ResearchesController> {
                                   onConfirm: () {
                                     controller.clearAll();
                                     Get.back();
-                                    Get.snackbar(
-                                        'Cleared',
-                                        'All data has been deleted successfully',
-                                        snackPosition: SnackPosition.BOTTOM
+                                    customSnackbar(
+                                        'All data has been deleted successfully'
                                     );
                                   },
                                   onCancel: (){

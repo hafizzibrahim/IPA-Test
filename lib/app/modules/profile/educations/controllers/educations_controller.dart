@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 class Educations {
@@ -86,17 +87,13 @@ class EducationsController extends GetxController {
         gradDate: gradController.text
       ));
       clearAll();
-      Get.snackbar(
-        'Success',
-        'Educations history added successfully',
-        snackPosition: SnackPosition.BOTTOM,
+      customSnackbar(
+        'Success adding education history!',
       );
     }
     else {
-      Get.snackbar(
-        'Error',
-        'Please fill all fields',
-        snackPosition: SnackPosition.BOTTOM,
+      customSnackbar(
+        'Please fill all fields!'
       );
     }
   }
@@ -122,10 +119,8 @@ class EducationsController extends GetxController {
 
   void deleteEducations(int index) {
     educations.removeAt(index);
-    Get.snackbar(
-      'Success',
-      'Education history successfully deleted!',
-        snackPosition: SnackPosition.BOTTOM
+    customSnackbar(
+      'Success deleting education history!',
     );
   }
 

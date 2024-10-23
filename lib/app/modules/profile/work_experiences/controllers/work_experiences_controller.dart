@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 class WorkExperience {
@@ -100,16 +101,12 @@ class WorkExperiencesController extends GetxController {
         endDate: endDateController.text,
       ));
       clearAll();
-      Get.snackbar(
-        'Success',
-        'Work experience added successfully',
-        snackPosition: SnackPosition.BOTTOM,
+      customSnackbar(
+        'Success adding work experience history!',
       );
     } else {
-      Get.snackbar(
-        'Error',
-        'Please fill all fields',
-        snackPosition: SnackPosition.BOTTOM,
+     customSnackbar(
+        'Please fill all fields!'
       );
     }
   }
@@ -125,6 +122,9 @@ class WorkExperiencesController extends GetxController {
 
   void deleteWorkExperience(int index) {
     workExperiences.removeAt(index);
+    customSnackbar(
+      'Success deleting education history!',
+    );
   }
 
   @override

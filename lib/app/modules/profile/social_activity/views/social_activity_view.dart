@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/profile/social_activity/controllers/social_activity_controller.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
@@ -117,10 +118,8 @@ class SocialActivityView extends GetView<SocialActivityController> {
                                       onConfirm: () {
                                         controller.clearAll();
                                         Get.back();
-                                        Get.snackbar(
-                                            'Cleared',
+                                        customSnackbar(
                                             'All data has been deleted successfully',
-                                            snackPosition: SnackPosition.BOTTOM
                                         );
                                       },
                                       onCancel: (){

@@ -7,6 +7,7 @@ import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../../../widget/custom_dialog.dart';
+import '../../../widget/custom_snackbar.dart';
 
 class PublicationView extends GetView<PublicationController> {
   const PublicationView({super.key});
@@ -147,10 +148,8 @@ class PublicationView extends GetView<PublicationController> {
                               onConfirm: () {
                                 controller.clearAll();
                                 Get.back();
-                                Get.snackbar(
-                                  'Cleared',
+                                customSnackbar(
                                   'All data has been deleted successfully',
-                                  snackPosition: SnackPosition.BOTTOM,
                                 );
                               },
                               onCancel: () {

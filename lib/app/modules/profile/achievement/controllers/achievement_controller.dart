@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+import '../../../widget/custom_snackbar.dart';
+
 class Achievements {
   final String award;
   final String appreciatior;
@@ -84,16 +86,12 @@ class AchievementController extends GetxController {
         date: dateC.text
       ));
       clearAll();
-      Get.snackbar(
-        'Success',
-        'Achievement history successfully added!',
-        snackPosition: SnackPosition.BOTTOM
+      customSnackbar(
+        'Success adding achievement history!',
       );
     } else {
-      Get.snackbar(
-        'Error',
-        'Please fill all fields',
-        snackPosition: SnackPosition.BOTTOM
+      customSnackbar(
+        'Please fill all fields!',
       );
     }
   }
@@ -132,6 +130,9 @@ class AchievementController extends GetxController {
 
   void deleteAchievement(int index) {
     achievement.removeAt(index);
+    customSnackbar(
+      'Success deleting education history!',
+    );
   }
 
   void increment() => count.value++;

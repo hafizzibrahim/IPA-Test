@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+import '../../../widget/custom_snackbar.dart';
+
 class Researches {
   final String title;
   final String role;
@@ -119,22 +121,21 @@ class ResearchesController extends GetxController {
         endDate: endDateController.text
       ));
       clearAll();
-      Get.snackbar(
-        'Success',
-        'Researches history successfully added!',
-        snackPosition: SnackPosition.BOTTOM
+      customSnackbar(
+        'Success adding research history!',
       );
     } else {
-      Get.snackbar(
-        'Error',
+      customSnackbar(
         'Please fill all fields!',
-        snackPosition: SnackPosition.BOTTOM
       );
     }
   }
 
   void deleteResearches(int index) {
     researches.removeAt(index);
+    customSnackbar(
+      'Success deleting education history!',
+    );
   }
 
   @override

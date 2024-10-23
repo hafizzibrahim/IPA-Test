@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+import '../../../widget/custom_snackbar.dart';
+
 class Organizations {
   final String organization;
   final String position;
@@ -98,16 +100,12 @@ class OrganizationsController extends GetxController {
           endDate: endDateController.text
       ));
       clearAll();
-      Get.snackbar(
-          'Success',
-          'Organizations experience added successfully',
-          snackPosition: SnackPosition.BOTTOM
+      customSnackbar(
+          'Success adding organization history!',
       );
     } else {
-      Get.snackbar(
-        'Error',
-        'Please fill all fields',
-        snackPosition: SnackPosition.BOTTOM,
+      customSnackbar(
+        'Please fill all fields!',
       );
     }
   }
@@ -122,6 +120,9 @@ class OrganizationsController extends GetxController {
 
   void deleteOrganizations(int index) {
     organizations.removeAt(index);
+    customSnackbar(
+      'Success deleting education history!',
+    );
   }
 
   @override

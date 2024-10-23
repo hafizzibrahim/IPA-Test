@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_dialog.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
+import '../../../widget/custom_snackbar.dart';
 import '../../../widget/custom_textfield.dart';
 import '../../../widget/profile_button.dart';
 import '../controllers/work_experiences_controller.dart';
@@ -103,10 +104,8 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                                     onConfirm: () {
                                       controller.clearAll();
                                       Get.back();
-                                      Get.snackbar(
-                                          'Cleared',
-                                          'All data has been deleted successfully',
-                                          snackPosition: SnackPosition.BOTTOM
+                                      customSnackbar(
+                                        'All data has been deleted successfully',
                                       );
                                     },
                                     onCancel: () {
