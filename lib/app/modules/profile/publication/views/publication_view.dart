@@ -188,7 +188,7 @@ class PublicationView extends GetView<PublicationController> {
                 ),
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 58),
           ],
         ),
       ),

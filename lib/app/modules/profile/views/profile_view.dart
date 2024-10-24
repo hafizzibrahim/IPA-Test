@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../../widget/custom_dialog.dart';
 import '../controllers/profile_controller.dart';
@@ -325,10 +326,8 @@ class ProfileView extends GetView<ProfileController> {
                                 onConfirm: () {
                                   controller.clearAll();
                                   Get.back();
-                                  Get.snackbar(
-                                      'Cleared',
+                                  customSnackbar(
                                       'All data has been deleted successfully',
-                                      snackPosition: SnackPosition.BOTTOM
                                   );
                                 },
                                 onCancel: (){
@@ -341,8 +340,7 @@ class ProfileView extends GetView<ProfileController> {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            const SizedBox(height: 24),
+            const SizedBox(height: 100,)
           ],
         ),
       ),
