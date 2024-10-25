@@ -1,6 +1,24 @@
+import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:maritimmuda_connect/themes.dart';
+
+import '../../../widget/custom_snackbar.dart';
+
+class Organizations {
+  final String organization;
+  final String position;
+  final String startDate;
+  final String endDate;
+
+  Organizations({
+    required this.organization,
+    required this.position,
+    required this.startDate,
+    required this.endDate,
+  });
+}
 
 class OrganizationsController extends GetxController {
   final organizationController = TextEditingController();
@@ -8,37 +26,87 @@ class OrganizationsController extends GetxController {
   final startDateController = TextEditingController();
   final endDateController = TextEditingController();
 
+  RxList<Organizations> organizations = <Organizations>[].obs;
+
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
-  String get formattedDate {
-    return selectedDate.value != null
-        ? DateFormat('yyyy-MM-dd').format(selectedDate.value!)
-        : '';
+  String formattedDate(DateTime? date) {
+    return date != null ? DateFormat('MMMM yyyy').format(date) : '';
   }
 
-  Future<void> selectStartDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate.value ?? DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null && picked != selectedDate.value) {
-      selectedDate.value = picked;
-      startDateController.text = formattedDate;
+  Rx<int?> selectedMonth = Rx<int?>(null);
+  Rx<int?> selectedYear = Rx<int?>(null);
+
+  String get formattedMonthYear {
+    if (selectedMonth.value != null && selectedYear.value != null) {
+      return DateFormat('MMMM yyyy')
+          .format(DateTime(selectedYear.value!, selectedMonth.value!));
+    } else {
+      return '';
     }
   }
 
-  Future<void> selectEndDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate.value ?? DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+  Future<void> selectStartDate(BuildContext context) async {
+    showMonthPicker(
+      context,
+      initialSelectedMonth: selectedMonth.value ?? DateTime.now().month,
+      initialSelectedYear: selectedYear.value ?? DateTime.now().year,
+      firstYear: 1900,
+      lastYear: DateTime.now().year,
+      selectButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      highlightColor: primaryBlueColor,
+      textColor: Colors.black,
+      contentBackgroundColor: neutral01Color,
+      dialogBackgroundColor: Colors.white,
+      onSelected: (month, year) {
+        selectedMonth.value = month;
+        selectedYear.value = year;
+        startDateController.text = formattedMonthYear;
+      },
     );
-    if (picked != null && picked != selectedDate.value) {
-      selectedDate.value = picked;
-      endDateController.text = formattedDate;
+  }
+
+  Future<void> selectEndDate(BuildContext context) async {
+    showMonthPicker(
+      context,
+      initialSelectedMonth: selectedMonth.value ?? DateTime.now().month,
+      initialSelectedYear: selectedYear.value ?? DateTime.now().year,
+      firstYear: 1900,
+      lastYear: DateTime.now().year,
+      selectButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      highlightColor: primaryBlueColor,
+      textColor: Colors.black,
+      contentBackgroundColor: Colors.white,
+      dialogBackgroundColor: neutral01Color,
+      onSelected: (month, year) {
+        selectedMonth.value = month;
+        selectedYear.value = year;
+        endDateController.text = formattedMonthYear;
+      },
+    );
+  }
+
+  void saveOrganizations() {
+    if (organizationController.text.isNotEmpty &&
+        positionController.text.isNotEmpty &&
+        startDateController.text.isNotEmpty &&
+        endDateController.text.isNotEmpty) {
+      organizations.add(Organizations(
+          organization: organizationController.text,
+          position: positionController.text,
+          startDate: startDateController.text,
+          endDate: endDateController.text
+      ));
+      clearAll();
+      customSnackbar(
+          'Success adding organization history!',
+      );
+    } else {
+      customSnackbar(
+        'Please fill all fields!',
+      );
     }
   }
 
@@ -47,8 +115,14 @@ class OrganizationsController extends GetxController {
     positionController.clear();
     startDateController.clear();
     endDateController.clear();
-
     selectedDate.value = null;
+  }
+
+  void deleteOrganizations(int index) {
+    organizations.removeAt(index);
+    customSnackbar(
+      'Success deleting education history!',
+    );
   }
 
   @override

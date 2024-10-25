@@ -7,6 +7,7 @@ import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 import '../../../widget/custom_dialog.dart';
+import '../../../widget/custom_snackbar.dart';
 import '../controllers/achievement_controller.dart';
 
 
@@ -92,6 +93,7 @@ class AchievementView extends GetView<AchievementController> {
                                   color: neutral01Color,
                                 ),
                                 text: 'Save',
+                                onTap: controller.saveAchievement,
                                 color: primaryDarkBlueColor),
                             const SizedBox(width: 10),
                             ProfileButton(
@@ -107,10 +109,8 @@ class AchievementView extends GetView<AchievementController> {
                                       onConfirm: () {
                                         controller.clearAll();
                                         Get.back();
-                                        Get.snackbar(
-                                            'Cleared',
-                                            'All data has been deleted successfully',
-                                            snackPosition: SnackPosition.BOTTOM
+                                        customSnackbar(
+                                          'All data has been deleted successfully',
                                         );
                                       },
                                       onCancel: (){
@@ -121,12 +121,25 @@ class AchievementView extends GetView<AchievementController> {
                           ],
                         ),
                         const SizedBox(height: 30),
-                        ProfileCard(
-                            title: 'Mobile Apps',
-                            leftSubTitle: 'Finalist',
-                            onTap1: () {},
-                            onTap2: () {},
-                            onTap3: () {}),
+                        Obx(() => Column(
+                          children: controller.achievement.asMap().entries.map((entry) {
+                            int idx = entry.key;
+                            Achievements exp = entry.value;
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: ProfileCard(
+                                title: exp.award,
+                                leftSubTitle: exp.appreciatior,
+                                rightSubTitle: exp.eventName,
+                                startDate: exp.eventLevel,
+                                endDate: exp.date,
+                                onTap1: () {},
+                                onTap2: () => controller.deleteAchievement(idx),
+                                onTap3: () {},
+                              ),
+                            );
+                          }).toList(),
+                        )),
                         const SizedBox(
                           height: 5,
                         ),

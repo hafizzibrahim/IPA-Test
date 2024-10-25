@@ -10,12 +10,18 @@ SnackbarController customSnackbar(String text) {
     messageText: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          text,
-          style: mediumText12.copyWith(
-            fontSize: 14,
-            color: neutral01Color,
+        Expanded(
+          child: Text(
+            text,
+            style: mediumText12.copyWith(
+              fontSize: 14,
+              color: neutral01Color,
+            ),
+            maxLines: null,
           ),
+        ),
+        SizedBox(
+          width: 16,
         ),
         InkWell(
           onTap: () {
@@ -29,6 +35,6 @@ SnackbarController customSnackbar(String text) {
       ],
     ),
     backgroundColor: primaryDarkBlueColor,
-    borderRadius: 5,
+    borderRadius: 10,
   );
 }

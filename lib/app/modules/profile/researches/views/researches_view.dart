@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/modules/profile/researches/controllers/researches_controller.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
@@ -125,6 +126,7 @@ class ResearchesView extends GetView<ResearchesController> {
                               color: neutral01Color,
                             ),
                             text: 'Save',
+                            onTap: controller.saveResearches,
                             color: primaryDarkBlueColor),
                         const SizedBox(width: 10),
                         ProfileButton(
@@ -140,10 +142,8 @@ class ResearchesView extends GetView<ResearchesController> {
                                   onConfirm: () {
                                     controller.clearAll();
                                     Get.back();
-                                    Get.snackbar(
-                                        'Cleared',
-                                        'All data has been deleted successfully',
-                                        snackPosition: SnackPosition.BOTTOM
+                                    customSnackbar(
+                                        'All data has been deleted successfully'
                                     );
                                   },
                                   onCancel: (){
@@ -154,12 +154,26 @@ class ResearchesView extends GetView<ResearchesController> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    ProfileCard(
-                        title: 'Mobile Apps',
-                        leftSubTitle: 'Finalist',
-                        onTap1: () {},
-                        onTap2: () {},
-                        onTap3: () {}),
+                    Obx(() => Column(
+                      children: controller.researches.asMap().entries.map((entry) {
+                        int idx = entry.key;
+                        Researches exp = entry.value;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: ProfileCard(
+                            title: exp.title,
+                            rightTitle: exp.role,
+                            leftSubTitle: exp.affiliation,
+                            rightSubTitle: exp.sponsor,
+                            startDate: exp.startDate,
+                            endDate: exp.endDate,
+                            onTap1: () {},
+                            onTap2: () => controller.deleteResearches(idx),
+                            onTap3: () {},
+                          ),
+                        );
+                      }).toList(),
+                    )),
                     const SizedBox(
                       height: 5,
                     ),

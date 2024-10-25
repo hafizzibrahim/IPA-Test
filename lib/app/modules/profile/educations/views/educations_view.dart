@@ -4,6 +4,7 @@ import 'package:maritimmuda_connect/app/modules/widget/custom_dropdown.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../../../widget/custom_dialog.dart';
+import '../../../widget/custom_snackbar.dart';
 import '../../../widget/custom_textfield.dart';
 import '../../../widget/profile_button.dart';
 import '../controllers/educations_controller.dart';
@@ -112,6 +113,7 @@ class EducationsView extends GetView<EducationsController> {
                           ),
                           color: primaryDarkBlueColor,
                           text: 'Save',
+                          onTap: controller.saveEducations,
                         ),
                         const SizedBox(
                           width: 10,
@@ -129,10 +131,8 @@ class EducationsView extends GetView<EducationsController> {
                                   onConfirm: () {
                                     controller.clearAll();
                                     Get.back();
-                                    Get.snackbar(
-                                        'Cleared',
-                                        'All data has been deleted successfully',
-                                        snackPosition: SnackPosition.BOTTOM
+                                    customSnackbar(
+                                      'All data has been deleted successfully',
                                     );
                                   },
                                   onCancel: (){
@@ -143,13 +143,23 @@ class EducationsView extends GetView<EducationsController> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    ProfileCard(
-                        title: 'Universitas Indonesia',
-                        leftSubTitle: 'Ilmu Komputer',
-                        rightSubTitle: 'August 2025',
-                        onTap1: () {},
-                        onTap2: () {},
-                        onTap3: () {}),
+                    Obx(() => Column(
+                      children: controller.educations.asMap().entries.map((entry) {
+                        int idx = entry.key;
+                        Educations exp = entry.value;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: ProfileCard(
+                            title: exp.institution,
+                            leftSubTitle: exp.major,
+                            rightSubTitle: exp.gradDate,
+                            onTap1: () {},
+                            onTap2: () => controller.deleteEducations(idx),
+                            onTap3: () {},
+                          ),
+                        );
+                      }).toList(),
+                    )),
                   ],
                 ),
               ),
