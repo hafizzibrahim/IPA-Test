@@ -53,7 +53,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Forgot Password",
-                            style: mediumText30,
+                            style: mediumText30.copyWith(
+                                color: primaryDarkBlueColor),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -62,13 +63,17 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           child: Text(
                             "Input email to reset your password",
                             style:
-                                regulerText10.copyWith(color: neutral03Color),
+                                regulerText11.copyWith(color: neutral03Color),
                           ),
                         ),
                         const SizedBox(height: 50),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Email"),
+                          child: Text(
+                            "Email",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(

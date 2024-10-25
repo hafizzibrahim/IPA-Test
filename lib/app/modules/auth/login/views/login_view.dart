@@ -60,7 +60,8 @@ class LoginView extends GetView<LoginController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Hi, Welcome!",
-                            style: mediumText30,
+                            style: mediumText30.copyWith(
+                                color: primaryDarkBlueColor),
                           ),
                         ),
                         Align(
@@ -68,13 +69,17 @@ class LoginView extends GetView<LoginController> {
                           child: Text(
                             "Enter your email and password to login",
                             style:
-                                regulerText10.copyWith(color: neutral03Color),
+                                regulerText11.copyWith(color: neutral03Color),
                           ),
                         ),
                         const SizedBox(height: 50),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Email"),
+                          child: Text(
+                            "Email",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
@@ -89,9 +94,13 @@ class LoginView extends GetView<LoginController> {
                               Icon(Icons.email_outlined, color: neutral03Color),
                         ),
                         const SizedBox(height: 30),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Password"),
+                          child: Text(
+                            "Password",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -136,7 +145,7 @@ class LoginView extends GetView<LoginController> {
                             child: Text(
                               "Forgot Password?",
                               style: regulerText12.copyWith(
-                                  color: primaryBlueColor),
+                                  color: primaryDarkBlueColor),
                             ),
                           ),
                         ),
@@ -191,7 +200,7 @@ class LoginView extends GetView<LoginController> {
                               Text(
                                 "Register",
                                 style: regulerText10.copyWith(
-                                    color: primaryBlueColor),
+                                    color: primaryDarkBlueColor),
                               ),
                             ],
                           ),
