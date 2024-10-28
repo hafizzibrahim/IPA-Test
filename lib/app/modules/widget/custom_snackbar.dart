@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
-SnackbarController customSnackbar(String text) {
+SnackbarController customSnackbar(String text, [Color? color]) {
   return Get.snackbar(
     "",
     text,
@@ -20,9 +20,7 @@ SnackbarController customSnackbar(String text) {
             maxLines: null,
           ),
         ),
-        SizedBox(
-          width: 16,
-        ),
+        const SizedBox(width: 16),
         InkWell(
           onTap: () {
             Get.back();
@@ -34,7 +32,7 @@ SnackbarController customSnackbar(String text) {
         ),
       ],
     ),
-    backgroundColor: primaryDarkBlueColor,
+    backgroundColor: color ?? primaryDarkBlueColor,
     borderRadius: 10,
   );
 }

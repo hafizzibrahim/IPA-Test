@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/data/models/request/login_request.dart';
 import 'package:maritimmuda_connect/app/modules/auth/forgot_password/bindings/forgot_password_binding.dart';
 import 'package:maritimmuda_connect/app/modules/auth/forgot_password/views/forgot_password_view.dart';
-import 'package:maritimmuda_connect/app/modules/navbar/bindings/main_binding.dart';
-import 'package:maritimmuda_connect/app/modules/navbar/views/main_view.dart';
 import 'package:maritimmuda_connect/app/modules/auth/register/bindings/register_binding.dart';
 import 'package:maritimmuda_connect/app/modules/auth/register/views/register_view.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_button.dart';
 import 'package:maritimmuda_connect/themes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -60,7 +58,8 @@ class LoginView extends GetView<LoginController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Hi, Welcome!",
-                            style: mediumText30,
+                            style: mediumText30.copyWith(
+                                color: primaryDarkBlueColor),
                           ),
                         ),
                         Align(
@@ -68,13 +67,17 @@ class LoginView extends GetView<LoginController> {
                           child: Text(
                             "Enter your email and password to login",
                             style:
-                                regulerText10.copyWith(color: neutral03Color),
+                                regulerText11.copyWith(color: neutral03Color),
                           ),
                         ),
                         const SizedBox(height: 50),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Email"),
+                          child: Text(
+                            "Email",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
@@ -89,9 +92,13 @@ class LoginView extends GetView<LoginController> {
                               Icon(Icons.email_outlined, color: neutral03Color),
                         ),
                         const SizedBox(height: 30),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Password"),
+                          child: Text(
+                            "Password",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -136,7 +143,7 @@ class LoginView extends GetView<LoginController> {
                             child: Text(
                               "Forgot Password?",
                               style: regulerText12.copyWith(
-                                  color: primaryBlueColor),
+                                  color: primaryDarkBlueColor),
                             ),
                           ),
                         ),
@@ -147,19 +154,16 @@ class LoginView extends GetView<LoginController> {
                               return CustomButton(
                                 onPressed: () async {
                                   if (controller.validateForm()) {
-                                    final SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
-                                    // await prefs.setBool("loggedIn", true);
-                                    Get.offAll(
-                                      () => MainView(),
-                                      binding: MainBinding(),
-                                      transition: Transition.rightToLeft,
-                                      duration:
-                                          const Duration(milliseconds: 100),
+                                    controller.login(
+                                      LoginRequest(
+                                        email: controller.emailC.text,
+                                        password: controller.passwordC.text,
+                                      ),
                                     );
                                   }
                                 },
                                 text: "Login",
+                                isLoading: controller.isLoading.value,
                               );
                             } else {
                               return CustomButton(
@@ -191,7 +195,7 @@ class LoginView extends GetView<LoginController> {
                               Text(
                                 "Register",
                                 style: regulerText10.copyWith(
-                                    color: primaryBlueColor),
+                                    color: primaryDarkBlueColor),
                               ),
                             ],
                           ),
