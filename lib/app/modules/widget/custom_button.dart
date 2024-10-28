@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.textSize,
     this.gradient,
+    this.isLoading,
   });
 
   final String text;
@@ -22,6 +23,7 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final TextStyle? textSize;
   final LinearGradient? gradient;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +51,17 @@ class CustomButton extends StatelessWidget {
             alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Text(
-                text,
-                style: textSize ?? boldText20.copyWith(color: neutral01Color),
-              ),
+              child: isLoading == true
+                  ? SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(color: neutral01Color),
+                    )
+                  : Text(
+                      text,
+                      style: textSize ??
+                          boldText20.copyWith(color: neutral01Color),
+                    ),
             ),
           ),
         ),
