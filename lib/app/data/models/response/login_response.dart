@@ -83,9 +83,13 @@ class User {
         gender: json["gender"],
         email: json["email"],
         locale: json["locale"],
-        emailVerifiedAt: DateTime.parse(json["email_verified_at"]),
+        emailVerifiedAt: json["email_verified_at"] != null
+            ? DateTime.parse(json["email_verified_at"])
+            : null,
         placeOfBirth: json["place_of_birth"],
-        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"] != null
+            ? DateTime.parse(json["date_of_birth"])
+            : null,
         linkedinProfile: json["linkedin_profile"],
         instagramProfile: json["instagram_profile"],
         provinceId: json["province_id"],
