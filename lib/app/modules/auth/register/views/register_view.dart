@@ -56,7 +56,8 @@ class RegisterView extends GetView<RegisterController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Register",
-                            style: mediumText30,
+                            style: mediumText30.copyWith(
+                                color: primaryDarkBlueColor),
                           ),
                         ),
                         const SizedBox(height: 7),
@@ -65,13 +66,17 @@ class RegisterView extends GetView<RegisterController> {
                           child: Text(
                             "Enter a few details below",
                             style:
-                                regulerText10.copyWith(color: neutral03Color),
+                                regulerText11.copyWith(color: neutral03Color),
                           ),
                         ),
                         const SizedBox(height: 30),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Name"),
+                          child: Text(
+                            "Name",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
@@ -86,9 +91,13 @@ class RegisterView extends GetView<RegisterController> {
                               color: neutral03Color),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Email"),
+                          child: Text(
+                            "Email",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
@@ -103,9 +112,13 @@ class RegisterView extends GetView<RegisterController> {
                               Icon(Icons.email_outlined, color: neutral03Color),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Gender"),
+                          child: Text(
+                            "Gender",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -119,9 +132,13 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Province"),
+                          child: Text(
+                            "Province",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -135,9 +152,13 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Password"),
+                          child: Text(
+                            "Password",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -168,9 +189,13 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Confirm Password"),
+                          child: Text(
+                            "Confirm Password",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -243,7 +268,7 @@ class RegisterView extends GetView<RegisterController> {
                               Text(
                                 "Login",
                                 style: regulerText10.copyWith(
-                                    color: primaryBlueColor),
+                                    color: primaryDarkBlueColor),
                               ),
                             ],
                           ),

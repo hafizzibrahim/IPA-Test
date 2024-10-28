@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences {
@@ -23,9 +25,14 @@ class UserPreferences {
     return prefs.getString('userId');
   }
 
-  Future<bool?> getLoggedIn() async {
+  Future<String?> getUid() async {
     final prefs = await _getPrefs();
-    return prefs.getBool('loggedIn');
+    return prefs.getString('uid');
+  }
+
+  Future<String?> getUuid() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('uuid');
   }
 
   Future<void> logout() async {
