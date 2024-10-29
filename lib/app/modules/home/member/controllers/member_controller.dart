@@ -1,9 +1,17 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/data/services/home_service.dart';
+
+import '../../../../data/models/response/member_response.dart';
 
 class MemberController extends GetxController {
   var isVisible = false.obs;
+  var isLoading = false.obs;
   // Observable map to track which sections are expanded
   final expandedSections = <String, bool>{}.obs;
+
+  var memberList = <Member>[].obs;
 
   // Observable map to store selected items for each section
   final selectedItems = <String, String>{}.obs;
@@ -27,6 +35,25 @@ class MemberController extends GetxController {
     "Desain Grafis",
     "Manajemen Proyek"
   ].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    getAllMember();
+  }
+
+  void getAllMember() async {
+    try {
+      isLoading.value = true;
+      var response = await HomeService().getAllMembers();
+      print(response.members);
+      memberList.assignAll(response.members!);
+    } catch (e) {
+      print("INI ERROR ICLIK $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   // Toggle the expansion state of a section
   void toggleSection(String title) {
