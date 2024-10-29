@@ -105,25 +105,21 @@ class HomeView extends GetView<HomeController> {
           const SizedBox(
             height: 32,
           ),
-          Container(
-            child: CarouselSlider(
-              options: CarouselOptions(
-                height: 180,
-                autoPlay: true, // Otomatis bergeser
-                enlargeCenterPage: true, // Gambar di tengah diperbesar
-              ),
-              items: listImage.map((item) {
-                return Container(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                    child: Image.asset(
-                      item, // Mengambil path dari listImage
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              }).toList(),
+          CarouselSlider(
+            options: CarouselOptions(
+              height: 180,
+              autoPlay: true, // Otomatis bergeser
+              enlargeCenterPage: true, // Gambar di tengah diperbesar
             ),
+            items: listImage.map((item) {
+              return ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                child: Image.asset(
+                  item, // Mengambil path dari listImage
+                  fit: BoxFit.cover,
+                ),
+              );
+            }).toList(),
           ),
           const SizedBox(
             height: 16,
