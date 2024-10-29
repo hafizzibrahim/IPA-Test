@@ -21,11 +21,16 @@ class AuthService {
       int userId = loginResponseFromJson(response.body).user!.id!;
       String? uid = loginResponseFromJson(response.body).user?.uid;
       String uuid = loginResponseFromJson(response.body).user!.uuid!;
+      String name = loginResponseFromJson(response.body).user!.name!;
+      int serialNumber =
+          loginResponseFromJson(response.body).user!.serialNumber!;
 
       await prefs.setString("token", token);
       await prefs.setString("userId", userId.toString());
       await prefs.setString("uid", uid ?? "");
       await prefs.setString("uuid", uuid);
+      await prefs.setString("name", name);
+      await prefs.setInt("serial_number", serialNumber);
 
       return 200;
     } else {
