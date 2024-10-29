@@ -33,6 +33,16 @@ class UserPreferences {
     return prefs.getString('uuid');
   }
 
+  Future<String?> getName() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('name');
+  }
+
+    Future<int?> getSerialNumber() async {
+    final prefs = await _getPrefs();
+    return prefs.getInt('serial_number');
+  }
+
   Future<void> logout() async {
     final prefs = await _getPrefs();
     await prefs.clear();
