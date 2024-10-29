@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+import '../../../../data/models/response/member_response.dart';
 import '../controllers/member_controller.dart';
 
 class MemberDetailView extends GetView<MemberController> {
-  const MemberDetailView({super.key});
+  MemberDetailView({super.key, required this.memberList});
+  Member memberList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +45,7 @@ class MemberDetailView extends GetView<MemberController> {
                                       "assets/images/paternkartu.png"))),
                         ),
                         const SizedBox(height: 50),
-                        Text("Uzank", style: semiBoldText24),
+                        Text("${memberList.name}", style: semiBoldText24),
                         const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
