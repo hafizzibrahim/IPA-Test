@@ -1,12 +1,13 @@
 import "dart:convert";
 import "package:http/http.dart" as http;
 import "package:maritimmuda_connect/app/data/models/request/login_request.dart";
+import "package:maritimmuda_connect/app/data/models/request/register_request.dart";
 import "package:maritimmuda_connect/app/data/models/response/login_response.dart";
 import "package:maritimmuda_connect/app/data/services/config.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 class AuthService {
-  Future<bool> login(LoginRequest request) async {
+  Future<int> login(LoginRequest request) async {
     final response = await http.post(
       Uri.parse("$baseUrl/login"),
       headers: headersNoToken,
@@ -21,16 +22,43 @@ class AuthService {
       String? uid = loginResponseFromJson(response.body).user?.uid;
       String uuid = loginResponseFromJson(response.body).user!.uuid!;
 
-      if (uid == null) {
-        return false;
-      }
       await prefs.setString("token", token);
       await prefs.setString("userId", userId.toString());
-      await prefs.setString("uid", uid);
+      await prefs.setString("uid", uid ?? "");
       await prefs.setString("uuid", uuid);
 
+      return 200;
+    } else {
+      return response.statusCode;
+    }
+  }
+
+  Future<bool> register(RegisterRequest request) async {
+    final response = await http.post(
+      Uri.parse("$baseUrl/register"),
+      headers: headersNoToken,
+      body: jsonEncode(request),
+    );
+
+    if (response.statusCode == 201) {
       return true;
     } else {
+      return false;
+    }
+  }
+
+  Future<bool> forgotPassword(String email) async {
+    final response = await http.post(
+      Uri.parse("$baseUrl/forgot-password"),
+      headers: headersNoToken,
+      body: jsonEncode({'email': email}),
+    );
+
+    if (response.statusCode == 200) {
+      print("Berhasil ${response.body}");
+      return true;
+    } else {
+      print("Gagal ${response.body}");
       return false;
     }
   }
