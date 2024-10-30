@@ -19,18 +19,20 @@ class AuthService {
 
       String token = loginResponseFromJson(response.body).token!;
       int userId = loginResponseFromJson(response.body).user!.id!;
-      String? uid = loginResponseFromJson(response.body).user?.uid;
+      String? uid = loginResponseFromJson(response.body).user?.uid ?? "";
       String uuid = loginResponseFromJson(response.body).user!.uuid!;
       String name = loginResponseFromJson(response.body).user!.name!;
+      String email = loginResponseFromJson(response.body).user!.email!;
       int serialNumber =
-          loginResponseFromJson(response.body).user!.serialNumber!;
+          loginResponseFromJson(response.body).user?.serialNumber ?? 0;
 
       await prefs.setString("token", token);
       await prefs.setString("userId", userId.toString());
-      await prefs.setString("uid", uid ?? "");
+      await prefs.setString("uid", uid);
       await prefs.setString("uuid", uuid);
       await prefs.setString("name", name);
       await prefs.setInt("serial_number", serialNumber);
+      await prefs.setString("email", email);
 
       return 200;
     } else {
