@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
-SnackbarController customSnackbar(String text, [Color? color]) {
+SnackbarController customSnackbar(String text,
+    [Color? color, Duration? duration]) {
   return Get.snackbar(
     "",
     text,
     titleText: const SizedBox.shrink(),
+    duration: duration ?? const Duration(seconds: 3),
     messageText: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

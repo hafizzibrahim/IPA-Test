@@ -45,7 +45,8 @@ class HomeView extends GetView<HomeController> {
                   height: 24,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                   decoration: BoxDecoration(
                     color: neutral01Color,
                     borderRadius: BorderRadius.circular(15),
@@ -54,48 +55,46 @@ class HomeView extends GetView<HomeController> {
                         color: neutral04Color.withOpacity(0.3), // Warna shadow
                         spreadRadius: 1, // Penyebaran shadow
                         blurRadius: 5, // Tingkat blur shadow
-                        offset: const Offset(3, 3), // Arah dan jarak shadow (x, y)
+                        offset:
+                            const Offset(3, 3), // Arah dan jarak shadow (x, y)
+
                       ),
                     ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Hello,",
-                            style: regulerText16.copyWith(
-                                color: neutral04Color, fontSize: 20),
-                          ),
-                          Text(
-                            "Komeng",
-                            style: semiBoldText24.copyWith(
-                                color: primaryBlueColor),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "No: 0900240850",
-                                style: regulerText10.copyWith(fontSize: 9),
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Text(
-                                "No: 0900240850",
-                                style: regulerText10.copyWith(fontSize: 9),
-                              ),
-                            ],
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hello,",
+                              style: regulerText16.copyWith(
+                                  color: neutral04Color, fontSize: 20),
+                            ),
+                            Obx(() => Text(
+                                  controller.name.value,
+                                  style: semiBoldText24.copyWith(
+                                      color: primaryBlueColor),
+                                  overflow: TextOverflow
+                                      .ellipsis, // Tambahkan ini untuk memotong teks panjang
+                                )),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Obx(() => Text(
+                                      "No: ${controller.serialNumber.value}",
+                                      style:
+                                          regulerText10.copyWith(fontSize: 9),
+                                    )),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       const CircleAvatar(
-                        radius: 50, // Ukuran lingkaran
+                        radius: 50,
                         backgroundImage:
                             AssetImage("assets/images/profile.png"),
                       ),
@@ -108,25 +107,21 @@ class HomeView extends GetView<HomeController> {
           const SizedBox(
             height: 32,
           ),
-          Container(
-            child: CarouselSlider(
-              options: CarouselOptions(
-                height: 180,
-                autoPlay: true, // Otomatis bergeser
-                enlargeCenterPage: true, // Gambar di tengah diperbesar
-              ),
-              items: listImage.map((item) {
-                return Container(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                    child: Image.asset(
-                      item, // Mengambil path dari listImage
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              }).toList(),
+          CarouselSlider(
+            options: CarouselOptions(
+              height: 180,
+              autoPlay: true, // Otomatis bergeser
+              enlargeCenterPage: true, // Gambar di tengah diperbesar
             ),
+            items: listImage.map((item) {
+              return ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                child: Image.asset(
+                  item, // Mengambil path dari listImage
+                  fit: BoxFit.cover,
+                ),
+              );
+            }).toList(),
           ),
           const SizedBox(
             height: 16,
@@ -173,8 +168,6 @@ class HomeView extends GetView<HomeController> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const ScholarshipView()));
-
-//                       Get.to(ScholarshipView());
                     },
                   ),
                 ),

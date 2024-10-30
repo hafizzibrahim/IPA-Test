@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/auth/login/bindings/login_binding.dart';
-import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
+import 'package:maritimmuda_connect/app/data/models/request/register_request.dart';
+import 'package:maritimmuda_connect/app/data/utils/province.dart';
+import 'package:maritimmuda_connect/app/modules/auth/widget/header_auth.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_dropdown.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
@@ -20,23 +21,7 @@ class RegisterView extends GetView<RegisterController> {
           child: Center(
             child: Column(
               children: [
-                Container(
-                  height: 80,
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: neutral01Color,
-                    border: Border.all(color: neutral03Color, width: 1),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(13),
-                    child: Image.asset("assets/images/maritimmuda_connect.png"),
-                  ),
-                ),
+                const HeaderAuth(),
                 const SizedBox(height: 55),
                 Container(
                   width: double.infinity,
@@ -124,8 +109,8 @@ class RegisterView extends GetView<RegisterController> {
                         Obx(
                           () => CustomDropdown(
                             options: controller.genderOptions,
-                            selectedOption:
-                                controller.selectedGender.value ?? "",
+                            selectedOption: controller.genderOptions[
+                                controller.selectedGender.value - 1],
                             onSelected: (String? value) {
                               controller.setSelectedGender(value);
                             },
@@ -141,16 +126,16 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Obx(
-                          () => CustomDropdown(
-                            options: controller.provinceOptions,
-                            selectedOption:
-                                controller.selectedProvince.value ?? "",
-                            onSelected: (String? value) {
-                              controller.setSelectedProvince(value);
-                            },
-                          ),
-                        ),
+                        // Obx(
+                        //   () => CustomDropdown(
+                        //     options: provinceOptions,
+                        //     selectedOption: provinceOptions[
+                        //         controller.selectedProvince.value - 1],
+                        //     onSelected: (String? value) {
+                        //       controller.setSelectedProvince(value);
+                        //     },
+                        //   ),
+                        // ),
                         const SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -230,18 +215,24 @@ class RegisterView extends GetView<RegisterController> {
                           () {
                             if (controller.isCheckField.value) {
                               return CustomButton(
+                                text: "Register",
+                                isLoading: controller.isLoading.value,
                                 onPressed: () {
                                   if (controller.validateForm()) {
-                                    Get.offAll(
-                                      () => const LoginView(),
-                                      binding: LoginBinding(),
-                                      transition: Transition.leftToRight,
-                                      duration:
-                                          const Duration(milliseconds: 1000),
+                                    controller.register(
+                                      RegisterRequest(
+                                        name: controller.nameC.text,
+                                        email: controller.emailC.text,
+                                        gender: controller.selectedGender.value,
+                                        provinceId:
+                                            controller.selectedProvince.value,
+                                        password: controller.passwordC.text,
+                                        passwordConfirmation:
+                                            controller.confirmPassC.text,
+                                      ),
                                     );
                                   }
                                 },
-                                text: "Register",
                               );
                             } else {
                               return CustomButton(

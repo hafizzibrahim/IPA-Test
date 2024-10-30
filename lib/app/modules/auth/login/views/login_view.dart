@@ -5,6 +5,7 @@ import 'package:maritimmuda_connect/app/modules/auth/forgot_password/bindings/fo
 import 'package:maritimmuda_connect/app/modules/auth/forgot_password/views/forgot_password_view.dart';
 import 'package:maritimmuda_connect/app/modules/auth/register/bindings/register_binding.dart';
 import 'package:maritimmuda_connect/app/modules/auth/register/views/register_view.dart';
+import 'package:maritimmuda_connect/app/modules/auth/widget/header_auth.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_button.dart';
 import 'package:maritimmuda_connect/themes.dart';
@@ -22,23 +23,7 @@ class LoginView extends GetView<LoginController> {
           child: Center(
             child: Column(
               children: [
-                Container(
-                  height: 80,
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: neutral01Color,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    border: Border.all(color: neutral03Color, width: 1),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(13),
-                    child: Image.asset("assets/images/maritimmuda_connect.png"),
-                  ),
-                ),
+                const HeaderAuth(),
                 const SizedBox(height: 80),
                 Container(
                   width: double.infinity,
@@ -152,6 +137,8 @@ class LoginView extends GetView<LoginController> {
                           () {
                             if (controller.isCheckField.value) {
                               return CustomButton(
+                                text: "Login",
+                                isLoading: controller.isLoading.value,
                                 onPressed: () async {
                                   if (controller.validateForm()) {
                                     controller.login(
@@ -162,8 +149,6 @@ class LoginView extends GetView<LoginController> {
                                     );
                                   }
                                 },
-                                text: "Login",
-                                isLoading: controller.isLoading.value,
                               );
                             } else {
                               return CustomButton(

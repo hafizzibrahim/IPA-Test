@@ -69,13 +69,19 @@ class LoginController extends GetxController {
   void login(LoginRequest request) async {
     try {
       isLoading.value = true;
-      bool response = await AuthService().login(request);
-      if (response) {
+      int statusCode = await AuthService().login(request);
+
+      if (statusCode == 200) {
         Get.offAll(
           () => MainView(),
           binding: MainBinding(),
           transition: Transition.rightToLeft,
           duration: const Duration(milliseconds: 100),
+        );
+      } else if (statusCode == 400) {
+        customSnackbar(
+          "Login failed, your account is not verified please check your email",
+          secondaryRedColor,
         );
       } else {
         customSnackbar(

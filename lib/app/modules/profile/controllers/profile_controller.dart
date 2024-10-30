@@ -1,8 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:maritimmuda_connect/app/data/models/request/general_request.dart';
+import 'package:maritimmuda_connect/app/data/models/response/general_response.dart';
+import 'package:maritimmuda_connect/app/data/services/general_service.dart';
+import 'package:maritimmuda_connect/app/data/utils/province.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
+import 'package:maritimmuda_connect/themes.dart';
 
 class ProfileController extends GetxController {
   final emailController = TextEditingController();
@@ -18,13 +23,23 @@ class ProfileController extends GetxController {
   final residenceAddressController = TextEditingController();
   final bioController = TextEditingController();
 
-  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  final List<String> genderOptions = ["Choose your gender", 'Male', 'Female'];
+  final List<String> firstExpertise = [];
+  final List<String> secondExpertise = [];
   final Rx<File?> identityCardFile = Rx<File?>(null);
   final Rx<File?> studentCardFile = Rx<File?>(null);
-  Rx<String?> profileImagePath = Rx<String?>(null);
-
+  final Rx<File?> profileImageFile = Rx<File?>(null);
+  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   Rx<int?> selectedMonth = Rx<int?>(null);
   Rx<int?> selectedYear = Rx<int?>(null);
+  Map<String, int> expertiseMap = {};
+  int indexCounter = 0;
+  var selectedFirstExpertise = 0.obs;
+  var selectedSecondExpertise = 0.obs;
+  var generalData = GeneralResponse().obs;
+  var isLoading = false.obs;
+  var selectedGender = 1.obs;
+  var province = 1.obs;
 
   String get formattedDate {
     return selectedDate.value != null
@@ -32,9 +47,44 @@ class ProfileController extends GetxController {
         : '';
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchGeneral();
+  }
+
+  void setGender(String? value) {
+    if (value != null) {
+      selectedGender.value = genderOptions.indexOf(value);
+    }
+  }
+
+  void setFirstExpertise(String? value) {
+    if (value != null) {
+      selectedFirstExpertise.value = firstExpertise.indexOf(value);
+    }
+  }
+
+  void setSecondExpertise(String? value) {
+    if (value != null) {
+      selectedSecondExpertise.value = secondExpertise.indexOf(value);
+    }
+  }
+
+  void setIdentityCardFile(File file) {
+    identityCardFile.value = file;
+  }
+
+  void setStudentCardFile(File file) {
+    studentCardFile.value = file;
+  }
+
+  void setProfileImagePath(File file) {
+    profileImageFile.value = file;
+  }
+
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-
       context: context,
       initialDate: selectedDate.value ?? DateTime.now(),
       firstDate: DateTime(1900),
@@ -46,70 +96,81 @@ class ProfileController extends GetxController {
     }
   }
 
-  final List<String> genderOptions = ['Choose your gender','Male', 'Female'];
-  var selectedGender = ''.obs;
+  void expertiseMapping(GeneralResponse data) {
+    data.expertises?.forEach((id, expertise) {
+      if (!expertiseMap.containsKey(expertise)) {
+        expertiseMap[expertise] = indexCounter;
+        firstExpertise.add(expertise);
+        secondExpertise.add(expertise);
+        indexCounter++;
+      }
+    });
 
-  final List<String> firstExpertise = [
-    'Choose your first expertise',
-    'Arkeologi, Sejarah, dan Budaya Maritim',
-    'Bioteknologi, Biokimia, dan Pengolahan Produk Kelautan',
-    'Bisnis Kelautan dan Perikanan',
-    'Ekonomi Sumber Daya Kelautan',
-    'Geologi Kelautan',
-    'Hubungan Internasional dan Hukum Maritim',
-    'Keamanan Maritim',
-    'Kedokteran Kelautan',
-    'Kesehatan Masyarakat Pesisir',
-    'Klimatologi dan Meteorologi Kelautan',
-    'Komunikasi dan Sosiologi Maritim',
-    'Logistik dan Ekonomi Maritim',
-    'Manajemen Pesisir Terpadu dan Tata Kelola Laut',
-    'Olahraga Bahari',
-    'Oseanografi Biologi, Oseanografi Perikanan',
-    'Oseanografi Fisika, Pemodelan Laut',
-    'Oseanografi Kimia, Pencemaran Laut',
-    'Pariwisata Bahari',
-    'Pendidikan Kelautan dan Perikanan',
-    'Perikanan Budidaya',
-    'Perikanan Tangkap',
-    'Sistem Informasi, Penginderaan Jauh, dan Instrumentasi Kelautan',
-    'Teknik Kelautan, Energi Laut',
-    'Teknik Perkapalan, Sistem Perkapalan',
-    'Transportasi Laut dan Pelayaran',
-  ];
-  var selectedFirstExpertise = ''.obs;
+    if (data.user?.firstExpertiseId != null) {
+      var firstExpertiseId = data.user!.firstExpertiseId.toString();
+      selectedFirstExpertise.value =
+          expertiseMap[data.expertises?[firstExpertiseId] ?? ""] ?? 0;
+    }
+    if (data.user?.secondExpertiseId != null) {
+      var secondExpertiseId = data.user!.secondExpertiseId.toString();
+      selectedSecondExpertise.value =
+          expertiseMap[data.expertises?[secondExpertiseId] ?? ""]! + 1;
+    }
+  }
 
-  final List<String> secondExpertise = [
-    'Choose your second expertise',
-    'Arkeologi, Sejarah, dan Budaya Maritim',
-    'Bioteknologi, Biokimia, dan Pengolahan Produk Kelautan',
-    'Bisnis Kelautan dan Perikanan',
-    'Ekonomi Sumber Daya Kelautan',
-    'Geologi Kelautan',
-    'Hubungan Internasional dan Hukum Maritim',
-    'Keamanan Maritim',
-    'Kedokteran Kelautan',
-    'Kesehatan Masyarakat Pesisir',
-    'Klimatologi dan Meteorologi Kelautan',
-    'Komunikasi dan Sosiologi Maritim',
-    'Logistik dan Ekonomi Maritim',
-    'Manajemen Pesisir Terpadu dan Tata Kelola Laut',
-    'Olahraga Bahari',
-    'Oseanografi Biologi, Oseanografi Perikanan',
-    'Oseanografi Fisika, Pemodelan Laut',
-    'Oseanografi Kimia, Pencemaran Laut',
-    'Pariwisata Bahari',
-    'Pendidikan Kelautan dan Perikanan',
-    'Perikanan Budidaya',
-    'Perikanan Tangkap',
-    'Sistem Informasi, Penginderaan Jauh, dan Instrumentasi Kelautan',
-    'Teknik Kelautan, Energi Laut',
-    'Teknik Perkapalan, Sistem Perkapalan',
-    'Transportasi Laut dan Pelayaran',
-  ];
-  var selectedSecondExpertise = ''.obs;
+  void setAllController() {
+    emailController.text = generalData.value.user?.email ?? '';
+    // provincialOrgController.text =
+    //     provinceOptions[generalData.value.user?.provinceId ?? 1];
+    placeOfBirthController.text = generalData.value.user?.placeOfBirth ?? '';
+    dateOfBirthController.text = DateFormat('yyyy-MM-dd')
+        .format(DateTime.parse(generalData.value.user!.dateOfBirth.toString()));
+    linkedInController.text = generalData.value.user?.linkedinProfile ?? '';
+    instagramController.text = generalData.value.user?.instagramProfile ?? '';
+    addressController.text = generalData.value.user?.permanentAddress ?? '';
+    residenceAddressController.text =
+        generalData.value.user?.residenceAddress ?? '';
+    bioController.text = generalData.value.user?.bio ?? '';
+  }
 
+  Future<void> fetchGeneral() async {
+    try {
+      isLoading.value = true;
+      var data = await GeneralService().fetchGeneral();
+      generalData.value = data;
 
+      expertiseMapping(data);
+      setAllController();
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void updateGeneral(GeneralRequest request) async {
+    try {
+      isLoading.value = true;
+      bool success = await GeneralService().updateGeneral(request);
+
+      if (success) {
+        // customSnackbar("Profile updated successfully");
+        customSnackbar(
+          "Profile update failed, please check your input field",
+          secondaryRedColor,
+        );
+      } else {
+        customSnackbar(
+          "Profile update failed, please check your input field",
+          secondaryRedColor,
+        );
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   @override
   void onClose() {
@@ -129,60 +190,24 @@ class ProfileController extends GetxController {
   }
 
   void clearAll() {
-    emailController.clear();
-    genderController.clear();
-    provincialOrgController.clear();
-    placeOfBirthController.clear();
-    dateOfBirthController.clear();
-    linkedInController.clear();
-    instagramController.clear();
-    firstExpertiseController.clear();
-    secondExpertiseController.clear();
-    addressController.clear();
-    residenceAddressController.clear();
-    bioController.clear();
-
-    selectedGender.value = '';
-    selectedFirstExpertise.value = '';
-    selectedSecondExpertise.value = '';
-
-    selectedDate.value = null;
-
-    identityCardFile.value = null;
-    studentCardFile.value = null;
-    profileImagePath.value = null;
-  }
-
-  void setGender(String? gender) {
-    if (gender != null) {
-      selectedGender.value = gender;
-      genderController.text = gender;
-    }
-  }
-
-  void setFirstExpertise(String? firstExpertise) {
-    if (firstExpertise != null) {
-      selectedFirstExpertise.value = firstExpertise;
-      firstExpertiseController.text = firstExpertise;
-    }
-  }
-
-  void setSecondExpertise(String? secondExpertise) {
-    if (secondExpertise != null) {
-      selectedSecondExpertise.value = secondExpertise;
-      secondExpertiseController.text = secondExpertise;
-    }
-  }
-
-  void setIdentityCardFile(File file) {
-    identityCardFile.value = file;
-  }
-
-  void setStudentCardFile(File file) {
-    studentCardFile.value = file;
-  }
-
-  void setProfileImagePath(String path) {
-    profileImagePath.value = path;
+    // emailController.clear();
+    // genderController.clear();
+    // provincialOrgController.clear();
+    // placeOfBirthController.clear();
+    // dateOfBirthController.clear();
+    // linkedInController.clear();
+    // instagramController.clear();
+    // firstExpertiseController.clear();
+    // secondExpertiseController.clear();
+    // addressController.clear();
+    // residenceAddressController.clear();
+    // bioController.clear();
+    // selectedGender.value = 0;
+    // selectedFirstExpertise.value = 0;
+    // selectedSecondExpertise.value = 0;
+    // selectedDate.value = null;
+    // identityCardFile.value = null;
+    // studentCardFile.value = null;
+    // profileImagePath.value = null;
   }
 }

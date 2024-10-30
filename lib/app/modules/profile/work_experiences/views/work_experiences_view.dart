@@ -8,10 +8,9 @@ import '../../../widget/custom_snackbar.dart';
 import '../../../widget/custom_textfield.dart';
 import '../../../widget/profile_button.dart';
 import '../controllers/work_experiences_controller.dart';
-import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
 
 class WorkExperiencesView extends GetView<WorkExperiencesController> {
-  WorkExperiencesView({super.key});
+  const WorkExperiencesView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,35 +1,40 @@
+// To parse this JSON data, do
+//
+//     final memberResponse = memberResponseFromJson(jsonString);
+
 import 'dart:convert';
 
-LoginResponse loginResponseFromJson(String str) =>
-    LoginResponse.fromJson(json.decode(str));
+MemberResponse memberResponseFromJson(String str) =>
+    MemberResponse.fromJson(json.decode(str));
 
-String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
+String memberResponseToJson(MemberResponse data) => json.encode(data.toJson());
 
-class LoginResponse {
-  String? message;
-  User? user;
-  String? token;
+class MemberResponse {
+  bool? success;
+  List<Member>? members;
 
-  LoginResponse({
-    this.message,
-    this.user,
-    this.token,
+  MemberResponse({
+    this.success,
+    this.members,
   });
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-        message: json["message"],
-        user: User.fromJson(json["user"]),
-        token: json["token"],
+  factory MemberResponse.fromJson(Map<String, dynamic> json) => MemberResponse(
+        success: json["success"],
+        members: json["members"] == null
+            ? []
+            : List<Member>.from(
+                json["members"]!.map((x) => Member.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "message": message,
-        "user": user?.toJson(),
-        "token": token,
+        "success": success,
+        "members": members == null
+            ? []
+            : List<dynamic>.from(members!.map((x) => x.toJson())),
       };
 }
 
-class User {
+class Member {
   int? id;
   String? uuid;
   String? uid;
@@ -37,10 +42,10 @@ class User {
   String? name;
   int? gender;
   String? email;
-  dynamic locale;
   DateTime? emailVerifiedAt;
   String? placeOfBirth;
   DateTime? dateOfBirth;
+  String? locale;
   String? linkedinProfile;
   String? instagramProfile;
   int? provinceId;
@@ -51,7 +56,7 @@ class User {
   String? bio;
   int? isAdmin;
 
-  User({
+  Member({
     this.id,
     this.uuid,
     this.uid,
@@ -59,11 +64,11 @@ class User {
     this.name,
     this.gender,
     this.email,
-    this.locale,
     this.emailVerifiedAt,
     this.placeOfBirth,
     this.dateOfBirth,
     this.linkedinProfile,
+    this.locale,
     this.instagramProfile,
     this.provinceId,
     this.firstExpertiseId,
@@ -74,7 +79,7 @@ class User {
     this.isAdmin,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory Member.fromJson(Map<String, dynamic> json) => Member(
         id: json["id"],
         uuid: json["uuid"],
         uid: json["uid"],
@@ -82,14 +87,14 @@ class User {
         name: json["name"],
         gender: json["gender"],
         email: json["email"],
+        emailVerifiedAt: json["email_verified_at"] == null
+            ? null
+            : DateTime.parse(json["email_verified_at"]),
         locale: json["locale"],
-        emailVerifiedAt: json["email_verified_at"] != null
-            ? DateTime.parse(json["email_verified_at"])
-            : null,
         placeOfBirth: json["place_of_birth"],
-        dateOfBirth: json["date_of_birth"] != null
-            ? DateTime.parse(json["date_of_birth"])
-            : null,
+        dateOfBirth: json["date_of_birth"] == null
+            ? null
+            : DateTime.parse(json["date_of_birth"]),
         linkedinProfile: json["linkedin_profile"],
         instagramProfile: json["instagram_profile"],
         provinceId: json["province_id"],
@@ -109,9 +114,9 @@ class User {
         "name": name,
         "gender": gender,
         "email": email,
-        "locale": locale,
         "email_verified_at": emailVerifiedAt?.toIso8601String(),
         "place_of_birth": placeOfBirth,
+        "locale": locale,
         "date_of_birth": dateOfBirth?.toIso8601String(),
         "linkedin_profile": linkedinProfile,
         "instagram_profile": instagramProfile,

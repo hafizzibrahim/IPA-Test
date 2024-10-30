@@ -1,31 +1,37 @@
 import 'dart:convert';
 
-LoginResponse loginResponseFromJson(String str) =>
-    LoginResponse.fromJson(json.decode(str));
+GeneralResponse generalResponseFromJson(String str) =>
+    GeneralResponse.fromJson(json.decode(str));
 
-String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
+String generalResponseToJson(GeneralResponse data) =>
+    json.encode(data.toJson());
 
-class LoginResponse {
-  String? message;
+class GeneralResponse {
   User? user;
-  String? token;
+  Map<String, String>? provinces;
+  Map<String, String>? expertises;
 
-  LoginResponse({
-    this.message,
+  GeneralResponse({
     this.user,
-    this.token,
+    this.provinces,
+    this.expertises,
   });
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-        message: json["message"],
-        user: User.fromJson(json["user"]),
-        token: json["token"],
+  factory GeneralResponse.fromJson(Map<String, dynamic> json) =>
+      GeneralResponse(
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        provinces: Map.from(json["provinces"]!)
+            .map((k, v) => MapEntry<String, String>(k, v)),
+        expertises: Map.from(json["expertises"]!)
+            .map((k, v) => MapEntry<String, String>(k, v)),
       );
 
   Map<String, dynamic> toJson() => {
-        "message": message,
         "user": user?.toJson(),
-        "token": token,
+        "provinces":
+            Map.from(provinces!).map((k, v) => MapEntry<String, dynamic>(k, v)),
+        "expertises": Map.from(expertises!)
+            .map((k, v) => MapEntry<String, dynamic>(k, v)),
       };
 }
 
@@ -50,6 +56,8 @@ class User {
   String? residenceAddress;
   String? bio;
   int? isAdmin;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   User({
     this.id,
@@ -72,6 +80,8 @@ class User {
     this.residenceAddress,
     this.bio,
     this.isAdmin,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -83,13 +93,13 @@ class User {
         gender: json["gender"],
         email: json["email"],
         locale: json["locale"],
-        emailVerifiedAt: json["email_verified_at"] != null
-            ? DateTime.parse(json["email_verified_at"])
-            : null,
+        emailVerifiedAt: json["email_verified_at"] == null
+            ? null
+            : DateTime.parse(json["email_verified_at"]),
         placeOfBirth: json["place_of_birth"],
-        dateOfBirth: json["date_of_birth"] != null
-            ? DateTime.parse(json["date_of_birth"])
-            : null,
+        dateOfBirth: json["date_of_birth"] == null
+            ? null
+            : DateTime.parse(json["date_of_birth"]),
         linkedinProfile: json["linkedin_profile"],
         instagramProfile: json["instagram_profile"],
         provinceId: json["province_id"],
@@ -99,6 +109,12 @@ class User {
         residenceAddress: json["residence_address"],
         bio: json["bio"],
         isAdmin: json["is_admin"],
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -122,5 +138,7 @@ class User {
         "residence_address": residenceAddress,
         "bio": bio,
         "is_admin": isAdmin,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
       };
 }

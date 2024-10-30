@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences {
@@ -33,6 +31,21 @@ class UserPreferences {
   Future<String?> getUuid() async {
     final prefs = await _getPrefs();
     return prefs.getString('uuid');
+  }
+
+  Future<String?> getName() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('name');
+  }
+
+  Future<String?> getEmail() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('email');
+  }
+
+  Future<int?> getSerialNumber() async {
+    final prefs = await _getPrefs();
+    return prefs.getInt('serial_number');
   }
 
   Future<void> logout() async {
