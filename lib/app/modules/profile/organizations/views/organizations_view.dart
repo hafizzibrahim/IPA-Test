@@ -8,10 +8,9 @@ import '../../../widget/custom_dialog.dart';
 import '../../../widget/custom_snackbar.dart';
 import '../../../widget/custom_textfield.dart';
 import '../../../widget/profile_button.dart';
-import '../controllers/organizations_controller.dart';
 
 class OrganizationsView extends GetView<OrganizationsController> {
-  OrganizationsView({super.key});
+  const OrganizationsView({super.key});
 
   @override
   Widget build(BuildContext context) {
