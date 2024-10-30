@@ -68,6 +68,8 @@ class EducationsController extends GetxController {
         selectedMonth.value = month;
         selectedYear.value = year;
         gradController.text = formattedMonthYear;
+        selectedDate.value =
+            DateTime(selectedYear.value!, selectedMonth.value!);
       },
     );
   }

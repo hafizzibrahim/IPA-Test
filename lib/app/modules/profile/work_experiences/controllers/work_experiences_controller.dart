@@ -65,6 +65,8 @@ class WorkExperiencesController extends GetxController {
         selectedMonth.value = month;
         selectedYear.value = year;
         startDateController.text = formattedMonthYear;
+        selectedStartDate.value =
+            DateTime(selectedYear.value!, selectedMonth.value!);
       },
     );
   }
@@ -86,6 +88,8 @@ class WorkExperiencesController extends GetxController {
         selectedMonth.value = month;
         selectedYear.value = year;
         endDateController.text = formattedMonthYear;
+        selectedEndDate.value =
+            DateTime(selectedYear.value!, selectedMonth.value!);
       },
     );
   }

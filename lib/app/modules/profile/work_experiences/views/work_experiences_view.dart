@@ -160,7 +160,7 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                               title: activity.positionTitle!,
                               leftSubTitle: activity.companyName!,
                               startDate: activity.startDate != null ? controller.formatDate(activity.startDate) : 'N/A',
-                              endDate: activity.endDate != null ? controller.formatDate(activity.startDate) : 'N/A',
+                              endDate: activity.endDate != null ? controller.formatDate(activity.endDate) : 'N/A',
                               onTap1: () {
                                 controller.isEdit.value = true;
                                 controller.idCard.value = activity.id!;
