@@ -126,16 +126,16 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Obx(
-                          () => CustomDropdown(
-                            options: provinceOptions,
-                            selectedOption: provinceOptions[
-                                controller.selectedProvince.value - 1],
-                            onSelected: (String? value) {
-                              controller.setSelectedProvince(value);
-                            },
-                          ),
-                        ),
+                        // Obx(
+                        //   () => CustomDropdown(
+                        //     options: provinceOptions,
+                        //     selectedOption: provinceOptions[
+                        //         controller.selectedProvince.value - 1],
+                        //     onSelected: (String? value) {
+                        //       controller.setSelectedProvince(value);
+                        //     },
+                        //   ),
+                        // ),
                         const SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
