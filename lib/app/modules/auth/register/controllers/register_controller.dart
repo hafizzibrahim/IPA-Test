@@ -42,11 +42,11 @@ class RegisterController extends GetxController {
     }
   }
 
-  void setSelectedProvince(String? value) {
-    if (value != null) {
-      selectedProvince.value = provinceOptions.indexOf(value) + 1;
-    }
-  }
+  // void setSelectedProvince(String? value) {
+  //   if (value != null) {
+  //     selectedProvince.value = provinceOptions.indexOf(value) + 1;
+  //   }
+  // }
 
   void validateName(String value) {
     formKey.currentState!.validate();

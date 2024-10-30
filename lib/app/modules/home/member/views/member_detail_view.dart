@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:maritimmuda_connect/app/data/utils/expertise.dart';
+import 'package:maritimmuda_connect/app/data/utils/province.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 import '../../../../data/models/response/member_response.dart';
@@ -13,7 +16,10 @@ class MemberDetailView extends GetView<MemberController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: neutral02Color,
-      appBar: AppBar(scrolledUnderElevation: 0.0),
+      appBar: AppBar(
+        scrolledUnderElevation: 0.0,
+        backgroundColor: neutral02Color,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -45,16 +51,33 @@ class MemberDetailView extends GetView<MemberController> {
                                       "assets/images/paternkartu.png"))),
                         ),
                         const SizedBox(height: 50),
-                        Text("${memberList.name}", style: semiBoldText24),
+                        Text(
+                          "${memberList.name}",
+                          style: semiBoldText24,
+                          textAlign: TextAlign.center,
+                        ),
                         const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Jawa Timur", style: regulerText16),
+                            Flexible(
+                              child: Text(
+                                provinceOptions[
+                                    memberList.provinceId.toString()]!,
+                                style: regulerText16,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                             SizedBox(
                                 height: 20,
                                 child: VerticalDivider(color: neutral04Color)),
-                            Text("Joined March 2024", style: regulerText16),
+                            Flexible(
+                              child: Text(
+                                "Joined ${DateFormat('MMMM yyyy', 'id_ID').format(memberList.emailVerifiedAt!)}",
+                                style: regulerText16,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 6),
@@ -62,7 +85,7 @@ class MemberDetailView extends GetView<MemberController> {
                           padding: const EdgeInsets.only(
                               left: 63, top: 5, right: 63, bottom: 20),
                           child: Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            memberList.bio ?? "no bio yet",
                             style:
                                 regulerText10.copyWith(color: neutral04Color),
                             textAlign: TextAlign.center,
@@ -118,9 +141,14 @@ class MemberDetailView extends GetView<MemberController> {
                                     color: subTitleColor)),
                           ],
                         ),
-                        Text("test123@gmail.com",
+                        Flexible(
+                          child: Text(
+                            "${memberList.email}",
                             style:
-                                regulerText16.copyWith(color: neutral04Color))
+                                regulerText16.copyWith(color: neutral04Color),
+                            maxLines: 2,
+                          ),
+                        )
                       ],
                     ),
                     const SizedBox(height: 27),
@@ -134,33 +162,14 @@ class MemberDetailView extends GetView<MemberController> {
                               color: subTitleColor,
                             ),
                             const SizedBox(width: 7),
-                            Text("Email",
+                            Text("Joined",
                                 style: regulerText16.copyWith(
                                     color: subTitleColor)),
                           ],
                         ),
-                        Text("test123@gmail.com",
-                            style:
-                                regulerText16.copyWith(color: neutral04Color))
-                      ],
-                    ),
-                    const SizedBox(height: 27),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.email,
-                              color: subTitleColor,
-                            ),
-                            const SizedBox(width: 7),
-                            Text("Email",
-                                style: regulerText16.copyWith(
-                                    color: subTitleColor)),
-                          ],
-                        ),
-                        Text("test123@gmail.com",
+                        Text(
+                            DateFormat('MMMM yyyy', 'id_ID')
+                                .format(memberList.emailVerifiedAt!),
                             style:
                                 regulerText16.copyWith(color: neutral04Color))
                       ],
@@ -175,7 +184,9 @@ class MemberDetailView extends GetView<MemberController> {
                             style:
                                 mediumText16.copyWith(color: neutral04Color)),
                         Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            expertiseOptions[
+                                    memberList.firstExpertiseId.toString()] ??
+                                "Not set",
                             style: regulerText10.copyWith(color: subTitleColor))
                       ],
                     ),
@@ -187,7 +198,9 @@ class MemberDetailView extends GetView<MemberController> {
                             style:
                                 mediumText16.copyWith(color: neutral04Color)),
                         Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            expertiseOptions[
+                                    memberList.secondExpertiseId.toString()] ??
+                                "Not set",
                             style: regulerText10.copyWith(color: subTitleColor))
                       ],
                     ),

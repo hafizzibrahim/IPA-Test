@@ -45,7 +45,8 @@ class HomeView extends GetView<HomeController> {
                   height: 24,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                   decoration: BoxDecoration(
                     color: neutral01Color,
                     borderRadius: BorderRadius.circular(15),
@@ -54,7 +55,8 @@ class HomeView extends GetView<HomeController> {
                         color: neutral04Color.withOpacity(0.3), // Warna shadow
                         spreadRadius: 1, // Penyebaran shadow
                         blurRadius: 5, // Tingkat blur shadow
-                        offset: const Offset(3, 3), // Arah dan jarak shadow (x, y)
+                        offset:
+                            const Offset(3, 3), // Arah dan jarak shadow (x, y)
                       ),
                     ],
                   ),
@@ -173,8 +175,6 @@ class HomeView extends GetView<HomeController> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const ScholarshipView()));
-
-//                       Get.to(ScholarshipView());
                     },
                   ),
                 ),
