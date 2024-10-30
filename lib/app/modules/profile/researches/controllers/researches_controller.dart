@@ -23,6 +23,8 @@ class ResearchesController extends GetxController {
   Rx<int?> selectedYear = Rx<int?>(null);
 
   var isLoading = false.obs;
+  var isEdit = false.obs;
+  var idCard = 0.obs;
   var researcheLists = <ResearchesResponse>[].obs;
 
   String formatDate(DateTime? date) {
@@ -106,7 +108,7 @@ class ResearchesController extends GetxController {
     selectedEndDate.value = DateTime.parse(researcheData.endDate.toString());
   }
 
-  void fetchResearches() async {
+  Future<void> fetchResearches() async {
     try {
       isLoading.value = true;
       var data = await ResearchesService().fetchResearches();
@@ -143,7 +145,7 @@ class ResearchesController extends GetxController {
     }
   }
 
-  void updateResearche(ResearchesRequest request, String id) async {
+  void updateResearche(ResearchesRequest request, int id) async {
     try {
       isLoading.value = true;
       bool success = await ResearchesService().updateResearche(request, id);

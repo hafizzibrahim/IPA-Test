@@ -133,7 +133,7 @@ class ProfileController extends GetxController {
     bioController.text = generalData.value.user?.bio ?? '';
   }
 
-  void fetchGeneral() async {
+  Future<void> fetchGeneral() async {
     try {
       isLoading.value = true;
       var data = await GeneralService().fetchGeneral();
