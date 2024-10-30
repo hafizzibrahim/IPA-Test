@@ -120,8 +120,8 @@ class ProfileController extends GetxController {
 
   void setAllController() {
     emailController.text = generalData.value.user?.email ?? '';
-    provincialOrgController.text =
-        provinceOptions[generalData.value.user?.provinceId ?? 1];
+    // provincialOrgController.text =
+    //     provinceOptions[generalData.value.user?.provinceId ?? 1];
     placeOfBirthController.text = generalData.value.user?.placeOfBirth ?? '';
     dateOfBirthController.text = DateFormat('yyyy-MM-dd')
         .format(DateTime.parse(generalData.value.user!.dateOfBirth.toString()));
