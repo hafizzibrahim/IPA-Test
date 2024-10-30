@@ -108,20 +108,42 @@ class ResearchesView extends GetView<ResearchesController> {
                           ),
                           onTap: () {
                             if (controller.validateForm()) {
-                              controller.createResearche(
-                                ResearchesRequest(
-                                  name: controller.researchTitleC.text,
-                                  role: controller.roleC.text,
-                                  institutionName: controller.affiliationC.text,
-                                  sponsorName: controller.sponsorC.text,
-                                  startDate: controller.formatDateRequest(
-                                      controller.selectedStartDate.value ??
-                                          DateTime.now()),
-                                  endDate: controller.formatDateRequest(
-                                      controller.selectedEndDate.value ??
-                                          DateTime.now()),
-                                ),
-                              );
+                              if (controller.isEdit.value) {
+                                controller.updateResearche(
+                                  ResearchesRequest(
+                                    name: controller.researchTitleC.text,
+                                    role: controller.roleC.text,
+                                    institutionName:
+                                        controller.affiliationC.text,
+                                    sponsorName: controller.sponsorC.text,
+                                    startDate: controller.formatDateRequest(
+                                        controller.selectedStartDate.value ??
+                                            DateTime.now()),
+                                    endDate: controller.formatDateRequest(
+                                        controller.selectedEndDate.value ??
+                                            DateTime.now()),
+                                  ),
+                                  controller.idCard.value,
+                                );
+                                controller.isEdit.value = false;
+                                controller.idCard.value = 0;
+                              } else {
+                                controller.createResearche(
+                                  ResearchesRequest(
+                                    name: controller.researchTitleC.text,
+                                    role: controller.roleC.text,
+                                    institutionName:
+                                        controller.affiliationC.text,
+                                    sponsorName: controller.sponsorC.text,
+                                    startDate: controller.formatDateRequest(
+                                        controller.selectedStartDate.value ??
+                                            DateTime.now()),
+                                    endDate: controller.formatDateRequest(
+                                        controller.selectedEndDate.value ??
+                                            DateTime.now()),
+                                  ),
+                                );
+                              }
                             }
                           },
                         ),
@@ -180,6 +202,9 @@ class ResearchesView extends GetView<ResearchesController> {
                                     endDate: controller
                                         .formatDate(researcheData.endDate),
                                     onTap1: () {
+                                      controller.isEdit.value = true;
+                                      controller.idCard.value =
+                                          researcheData.id ?? 0;
                                       controller.patchField(researcheData);
                                     },
                                     onTap2: () {

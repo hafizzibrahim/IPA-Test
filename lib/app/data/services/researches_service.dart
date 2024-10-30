@@ -38,7 +38,7 @@ class ResearchesService {
     }
   }
 
-  Future<bool> updateResearche(ResearchesRequest request, String id) async {
+  Future<bool> updateResearche(ResearchesRequest request, int id) async {
     String? token = await UserPreferences().getToken();
 
     final response = await http.patch(
