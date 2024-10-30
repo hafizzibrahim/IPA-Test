@@ -38,7 +38,12 @@ class UserPreferences {
     return prefs.getString('name');
   }
 
-    Future<int?> getSerialNumber() async {
+  Future<String?> getEmail() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('email');
+  }
+
+  Future<int?> getSerialNumber() async {
     final prefs = await _getPrefs();
     return prefs.getInt('serial_number');
   }
