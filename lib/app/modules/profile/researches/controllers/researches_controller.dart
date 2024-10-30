@@ -108,7 +108,7 @@ class ResearchesController extends GetxController {
     selectedEndDate.value = DateTime.parse(researcheData.endDate.toString());
   }
 
-  void fetchResearches() async {
+  Future<void> fetchResearches() async {
     try {
       isLoading.value = true;
       var data = await ResearchesService().fetchResearches();
