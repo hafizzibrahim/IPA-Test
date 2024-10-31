@@ -16,6 +16,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.maxLines,
     this.readOnly,
+    this.inputAction,
   });
 
   final TextEditingController controller;
@@ -29,6 +30,7 @@ class CustomTextField extends StatelessWidget {
   final void Function(String)? onChanged;
   final int? maxLines;
   final bool? readOnly;
+  final TextInputAction? inputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class CustomTextField extends StatelessWidget {
       onChanged: onChanged,
       cursorHeight: 15,
       readOnly: readOnly ?? false,
+      textInputAction: inputAction,
       style: regulerText12,
       decoration: InputDecoration(
         filled: true,
