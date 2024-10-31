@@ -254,6 +254,7 @@ class EducationsController extends GetxController {
     if (level != null) {
       selectedLevel.value = level;
       levelController.text = level;
+      print(selectedLevel.value);
     }
   }
 }
