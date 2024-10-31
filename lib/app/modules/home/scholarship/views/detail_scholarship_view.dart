@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:maritimmuda_connect/app/data/models/scholarship_data.dart';
@@ -7,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DetailScholarshipView extends StatelessWidget {
   final ScholarshipData scholarshipData;
-  const DetailScholarshipView ({Key? key, required this.scholarshipData}): super (key: key);
-
+  const DetailScholarshipView({Key? key, required this.scholarshipData})
+      : super(key: key);
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
@@ -17,24 +16,23 @@ class DetailScholarshipView extends StatelessWidget {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: neutral02Color,
       appBar: AppBar(
-        title: Text('Detail Scholarship', style: boldText24,),
-        centerTitle:true,
+        title: Text(
+          'Detail Scholarship',
+          style: boldText24,
+        ),
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          const FavoriteButton()
-        ],
+        actions: [const FavoriteButton()],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -47,7 +45,6 @@ class DetailScholarshipView extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
-
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -56,7 +53,6 @@ class DetailScholarshipView extends StatelessWidget {
                 style: boldText24,
               ),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
@@ -64,7 +60,6 @@ class DetailScholarshipView extends StatelessWidget {
                 style: regulerText14,
               ),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
@@ -72,15 +67,12 @@ class DetailScholarshipView extends StatelessWidget {
                 'Penyelenggara',
               ),
             ),
-
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, ),
-              child: Text(
-                  style: regulerText14,
-                  scholarshipData.organizer!
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.0,
               ),
+              child: Text(style: regulerText14, scholarshipData.organizer!),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
@@ -88,71 +80,48 @@ class DetailScholarshipView extends StatelessWidget {
                 'Benefit',
               ),
             ),
-
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, ),
-              child: Text(
-                  style: regulerText14,
-                  scholarshipData.benefit!
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.0,
               ),
+              child: Text(style: regulerText14, scholarshipData.benefit!),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
                   style: boldText16,
                   textAlign: TextAlign.start,
-                  'Tanggal Penting'
-              ),
+                  'Tanggal Penting'),
             ),
-
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, ),
-              child: Text(
-                  style:regulerText14,
-                  scholarshipData.timeline!
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.0,
               ),
+              child: Text(style: regulerText14, scholarshipData.timeline!),
             ),
-
-
             Padding(
               padding: EdgeInsets.all(16.0),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
-                      backgroundColor: Color(0xFF086C9E)
-                  ),
+                      backgroundColor: Color(0xFF086C9E)),
                   child: Text(
                       style: TextStyle(fontSize: 16.0, color: Colors.white),
-                      'Daftar'
-                  ),
+                      'Daftar'),
                   onPressed: () {
                     _launchURL(scholarshipData.url!);
                   },
-
                 ),
               ),
             )
-
-
-
-
-
-
-
           ],
         ),
       ),
     );
   }
-
-
 }
-
-
 
 class FavoriteButton extends StatefulWidget {
   const FavoriteButton({Key? key}) : super(key: key);
@@ -161,9 +130,7 @@ class FavoriteButton extends StatefulWidget {
   _FavoriteButtonState createState() => _FavoriteButtonState();
 }
 
-
 class _FavoriteButtonState extends State<FavoriteButton> {
-
   bool isFavorite = false;
 
   @override
@@ -174,12 +141,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
             isFavorite = !isFavorite;
           });
         },
-        icon:
-        Icon(
-            isFavorite? Icons.favorite : Icons.favorite_border,
-            color: Colors.red
-        )
-    );
+        icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: Colors.red));
   }
-
 }

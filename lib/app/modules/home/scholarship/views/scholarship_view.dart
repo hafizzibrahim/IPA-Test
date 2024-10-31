@@ -90,9 +90,9 @@ class ScholarshipView extends GetView<ScholarshipController> {
                       date: scholarship.date,
                       textTitle: scholarship.title,
                       textSubTitle: scholarship.description!,
-                      views: scholarship.views,
-                      likes: scholarship.likes,
-                      send: scholarship.send,
+                      // views: scholarship.views,
+                      // likes: scholarship.likes,
+                      // send: scholarship.send,
                     ),
                   ),
                 );

@@ -34,7 +34,7 @@ class EventView extends GetView<EventController> {
               color: primaryBlueColor,
               child: Padding(
                 padding: EdgeInsets.all(30.0),
-                child: SearchbarWidget(),
+                child: SearchbarEventWidget(),
               ),
             ),
 
