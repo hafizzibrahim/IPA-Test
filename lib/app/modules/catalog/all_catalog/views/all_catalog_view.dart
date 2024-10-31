@@ -8,8 +8,10 @@ class AllCatalogView extends GetView<AllCatalogController> {
   const AllCatalogView({super.key});
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      separatorBuilder: (context, index) => const SizedBox(height: 5),
       itemCount: 4,
       itemBuilder: (context, index) {
         return CatalogCard(
