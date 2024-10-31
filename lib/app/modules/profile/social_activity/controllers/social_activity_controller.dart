@@ -107,7 +107,7 @@ class SocialActivityController extends GetxController {
     selectedEndDate.value = DateTime.parse(socialActivityData.endDate.toString());
   }
 
-  void fetchSocialActivity() async {
+  Future <void> fetchSocialActivity() async {
     try{
       isLoading.value = true;
       var data = await SocialActivityService().fetchSocialActivity();
