@@ -38,7 +38,7 @@ class EducationsController extends GetxController {
   }
 
   String formatDateRequest(DateTime date) {
-    return DateFormat('yyyy-MM').format(date);
+    return DateFormat('yyyy-MM-dd').format(date);
   }
 
   @override
@@ -148,7 +148,7 @@ class EducationsController extends GetxController {
   ];
   var selectedLevel = ''.obs;
 
-  void fetchEducations() async {
+  Future<void> fetchEducations() async {
     try {
       isLoading.value = true;
       var data = await EducationsService().fetchEducations();
