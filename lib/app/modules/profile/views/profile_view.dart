@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maritimmuda_connect/app/data/models/request/general_request.dart';
 import 'package:maritimmuda_connect/app/data/utils/expertises.dart';
+import 'package:maritimmuda_connect/app/data/utils/user_preference.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../../widget/custom_dialog.dart';
@@ -11,7 +13,6 @@ import '../../widget/custom_dropdown.dart';
 import '../../widget/profile_button.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import 'dart:io';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
@@ -95,8 +96,6 @@ class ProfileView extends GetView<ProfileController> {
                             if (result != null) {
                               controller.setIdentityCardFile(
                                   File(result.files.single.path!));
-                            } else {
-                              print('User canceled the picker');
                             }
                           },
                           child: Container(
@@ -138,8 +137,6 @@ class ProfileView extends GetView<ProfileController> {
                             if (result != null) {
                               controller.setStudentCardFile(
                                   File(result.files.single.path!));
-                            } else {
-                              print('User canceled the picker');
                             }
                           },
                           child: Container(
@@ -290,10 +287,12 @@ class ProfileView extends GetView<ProfileController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ProfileButton(
-                            onTap: () {
+                            onTap: () async {
+                              String? name = await UserPreferences().getName();
+
                               controller.updateGeneral(
                                 GeneralRequest(
-                                  name: controller.emailController.text,
+                                  name: name ?? "",
                                   linkedinProfile:
                                       controller.linkedInController.text,
                                   instagramProfile:
@@ -341,7 +340,6 @@ class ProfileView extends GetView<ProfileController> {
                               content:
                                   'Are you sure you want to clear all data entered?',
                               onConfirm: () {
-                                controller.clearAll();
                                 Get.back();
                                 customSnackbar("All data has been cleared");
                               },
