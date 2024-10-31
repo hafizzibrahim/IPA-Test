@@ -180,25 +180,38 @@ class EducationsView extends GetView<EducationsController> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Obx(() => Column(
-                      children: controller.educationList.map((activity) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: ProfileCard(
-                            title: activity.institutionName!,
-                            leftSubTitle: activity.major!,
-                            startDate: activity.graduationDate != null ? controller.formatDate(activity.graduationDate) : 'N/A',
-                            onTap1: () {
-                              controller.isEdit.value = true;
-                              controller.idCard.value = activity.id!;
-                              controller.patchField(activity);
-                            },
-                            onTap2: () => controller.deleteEducations(activity.id!),
-                            onTap3: () {},
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return Center(
+                          child: SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: CircularProgressIndicator(color: primaryDarkBlueColor),
                           ),
                         );
-                      }).toList(),
-                    )),
+                      } else if (controller.educationList.isEmpty) {
+                        return const SizedBox.shrink();
+                      }
+                      return Column(
+                        children: controller.educationList.map((activity) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: ProfileCard(
+                              title: activity.institutionName ?? '',
+                              leftSubTitle: activity.major ?? '',
+                              startDate: activity.graduationDate != null ? controller.formatDate(activity.graduationDate) : 'N/A',
+                              onTap1: () {
+                                controller.isEdit.value = true;
+                                controller.idCard.value = activity.id ?? 0;
+                                controller.patchField(activity);
+                              },
+                              onTap2: () => controller.deleteEducations(activity.id ?? 0),
+                              onTap3: () {},
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    }),
                   ],
                 ),
               ),
