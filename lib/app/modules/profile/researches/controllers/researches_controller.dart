@@ -127,7 +127,7 @@ class ResearchesController extends GetxController {
       bool success = await ResearchesService().createResearche(request);
 
       if (success) {
-        fetchResearches();
+        await fetchResearches();
         clearAll();
         customSnackbar(
           'Success adding research history!',
@@ -151,7 +151,7 @@ class ResearchesController extends GetxController {
       bool success = await ResearchesService().updateResearche(request, id);
 
       if (success) {
-        fetchResearches();
+        await fetchResearches();
         clearAll();
         customSnackbar(
           'Success update research history!',
@@ -175,15 +175,15 @@ class ResearchesController extends GetxController {
       bool success = await ResearchesService().deleteResearche(id);
 
       if (success) {
-        fetchResearches();
+        await fetchResearches();
         customSnackbar(
-          'Success delete research history!',
+          'Success delete research!',
           null,
           const Duration(milliseconds: 800),
         );
       } else {
         customSnackbar(
-          'Failed delete research history!',
+          'Failed delete research!',
           secondaryRedColor,
         );
       }
