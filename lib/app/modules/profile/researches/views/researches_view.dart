@@ -165,6 +165,7 @@ class ResearchesView extends GetView<ResearchesController> {
                                     'Are you sure you want to clear all data entered?',
                                 onConfirm: () {
                                   controller.clearAll();
+                                  controller.isEdit.value = false;
                                   Get.back();
                                   customSnackbar(
                                       'All data has been deleted successfully');

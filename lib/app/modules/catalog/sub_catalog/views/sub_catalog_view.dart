@@ -8,27 +8,22 @@ class SubCatalogView extends GetView<SubCatalogController> {
   const SubCatalogView({super.key});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        separatorBuilder: (context, index) => const SizedBox(height: 5),
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return ListCatalog(
-            onTap: () {
-              Get.to(() => const DetailCatalogView());
-            },
-            image: "assets/images/catalog_image.jpeg",
-            category: "Electronics",
-            company: "Fajar Elektronik",
-            desc:
-                "Menyediakan peralatan-peralatan elektronik mutakhir dan terbaik",
-            time: "2 days ago",
-          );
-        },
-      ),
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      itemCount: 5,
+      itemBuilder: (context, index) {
+        return ListCatalog(
+          onTap: () {
+            Get.to(() => const DetailCatalogView());
+          },
+          image: "assets/images/catalog_image.jpeg",
+          category: "Electronics",
+          company: "Fajar Elektronik",
+          desc:
+              "Menyediakan peralatan-peralatan elektronik mutakhir dan terbaik",
+          time: "2 days ago",
+        );
+      },
     );
   }
 }
