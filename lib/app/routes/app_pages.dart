@@ -111,7 +111,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EVENT,
-      page: () => EventView(categoryList),
+      page: () => EventView(),
       binding: EventBinding(),
     ),
     GetPage(

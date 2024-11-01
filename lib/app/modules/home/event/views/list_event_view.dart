@@ -16,8 +16,7 @@ class ListEventView extends GetView<EventController> {
   @override
   Widget build(BuildContext context) {
     // Get.put(EventController());
-    return Expanded(
-        child: Padding(
+    return Padding(
           padding: EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
           // child:Expanded(
           child: Obx(() {
@@ -37,7 +36,7 @@ class ListEventView extends GetView<EventController> {
             } else {
               return ListView.builder(
                 shrinkWrap: true,
-                // physics: NeverScrollableScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 // scrollDirection: Axis.vertical,
                 itemCount: controller.filterEventList.length,
                 itemBuilder: (context, index) {
@@ -75,7 +74,7 @@ class ListEventView extends GetView<EventController> {
           }),
 
 
-        ));
+        );
   }
 }
 

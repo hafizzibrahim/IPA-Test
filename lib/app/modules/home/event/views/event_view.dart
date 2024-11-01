@@ -8,9 +8,8 @@ import '../../../../data/models/category_data.dart';
 import '../controllers/event_controller.dart';
 
 class EventView extends GetView<EventController> {
-  final CategoryData category;
 
-  const EventView(this.category, {super.key});
+  const EventView( {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

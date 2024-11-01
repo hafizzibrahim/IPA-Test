@@ -82,20 +82,16 @@ class EventController extends GetxController
   void searchEvents(String query) {
     searchQuery.value = query;
     // applyFilters();
-
-
     var tempList = List<Event>.from(eventsList);
 
     if (searchQuery.value.isNotEmpty) {
-
       tempList = tempList.where((event) {
-        final nameMatch = event.name?.toLowerCase()
-                .contains(searchQuery.value.toLowerCase()) ??
-            false;
-        final organizerMatch = event.organizerName
-                ?.toLowerCase()
-                .contains(searchQuery.value.toLowerCase()) ??
-            false;
+        final nameMatch = event.name?.toLowerCase().contains(
+            searchQuery.value.toLowerCase()
+        ) ?? false;
+        final organizerMatch = event.organizerName?.toLowerCase().contains(
+            searchQuery.value.toLowerCase()
+        ) ?? false;
         return nameMatch || organizerMatch;
       }).toList();
     }
@@ -127,21 +123,5 @@ class EventController extends GetxController
     super.onClose();
   }
 
-// final count = 0.obs;
-//   @override
-//   void onInit() {
-//     super.onInit();
-//   }
-//
-//   @override
-//   void onReady() {
-//     super.onReady();
-//   }
-//
-//   @override
-//   void onClose() {
-//     super.onClose();
-//   }
-//
-//   void increment() => count.value++;
+
 }

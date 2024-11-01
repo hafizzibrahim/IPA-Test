@@ -4,7 +4,7 @@ import 'package:maritimmuda_connect/app/data/utils/user_preference.dart';
 import 'package:http/http.dart' as http;
 
 class EventService {
-  // Future<EventResponse> getAllEvents() async {
+
   Future<List<Event>> getAllEvents() async {
     String? token = await UserPreferences().getToken();
     print(token);

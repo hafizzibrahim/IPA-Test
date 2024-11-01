@@ -1,44 +1,14 @@
 import 'dart:convert';
 
-// EventResponse eventResponseFromJson(String str) =>
-//     EventResponse.fromJson(json.decode(str));
+
 
 List<Event> eventResponseFromJson(String str) =>
     List<Event>.from(json.decode(str).map((x) => Event.fromJson(x)));
 
-// String eventResponseToJson(EventResponse data) => json.encode(data.toJson());
+
 String eventResponseToJson(List<Event> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-// class EventResponse {
-//   List<Event>? events;
-//
-//   EventResponse({
-//     this.events,
-//   });
-//
-//   // factory EventResponse.fromJson(Map<String, dynamic> json) => EventResponse(
-//   //       events: json['events'] == null
-//   //           ? []
-//   //           : List<Event>.from(json["events"].map((x) => Event.fromJson(x))),
-//   //     );
-//   //
-//   // Map<String, dynamic> toJson() => {
-//   //       "events": events == null
-//   //           ? []
-//   //           : List<dynamic>.from(events!.map((x) => x.toJson())),
-//   //     };
-//
-//   factory EventResponse.fromJson(String str) => EventResponse(
-//     events: List<Event>.from(
-//         json.decode(str).map((x) => Event.fromJson(x))),
-//   );
-//
-//
-//
-//   String toJson() => json.encode(List<dynamic>.from(events!.map((x) => x.toJson())));
-//
-// }
 
 class Event {
   int? id;

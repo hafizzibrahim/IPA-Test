@@ -16,8 +16,6 @@ class CategoryEvent extends GetView<EventController> {
   Widget build(BuildContext context) {
     return  Padding(
       padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
-      // child:Expanded(
-
       child: Obx(() {
         if (controller.isLoading.value) {
           return Expanded(
@@ -35,7 +33,7 @@ class CategoryEvent extends GetView<EventController> {
         } else {
           return ListView.builder(
             shrinkWrap: true,
-            // physics: NeverScrollableScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             // scrollDirection: Axis.vertical,
             itemCount: controller.sortedEventList.length,
             itemBuilder: (context, index) {
