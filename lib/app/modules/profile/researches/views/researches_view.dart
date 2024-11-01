@@ -192,52 +192,52 @@ class ResearchesView extends GetView<ResearchesController> {
                           } else if (controller.researcheLists.isEmpty) {
                             return const SizedBox.shrink();
                           } else {
-                            return SizedBox(
-                              height: 270,
-                              child: ListView.builder(
-                                itemCount: controller.researcheLists.length,
-                                itemBuilder: (context, index) {
-                                  final researcheData =
-                                      controller.researcheLists[index];
-                                  return Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 16.0),
-                                    child: ProfileCard(
-                                      title: researcheData.name ?? '',
-                                      rightTitle: researcheData.role ?? '',
-                                      leftSubTitle:
-                                          researcheData.institutionName ?? '',
-                                      rightSubTitle:
-                                          researcheData.sponsorName ?? '',
-                                      startDate: controller
-                                          .formatDate(researcheData.startDate),
-                                      endDate: controller
-                                          .formatDate(researcheData.endDate),
-                                      onTap1: () {
-                                        controller.isEdit.value = true;
-                                        controller.idCard.value =
-                                            researcheData.id ?? 0;
-                                        controller.patchField(researcheData);
-                                      },
-                                      onTap2: () {
-                                        showCustomDialog(
-                                          content:
-                                              'Are you sure you want to delete this data?',
-                                          onConfirm: () {
-                                            controller.deleteResearche(
-                                                researcheData.id ?? 0);
-                                            Get.back();
-                                          },
-                                          onCancel: () {
-                                            Get.back();
-                                          },
-                                        );
-                                      },
-                                      onTap3: () {},
-                                    ),
-                                  );
-                                },
-                              ),
+                            return ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 5),
+                              itemCount: controller.researcheLists.length,
+                              itemBuilder: (context, index) {
+                                final researcheData =
+                                    controller.researcheLists[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: ProfileCard(
+                                    title: researcheData.name ?? '',
+                                    rightTitle: researcheData.role ?? '',
+                                    leftSubTitle:
+                                        researcheData.institutionName ?? '',
+                                    rightSubTitle:
+                                        researcheData.sponsorName ?? '',
+                                    startDate: controller
+                                        .formatDate(researcheData.startDate),
+                                    endDate: controller
+                                        .formatDate(researcheData.endDate),
+                                    onTap1: () {
+                                      controller.isEdit.value = true;
+                                      controller.idCard.value =
+                                          researcheData.id ?? 0;
+                                      controller.patchField(researcheData);
+                                    },
+                                    onTap2: () {
+                                      showCustomDialog(
+                                        content:
+                                            'Are you sure you want to delete this data?',
+                                        onConfirm: () {
+                                          controller.deleteResearche(
+                                              researcheData.id ?? 0);
+                                          Get.back();
+                                        },
+                                        onCancel: () {
+                                          Get.back();
+                                        },
+                                      );
+                                    },
+                                    onTap3: () {},
+                                  ),
+                                );
+                              },
                             );
                           }
                         },
@@ -246,7 +246,7 @@ class ResearchesView extends GetView<ResearchesController> {
                   ),
                 ),
               ),
-              const SizedBox(height: 100)
+              const SizedBox(height: 50)
             ],
           ),
         ),
