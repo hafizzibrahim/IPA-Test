@@ -23,9 +23,12 @@ class AuthService {
       String uuid = loginResponseFromJson(response.body).user!.uuid!;
       String name = loginResponseFromJson(response.body).user!.name!;
       String email = loginResponseFromJson(response.body).user!.email!;
+      String placeOfBirth = loginResponseFromJson(response.body).user!.placeOfBirth!;
+      String bio = loginResponseFromJson(response.body).user!.bio ?? "No bio yet";
+      DateTime emailVerifiedAt = loginResponseFromJson(response.body).user!.emailVerifiedAt!;
       int serialNumber =
           loginResponseFromJson(response.body).user?.serialNumber ?? 0;
-      
+
       await prefs.setString("token", token);
       await prefs.setString("userId", userId.toString());
       await prefs.setString("uid", uid);
@@ -33,6 +36,10 @@ class AuthService {
       await prefs.setString("name", name);
       await prefs.setInt("serial_number", serialNumber);
       await prefs.setString("email", email);
+      await prefs.setString("place_of_birth", placeOfBirth);
+      await prefs.setString("bio", bio);
+      await prefs.setString("created_at", emailVerifiedAt.toIso8601String());
+
       return 200;
     } else {
       return response.statusCode;
