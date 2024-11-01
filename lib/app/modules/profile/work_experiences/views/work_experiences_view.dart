@@ -189,7 +189,18 @@ class WorkExperiencesView extends GetView<WorkExperiencesController> {
                                     controller.idCard.value = activity.id!;
                                     controller.patchField(activity);
                                   },
-                                  onTap2: () => controller.deleteWorkExperience(activity.id!),
+                                  onTap2: () {
+                                    showCustomDialog(
+                                        content: 'Are you sure you want to delete this data?',
+                                        onConfirm: () {
+                                          controller.deleteWorkExperience(activity.id ?? 0);
+                                          Get.back();
+                                        },
+                                        onCancel: () {
+                                          Get.back();
+                                        }
+                                    );
+                                  },
                                   onTap3: () {},
                                 );
                               },
