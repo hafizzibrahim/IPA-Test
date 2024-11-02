@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:maritimmuda_connect/app/data/models/response/event_response.dart';
 import 'package:maritimmuda_connect/app/modules/home/event/controllers/event_controller.dart';
-
 import '../../../../../themes.dart';
 import '../../../../data/models/event_data.dart';
 import '../../../widget/program_card.dart';
 import 'detail_event_view.dart';
+
 
 class ListEventView extends GetView<EventController> {
   const ListEventView({super.key});
@@ -62,6 +63,9 @@ class ListEventView extends GetView<EventController> {
                         date: startDate ,
                         textTitle: event.name,
                         textSubTitle: "Kocak ga ada deskripsi nya",
+                        onShare: () {
+                          Share.share("Check this out: \n${event.externalUrl ?? "Sorry, this event does not have a URL available!"}" , subject: "Event Url");
+                        },
                         // views: event.views,
                         // likes: event.likes,
                         // send: event.send,

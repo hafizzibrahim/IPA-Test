@@ -18,6 +18,7 @@ class MemberView extends GetView<MemberController> {
 
     return Scaffold(
       backgroundColor: neutral02Color,
+
       // endDrawer: SafeArea(child: FilterDrawer(controller.memberList)),
       endDrawer: const SafeArea(child: FilterDrawer()),
       appBar: AppBar(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:maritimmuda_connect/app/data/models/scholarship_data.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../../themes.dart';
 import '../../../widget/program_card.dart';
@@ -84,6 +85,9 @@ class ScholarshipView extends GetView<ScholarshipController> {
                               date: startDate,
                               textTitle: scholarship.name,
                               textSubTitle: scholarship.providerName,
+                              onShare: () {
+                                Share.share("Check this out: \n${scholarship.registrationLink ?? "Sorry, this scholarship does not have a URL available!"}" , subject: "Scholarship Url");
+                              },
                               // views: scholarship.views,
                               // likes: scholarship.likes,
                               // send: scholarship.send,

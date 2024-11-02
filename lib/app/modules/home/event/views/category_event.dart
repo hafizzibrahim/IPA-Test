@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:maritimmuda_connect/app/modules/home/event/controllers/event_controller.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../../themes.dart';
 import '../../../../data/models/event_data.dart';
@@ -58,6 +59,9 @@ class CategoryEvent extends GetView<EventController> {
                     date: startDate,
                     textTitle: event.name,
                     textSubTitle: "Kocak ga ada deskripsi nya wkwk",
+                    onShare: () {
+                      Share.share("Check this out: \n${event.externalUrl ?? "Sorry, this event does not have a URL available!"}" , subject: "Event Url");
+                    },
                     // views: event.views,
                     // likes: event.likes,
                     // send: event.send,

@@ -9,6 +9,7 @@ class ProgramCard extends StatelessWidget {
     this.date,
     this.textTitle,
     this.textSubTitle,
+    this.onShare,
     // this.views,
     // this.likes,
     // this.send,
@@ -18,6 +19,7 @@ class ProgramCard extends StatelessWidget {
   final String? date;
   final String? textTitle;
   final String? textSubTitle;
+  final VoidCallback? onShare;
   // final String? views;
   // final String? likes;
   // final String? send;
@@ -94,15 +96,13 @@ class ProgramCard extends StatelessWidget {
                   //     )
                   //   ],
                   // ),
-                  Row(
-                    children: [
-                      Icon(Icons.send, color: primaryDarkBlueColor),
-                      const SizedBox(width: 4),
+                  IconButton(
+                      icon: Icon(Icons.send, color: primaryDarkBlueColor),
+                      onPressed: onShare,
                       // Text(
                       //   send!,
                       //   style: regulerText10,
                       // )
-                    ],
                   ),
                 ],
               )
