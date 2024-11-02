@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:maritimmuda_connect/app/data/models/scholarship_data.dart';
 import 'package:maritimmuda_connect/app/modules/home/scholarship/controllers/scholarship_controller.dart';
 import 'package:maritimmuda_connect/themes.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../data/models/response/scholarship_response.dart';
@@ -39,7 +40,12 @@ class DetailScholarshipView extends GetView<ScholarshipController> {
             Navigator.pop(context);
           },
         ),
-        actions: [const FavoriteButton()],
+        actions: [IconButton(
+            icon: Icon(Icons.send, color: primaryDarkBlueColor,),
+            onPressed: () {
+              Share.share("Check this out: \n${scholarshipData.registrationLink ?? "Sorry, this scholarship does not have a URL available!"}" , subject: "Scholarship Url");
+            }),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
