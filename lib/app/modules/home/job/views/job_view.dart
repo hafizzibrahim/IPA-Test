@@ -25,7 +25,6 @@ class JobView extends GetView<JobController> {
         ],
       ),
       body: Obx(() {
-        // Jika data masih loading, tampilkan indikator loading
         if (controller.isLoading.value) {
           return Center(child: CircularProgressIndicator());
         } else if (controller.jobs.isEmpty) {
