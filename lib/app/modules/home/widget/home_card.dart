@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
+// ignore: must_be_immutable
 class HomeCard extends StatelessWidget {
   final String icon;
   final String title;
@@ -27,7 +28,7 @@ class HomeCard extends StatelessWidget {
               width: 32,
               height: 32,
             ),
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             Row(

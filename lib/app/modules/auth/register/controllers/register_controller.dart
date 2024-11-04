@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/data/models/request/register_request.dart';
+import 'package:maritimmuda_connect/app/data/services/auth_service.dart';
+import 'package:maritimmuda_connect/app/data/utils/province.dart';
+import 'package:maritimmuda_connect/app/modules/auth/register/views/register_success_view.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_snackbar.dart';
+import 'package:maritimmuda_connect/themes.dart';
 
 class RegisterController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -8,28 +14,13 @@ class RegisterController extends GetxController {
   final TextEditingController passwordC = TextEditingController();
   final TextEditingController confirmPassC = TextEditingController();
   final List<String> genderOptions = ['Male', 'Female'];
-  final List<String> provinceOptions = [
-    'Jawa Barat',
-    'Jawa Tengah',
-    'Banten',
-    'DKI Jakarta',
-    'Jawa Timur',
-    'Kalimantan Barat',
-    'Sumatra Utara',
-  ];
 
   var isLoading = false.obs;
-  var isAuthenticated = false.obs;
   var obscureText = true.obs;
-  var selectedGender = RxnString();
-  var selectedProvince = RxnString();
-
-  @override
-  void onInit() {
-    super.onInit();
-    selectedGender.value = genderOptions[0];
-    selectedProvince.value = provinceOptions[0];
-  }
+  var selectedGender = 1.obs;
+  var selectedProvince = 0.obs;
+  var selectedProvinceReq = 1.obs;
+  var isCheckField = false.obs;
 
   bool validateForm() {
     return formKey.currentState!.validate();
@@ -40,27 +31,51 @@ class RegisterController extends GetxController {
   }
 
   void setSelectedGender(String? value) {
-    selectedGender.value = value;
+    if (value != null) {
+      selectedGender.value = genderOptions.indexOf(value) + 1;
+    }
   }
 
   void setSelectedProvince(String? value) {
-    selectedProvince.value = value;
+    if (value != null) {
+      String? selectedKey = provinceOptions.entries
+          .firstWhere((entry) => entry.value == value)
+          .key;
+
+      selectedProvince.value = provinceOptions.values.toList().indexOf(value);
+      selectedProvinceReq.value = int.parse(selectedKey);
+    }
   }
 
   void validateName(String value) {
     formKey.currentState!.validate();
+    checkField();
   }
 
   void validateEmail(String value) {
     formKey.currentState!.validate();
+    checkField();
   }
 
   void validatePassword(String value) {
     formKey.currentState!.validate();
+    checkField();
   }
 
   void validateConfirmPass(String value) {
     formKey.currentState!.validate();
+    checkField();
+  }
+
+  void checkField() {
+    if (nameC.text.isEmpty &&
+        emailC.text.isEmpty &&
+        passwordC.text.isEmpty &&
+        confirmPassC.text.isEmpty) {
+      isCheckField.value = false;
+    } else {
+      isCheckField.value = true;
+    }
   }
 
   bool isValidEmail(String email) {
@@ -90,10 +105,8 @@ class RegisterController extends GetxController {
   String? validatePasswordField(String? value) {
     if (value == null || value.isEmpty) {
       return "Password is required";
-    } else if (value.length < 7) {
-      return "Password must be more than 7 characters";
-    } else if (!RegExp(r'\d').hasMatch(value)) {
-      return "Password must contain numbers";
+    } else if (value.length < 4) {
+      return "Password must be more than 4 characters";
     }
     return null;
   }
@@ -105,6 +118,27 @@ class RegisterController extends GetxController {
       return "Password does not match";
     }
     return null;
+  }
+
+  void register(RegisterRequest request) async {
+    try {
+      isLoading.value = true;
+      bool success = await AuthService().register(request);
+      if (success) {
+        Get.off(
+          () => const RegisterSuccessView(),
+          transition: Transition.rightToLeft,
+          duration: const Duration(milliseconds: 100),
+        );
+      } else {
+        customSnackbar(
+          "Register failed, please check your input field",
+          secondaryRedColor,
+        );
+      }
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   @override

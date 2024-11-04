@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.textSize,
     this.gradient,
+    this.isLoading,
   });
 
   final String text;
@@ -22,34 +23,9 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final TextStyle? textSize;
   final LinearGradient? gradient;
+  final bool? isLoading;
 
   @override
-  // tadinya pake button yang ini
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       width: width ?? double.infinity,
-//       height: height ?? 55,
-//       child: ElevatedButton(
-//         onPressed: onPressed,
-//         style: ElevatedButton.styleFrom(
-//           foregroundColor: neutral01Color,
-//           backgroundColor: color ?? primaryBlueColor,
-//           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(radius ?? 10),
-//           ),
-//           elevation: 5,
-//         ),
-//         child: Text(
-//           text,
-//           style: textSize ?? boldText20,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-  // gua ganti code buttonnya soalnya butuh linear gradient di button e-kta
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
@@ -57,8 +33,8 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.zero, // Hapus padding default
-          backgroundColor: primaryBlueColor,
+          padding: EdgeInsets.zero,
+          backgroundColor: color ?? primaryBlueColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius ?? 10),
           ),
@@ -75,10 +51,17 @@ class CustomButton extends StatelessWidget {
             alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Text(
-                text,
-                style: textSize ?? boldText20.copyWith(color: neutral01Color),
-              ),
+              child: isLoading == true
+                  ? SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(color: neutral01Color),
+                    )
+                  : Text(
+                      text,
+                      style: textSize ??
+                          boldText20.copyWith(color: neutral01Color),
+                    ),
             ),
           ),
         ),

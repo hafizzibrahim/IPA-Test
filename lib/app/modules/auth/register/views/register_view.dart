@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maritimmuda_connect/app/modules/auth/login/bindings/login_binding.dart';
-import 'package:maritimmuda_connect/app/modules/auth/login/views/login_view.dart';
+import 'package:maritimmuda_connect/app/data/models/request/register_request.dart';
+import 'package:maritimmuda_connect/app/data/utils/province.dart';
+import 'package:maritimmuda_connect/app/modules/auth/widget/header_auth.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_dropdown.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
@@ -20,23 +21,7 @@ class RegisterView extends GetView<RegisterController> {
           child: Center(
             child: Column(
               children: [
-                Container(
-                  height: 80,
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: neutral01Color,
-                    border: Border.all(color: neutral03Color, width: 1),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(13),
-                    child: Image.asset("assets/images/maritimmuda_connect.png"),
-                  ),
-                ),
+                const HeaderAuth(),
                 const SizedBox(height: 55),
                 Container(
                   width: double.infinity,
@@ -56,7 +41,8 @@ class RegisterView extends GetView<RegisterController> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Register",
-                            style: mediumText30,
+                            style: mediumText30.copyWith(
+                                color: primaryDarkBlueColor),
                           ),
                         ),
                         const SizedBox(height: 7),
@@ -65,13 +51,17 @@ class RegisterView extends GetView<RegisterController> {
                           child: Text(
                             "Enter a few details below",
                             style:
-                                regulerText10.copyWith(color: neutral03Color),
+                                regulerText11.copyWith(color: neutral03Color),
                           ),
                         ),
                         const SizedBox(height: 30),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Name"),
+                          child: Text(
+                            "Name",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
@@ -86,9 +76,13 @@ class RegisterView extends GetView<RegisterController> {
                               color: neutral03Color),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Email"),
+                          child: Text(
+                            "Email",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
@@ -103,41 +97,53 @@ class RegisterView extends GetView<RegisterController> {
                               Icon(Icons.email_outlined, color: neutral03Color),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Gender"),
+                          child: Text(
+                            "Gender",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
                           () => CustomDropdown(
                             options: controller.genderOptions,
-                            selectedOption:
-                                controller.selectedGender.value ?? "",
+                            selectedOption: controller.genderOptions[
+                                controller.selectedGender.value - 1],
                             onSelected: (String? value) {
                               controller.setSelectedGender(value);
                             },
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Province"),
+                          child: Text(
+                            "Province",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
                           () => CustomDropdown(
-                            options: controller.provinceOptions,
-                            selectedOption:
-                                controller.selectedProvince.value ?? "",
+                            options: provinceOptions.values.toList(),
+                            selectedOption: provinceOptions.values
+                                .toList()[controller.selectedProvince.value],
                             onSelected: (String? value) {
                               controller.setSelectedProvince(value);
                             },
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Password"),
+                          child: Text(
+                            "Password",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -168,9 +174,13 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Confirm Password"),
+                          child: Text(
+                            "Confirm Password",
+                            style: regulerText12.copyWith(
+                                color: primaryDarkBlueColor),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Obx(
@@ -201,18 +211,37 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        CustomButton(
-                          onPressed: () {
-                            if (controller.validateForm()) {
-                              Get.offAll(
-                                () => const LoginView(),
-                                binding: LoginBinding(),
-                                transition: Transition.leftToRight,
-                                duration: const Duration(milliseconds: 1000),
+                        Obx(
+                          () {
+                            if (controller.isCheckField.value) {
+                              return CustomButton(
+                                text: "Register",
+                                isLoading: controller.isLoading.value,
+                                onPressed: () {
+                                  if (controller.validateForm()) {
+                                    controller.register(
+                                      RegisterRequest(
+                                        name: controller.nameC.text,
+                                        email: controller.emailC.text,
+                                        gender: controller.selectedGender.value,
+                                        provinceId: controller
+                                            .selectedProvinceReq.value,
+                                        password: controller.passwordC.text,
+                                        passwordConfirmation:
+                                            controller.confirmPassC.text,
+                                      ),
+                                    );
+                                  }
+                                },
+                              );
+                            } else {
+                              return CustomButton(
+                                onPressed: () {},
+                                text: "Register",
+                                color: neutral03Color,
                               );
                             }
                           },
-                          text: "Register",
                         ),
                         const SizedBox(height: 15),
                         InkWell(
@@ -230,7 +259,7 @@ class RegisterView extends GetView<RegisterController> {
                               Text(
                                 "Login",
                                 style: regulerText10.copyWith(
-                                    color: primaryBlueColor),
+                                    color: primaryDarkBlueColor),
                               ),
                             ],
                           ),

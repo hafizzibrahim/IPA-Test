@@ -1,23 +1,21 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+import '../../../data/utils/user_preference.dart';
 
-  final count = 0.obs;
+class HomeController extends GetxController {
+  final name = ''.obs;
+  final serialNumber = ''.obs;
+  final userPreferences = UserPreferences();
+
   @override
   void onInit() {
     super.onInit();
+    loadUserData(); // Muat data pengguna saat controller diinisialisasi
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> loadUserData() async {
+    name.value = (await userPreferences.getName())?.toString() ?? 'User';
+    serialNumber.value =
+        (await userPreferences.getSerialNumber())?.toString() ?? '0000';
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

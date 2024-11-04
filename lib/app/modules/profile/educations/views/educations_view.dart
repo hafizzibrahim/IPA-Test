@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/data/models/request/educations_request.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_dropdown.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
 import 'package:maritimmuda_connect/themes.dart';
 import '../../../widget/custom_dialog.dart';
+import '../../../widget/custom_snackbar.dart';
 import '../../../widget/custom_textfield.dart';
 import '../../../widget/profile_button.dart';
 import '../controllers/educations_controller.dart';
@@ -30,7 +32,6 @@ class EducationsView extends GetView<EducationsController> {
               ),
             ),
             const SizedBox(height: 16),
-            // Form widget wrapping the input fields
             Container(
               decoration: BoxDecoration(
                   color: neutral01Color,
@@ -39,6 +40,7 @@ class EducationsView extends GetView<EducationsController> {
               width: double.infinity,
               margin: const EdgeInsets.symmetric(horizontal: 13),
               child: Form(
+                key: controller.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -49,6 +51,12 @@ class EducationsView extends GetView<EducationsController> {
                     const SizedBox(height: 8),
                     CustomTextField(
                         controller: controller.institutionController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter institution name';
+                          }
+                          return null;
+                        },
                         hintText: 'Enter your Institution Name'),
                     const SizedBox(height: 16),
                     Text(
@@ -60,6 +68,12 @@ class EducationsView extends GetView<EducationsController> {
                     ),
                     CustomTextField(
                       controller: controller.majorController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter major/field study name';
+                        }
+                        return null;
+                      },
                       hintText: 'Enter your Major/Field Study',
                     ),
                     const SizedBox(
@@ -112,6 +126,29 @@ class EducationsView extends GetView<EducationsController> {
                           ),
                           color: primaryDarkBlueColor,
                           text: 'Save',
+                          onTap: () {
+                            if (controller.validateForm()) {
+                              if (controller.isEdit.value) {
+                                EducationsRequest request = EducationsRequest(
+                                    institutionName: controller.institutionController.text,
+                                    major: controller.majorController.text,
+                                    level: controller.getLevelValue(controller.selectedLevel.value),
+                                    graduationDate: controller.formatDateRequest(controller.selectedDate.value ?? DateTime.now())
+                                );
+                                controller.updateEducations(request, controller.idCard.value);
+                                controller.isEdit.value = false;
+                                controller.idCard.value = 0;
+                              } else {
+                                EducationsRequest request = EducationsRequest(
+                                    institutionName: controller.institutionController.text,
+                                    major: controller.majorController.text,
+                                    level: controller.getLevelValue(controller.selectedLevel.value),
+                                    graduationDate: controller.formatDateRequest(controller.selectedDate.value ?? DateTime.now())
+                                );
+                                controller.createEducations(request);
+                              }
+                            }
+                          },
                         ),
                         const SizedBox(
                           width: 10,
@@ -124,32 +161,44 @@ class EducationsView extends GetView<EducationsController> {
                             color: secondaryRedColor,
                             text: 'Clear',
                             onTap: () {
+                              controller.isEdit.value = false;
                               showCustomDialog(
-                                  content: 'Are you sure you want to clear all data entered?',
-                                  onConfirm: () {
-                                    controller.clearAll();
-                                    Get.back();
-                                    Get.snackbar(
-                                        'Cleared',
-                                        'All data has been deleted successfully',
-                                        snackPosition: SnackPosition.BOTTOM
-                                    );
-                                  },
-                                  onCancel: (){
-                                    Get.back();
-                                  });
+                                content: 'Are you sure you want to clear all data entered?',
+                                onConfirm: () {
+                                  controller.clearAll();
+                                  Get.back();
+                                  customSnackbar(
+                                    'All data has been deleted successfully'
+                                  );
+                                },
+                                onCancel: () {
+                                  Get.back();
+                                },
+                              );
                             }
                         )
                       ],
                     ),
                     const SizedBox(height: 30),
-                    ProfileCard(
-                        title: 'Universitas Indonesia',
-                        leftSubTitle: 'Ilmu Komputer',
-                        rightSubTitle: 'August 2025',
-                        onTap1: () {},
-                        onTap2: () {},
-                        onTap3: () {}),
+                    Obx(() => Column(
+                      children: controller.educationList.map((activity) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: ProfileCard(
+                            title: activity.institutionName!,
+                            leftSubTitle: activity.major!,
+                            startDate: activity.graduationDate != null ? controller.formatDate(activity.graduationDate) : 'N/A',
+                            onTap1: () {
+                              controller.isEdit.value = true;
+                              controller.idCard.value = activity.id!;
+                              controller.patchField(activity);
+                            },
+                            onTap2: () => controller.deleteEducations(activity.id!),
+                            onTap3: () {},
+                          ),
+                        );
+                      }).toList(),
+                    )),
                   ],
                 ),
               ),

@@ -23,9 +23,44 @@ class UserPreferences {
     return prefs.getString('userId');
   }
 
-  Future<bool?> getLoggedIn() async {
+  Future<String?> getUid() async {
     final prefs = await _getPrefs();
-    return prefs.getBool('loggedIn');
+    return prefs.getString('uid');
+  }
+
+  Future<String?> getUuid() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('uuid');
+  }
+
+  Future<String?> getName() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('name');
+  }
+
+  Future<String?> getEmail() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('email');
+  }
+
+  Future<int?> getSerialNumber() async {
+    final prefs = await _getPrefs();
+    return prefs.getInt('serial_number');
+  }
+  
+  Future<String?> getPlaceOfBirth() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('place_of_birth');
+  }
+
+  Future<String?> getBio() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('bio');
+  }
+
+  Future<String?> getCreatedAt() async {
+    final prefs = await _getPrefs();
+    return prefs.getString('created_at');
   }
 
   Future<void> logout() async {
