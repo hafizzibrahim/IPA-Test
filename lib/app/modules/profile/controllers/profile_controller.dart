@@ -32,6 +32,7 @@ class ProfileController extends GetxController {
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   Rx<int?> selectedMonth = Rx<int?>(null);
   Rx<int?> selectedYear = Rx<int?>(null);
+  Rx<int?> selectedOption = Rx<int?>(null);
   Map<String, int> expertiseMap = {};
   int indexCounter = 0;
   var selectedFirstExpertise = 0.obs;

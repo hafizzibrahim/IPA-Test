@@ -2,20 +2,23 @@ import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:maritimmuda_connect/app/data/models/request/achievements_request.dart';
+import 'package:maritimmuda_connect/app/data/models/response/achievements_response.dart';
+import 'package:maritimmuda_connect/app/data/services/achievements_service.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 import '../../../widget/custom_snackbar.dart';
 
 class Achievements {
   final String award;
-  final String appreciatior;
+  final String appreciator;
   final String eventName;
   final String eventLevel;
   final String date;
 
   Achievements({
     required this.award,
-    required this.appreciatior,
+    required this.appreciator,
     required this.eventName,
     required this.eventLevel,
     required this.date,
@@ -24,19 +27,20 @@ class Achievements {
 
 
 class AchievementController extends GetxController {
-  //TODO: Implement AchievementController
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController awardC = TextEditingController();
   final TextEditingController appreciatorC = TextEditingController();
   final TextEditingController eventNameC = TextEditingController();
   final TextEditingController eventLevelC = TextEditingController();
   final TextEditingController dateC = TextEditingController();
+
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
-  RxList<Achievements> achievement = <Achievements>[].obs;
+  var isLoading = false.obs;
+  var achievementsData = <AchievementsResponse>[].obs;
 
   String formatDate(DateTime? date) {
-    return date != null ? DateFormat('MMMM yyyy').format(date) : '';
+    return DateFormat('yyyy-MM').format(date!);
   }
 
   Rx<int?> selectedMonth = Rx<int?>(null);
@@ -54,10 +58,16 @@ class AchievementController extends GetxController {
   Future<void> selectDate(BuildContext context) async {
     showMonthPicker(
       context,
-      initialSelectedMonth: selectedMonth.value ?? DateTime.now().month,
-      initialSelectedYear: selectedYear.value ?? DateTime.now().year,
+      initialSelectedMonth: selectedMonth.value ?? DateTime
+          .now()
+          .month,
+      initialSelectedYear: selectedYear.value ?? DateTime
+          .now()
+          .year,
       firstYear: 1900,
-      lastYear: DateTime.now().year,
+      lastYear: DateTime
+          .now()
+          .year,
       selectButtonText: 'OK',
       cancelButtonText: 'Cancel',
       highlightColor: primaryBlueColor,
@@ -72,27 +82,72 @@ class AchievementController extends GetxController {
     );
   }
 
-  void saveAchievement() {
-    if (awardC.text.isNotEmpty &&
-    appreciatorC.text.isNotEmpty &&
-    eventNameC.text.isNotEmpty &&
-    eventLevelC.text.isNotEmpty &&
-    dateC.text.isNotEmpty) {
-      achievement.add(Achievements(
-        award: awardC.text,
-        appreciatior: appreciatorC.text,
-        eventName: eventNameC.text,
-        eventLevel: eventLevelC.text,
-        date: dateC.text
-      ));
-      clearAll();
-      customSnackbar(
-        'Success adding achievement history!',
-      );
-    } else {
-      customSnackbar(
-        'Please fill all fields!',
-      );
+  void patchField(AchievementsResponse achievementsData) {
+    awardC.text = achievementsData.awardName ?? '';
+    appreciatorC.text = achievementsData.appreciator ?? '';
+    eventNameC.text = achievementsData.awardName ?? '';
+    eventLevelC.text = achievementsData.eventLevel ?? '';
+    dateC.text = formatDate(achievementsData.achievedAt!);
+  }
+
+  void fetchAchievements() async {
+    try {
+      isLoading.value = true;
+      var data = await AchievementsService().fetchAchievements();
+      achievementsData.assignAll(data);
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void createAchievements(AchievementsRequest request) async {
+    print(request.toJson());
+    try {
+      isLoading.value = true;
+      bool success = await AchievementsService().createAchievements(request);
+      if (success) {
+        fetchAchievements();
+        clearAll();
+        customSnackbar(
+          'Success adding achievements history!',
+        );
+      } else {
+        customSnackbar(
+          'Failed adding achievements history!',
+          secondaryRedColor,
+        );
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void deleteAchievements(int id) async {
+    try {
+      isLoading.value = true;
+      bool success = await AchievementsService().deleteAchievements(id);
+
+      if (success) {
+        fetchAchievements();
+        customSnackbar(
+          'Success delete achievements!',
+          null,
+          const Duration(milliseconds: 800),
+        );
+      } else {
+        customSnackbar(
+          'Failed delete achievements!',
+          secondaryRedColor,
+        );
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
     }
   }
 
@@ -113,6 +168,10 @@ class AchievementController extends GetxController {
     super.onInit();
   }
 
+  bool validateForm() {
+    return formKey.currentState!.validate();
+  }
+
   @override
   void onReady() {
     super.onReady();
@@ -127,13 +186,4 @@ class AchievementController extends GetxController {
     eventLevelC.dispose();
     dateC.dispose();
   }
-
-  void deleteAchievement(int index) {
-    achievement.removeAt(index);
-    customSnackbar(
-      'Success deleting education history!',
-    );
-  }
-
-  void increment() => count.value++;
 }

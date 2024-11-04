@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maritimmuda_connect/app/data/models/request/publication_request.dart';
 import 'package:maritimmuda_connect/app/modules/profile/publication/controllers/publication_controller.dart';
+import 'package:maritimmuda_connect/app/modules/widget/custom_dropdown.dart';
 import 'package:maritimmuda_connect/app/modules/widget/custom_textfield.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_button.dart';
 import 'package:maritimmuda_connect/app/modules/widget/profile_card.dart';
@@ -57,9 +59,16 @@ class PublicationView extends GetView<PublicationController> {
                     const SizedBox(height: 16),
                     Text('Publication Type', style: boldText12),
                     const SizedBox(height: 8),
-                    CustomTextField(
-                      hintText: 'Enter publication type',
-                      controller: controller.pubTypeC,
+                    Obx(() =>
+                      CustomDropdown(
+                        options: controller.publicationOptions,
+                        hintText: 'Choose your publications type',
+                        selectedOption: controller.publicationOptions[
+                            controller.selectedPublicationType.value - 1],
+                        onSelected: (String? newPublicationType) {
+                          controller.setPublicationType(newPublicationType);
+                        },
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Text('Publisher', style: boldText12),
@@ -67,6 +76,13 @@ class PublicationView extends GetView<PublicationController> {
                     CustomTextField(
                       hintText: 'Enter publisher',
                       controller: controller.publisherC,
+                    ),
+                    const SizedBox(height: 16),
+                    Text('City of Publisher', style: boldText12),
+                    const SizedBox(height: 8),
+                    CustomTextField(
+                      hintText: 'Enter City of Publisher',
+                      controller: controller.cityC,
                     ),
                     const SizedBox(height: 16),
                     Text('Date of Publication', style: boldText12),
@@ -77,8 +93,8 @@ class PublicationView extends GetView<PublicationController> {
                         child: CustomTextField(
                           controller: controller.dateC,
                           hintText: 'Select date of publication',
-                          suffixIcon:
-                          Icon(Icons.calendar_today, color: primaryBlueColor),
+                          suffixIcon: Icon(Icons.calendar_today,
+                              color: primaryBlueColor),
                         ),
                       ),
                     ),
@@ -86,7 +102,7 @@ class PublicationView extends GetView<PublicationController> {
                     Text('Title Page', style: boldText12),
                     const SizedBox(height: 8),
                     Obx(
-                          () => Container(
+                      () => Container(
                         width: MediaQuery.of(context).size.width,
                         height: 50,
                         decoration: BoxDecoration(
@@ -111,7 +127,8 @@ class PublicationView extends GetView<PublicationController> {
                                     color: neutral03Color,
                                     border: Border.all(color: neutral02Color),
                                   ),
-                                  child: Text('Choose File', style: regulerText12),
+                                  child:
+                                      Text('Choose File', style: regulerText12),
                                 ),
                               ),
                             ),
@@ -131,9 +148,24 @@ class PublicationView extends GetView<PublicationController> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         ProfileButton(
-                          icon: Icon(Icons.save_outlined, color: neutral01Color),
+                          icon:
+                              Icon(Icons.save_outlined, color: neutral01Color),
                           text: 'Save',
-                          onTap: controller.savePublications,
+                          onTap: () {
+                            if (controller.validateForm()) {
+                              controller.createPublication(
+                                PublicationRequest(
+                                    title: controller.titleC.text,
+                                    authorName: controller.authorC.text,
+                                    type: controller.selectedPublicationType.value,
+                                    publisher: controller.publisherC.text,
+                                    city: controller.cityC.text,
+                                    publishDate: controller.formatDate(
+                                        controller.selectedDate.value ??
+                                            DateTime.now())),
+                              );
+                            }
+                          },
                           color: primaryDarkBlueColor,
                         ),
                         const SizedBox(width: 10),
@@ -144,7 +176,7 @@ class PublicationView extends GetView<PublicationController> {
                           onTap: () {
                             showCustomDialog(
                               content:
-                              'Are you sure you want to clear all data entered?',
+                                  'Are you sure you want to clear all data entered?',
                               onConfirm: () {
                                 controller.clearAll();
                                 Get.back();
@@ -161,37 +193,88 @@ class PublicationView extends GetView<PublicationController> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Obx(
-                          () => Column(
-                        children: controller.publication.asMap().entries.map((entry) {
-                          int idx = entry.key;
-                          Publication pub = entry.value;
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: ProfileCard(
-                              title: pub.title,
-                              rightTitle: pub.author,
-                              leftSubTitle: pub.pubType,
-                              rightSubTitle: pub.publisher,
-                              startDate: pub.date,
-                              imageUrl: pub.titlePage,
-                              onTap1: () {},
-                              onTap2: () => controller.deletePublication(idx),
-                              onTap3: () {},
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
+                Obx(
+                      () {
+                    if (controller.isLoading.value) {
+                      return CircularProgressIndicator();
+                    } else if (controller.publicationData.isEmpty) {
+                      return Container();
+                    } else {
+                      return SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                          itemCount: controller.publicationData.length,
+                          itemBuilder: (context, index) {
+                            final publicationData = controller.publicationData[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: ProfileCard(
+                                title: publicationData.title ?? '',
+                                rightTitle: publicationData.publisher,
+                                leftSubTitle: '',
+                                rightSubTitle: '',
+                                startDate:
+                                controller.formatDate(publicationData.publishDate!),
+                                imageUrl: '',
+                                onTap1: () {
+                                  controller.patchField(publicationData);
+                                },
+                                onTap2: () {
+                                  showCustomDialog(
+                                    content:
+                                    'Are you sure you want to delete this data?',
+                                    onConfirm: () {
+                                      controller
+                                          .deletePublication(publicationData.id ?? 0);
+                                      Get.back();
+                                    },
+                                    onCancel: () {
+                                      Get.back();
+                                    },
+                                  );
+                                },
+                                onTap3: () {},
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  },
+                ),
+                    const SizedBox(
+                      height: 50,
+                    )
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 50),
           ],
         ),
       ),
     );
   }
 }
+
+// Obx(
+//       () => Column(
+//     children: controller.publication.asMap().entries.map((entry) {
+//       int idx = entry.key;
+//       Publication pub = entry.value;
+//       return Padding(
+//         padding: const EdgeInsets.only(bottom: 16.0),
+//         child: ProfileCard(
+//           title: pub.title,
+//           rightTitle: pub.author,
+//           leftSubTitle: pub.pubType,
+//           rightSubTitle: pub.publisher,
+//           startDate: pub.date,
+//           imageUrl: pub.titlePage,
+//           onTap1: () {},
+//           onTap2: () => controller.deletePublication(idx),
+//           onTap3: () {},
+//         ),
+//       );
+//     }).toList(),
+//   ),
+// ),

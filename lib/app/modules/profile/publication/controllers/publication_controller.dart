@@ -4,27 +4,12 @@ import 'package:flutter_custom_month_picker/flutter_custom_month_picker.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:maritimmuda_connect/app/data/models/request/publication_request.dart';
+import 'package:maritimmuda_connect/app/data/models/response/publication_response.dart';
+import 'package:maritimmuda_connect/app/data/services/publication_service.dart';
 import 'package:maritimmuda_connect/themes.dart';
 
 import '../../../widget/custom_snackbar.dart';
-
-class Publication {
-  final String title;
-  final String author;
-  final String pubType;
-  final String publisher;
-  final String date;
-  final String? titlePage;
-
-  Publication({
-    required this.title,
-    required this.author,
-    required this.pubType,
-    required this.publisher,
-    required this.date,
-    this.titlePage,
-  });
-}
 
 class PublicationController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -32,18 +17,21 @@ class PublicationController extends GetxController {
   final TextEditingController authorC = TextEditingController();
   final TextEditingController pubTypeC = TextEditingController();
   final TextEditingController publisherC = TextEditingController();
+  final TextEditingController cityC = TextEditingController();
   final TextEditingController dateC = TextEditingController();
 
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
-  RxList<Publication> publication = <Publication>[].obs;
 
   // Updated file related variables
   RxString selectedFileName = 'No File Chosen'.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
   RxString selectedImagePath = ''.obs;
+  var publicationData = <PublicationResponse>[].obs;
+  var isLoading = false.obs;
+  var selectedPublicationType = 1.obs;
 
-  String formatDate(DateTime? date) {
-    return date != null ? DateFormat('MMMM yyyy').format(date) : '';
+  String formatDate(DateTime date) {
+    return DateFormat('yyyy-MM').format(date);
   }
 
   Rx<int?> selectedMonth = Rx<int?>(null);
@@ -56,6 +44,17 @@ class PublicationController extends GetxController {
     } else {
       return '';
     }
+  }
+
+  @override
+  void onInit(){
+    super.onInit();
+    fetchPublications();
+    selectedPublicationType.value = 1;
+  }
+
+  bool validateForm() {
+    return formKey.currentState!.validate();
   }
 
   Future<void> selectDate(BuildContext context) async {
@@ -79,6 +78,16 @@ class PublicationController extends GetxController {
     );
   }
 
+  final List<String> publicationOptions = [
+    'Choose your publications type',
+    'Abstract',
+    'Book',
+    'Journal Article',
+    'Magazine Article',
+    'News Article',
+    'Proceeding Article',
+  ];
+
   Future<void> pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -96,37 +105,74 @@ class PublicationController extends GetxController {
     }
   }
 
-  void savePublications() {
-    if (formKey.currentState!.validate() &&
-        titleC.text.isNotEmpty &&
-        authorC.text.isNotEmpty &&
-        pubTypeC.text.isNotEmpty &&
-        publisherC.text.isNotEmpty &&
-        dateC.text.isNotEmpty) {
-      publication.add(Publication(
-        title: titleC.text,
-        author: authorC.text,
-        pubType: pubTypeC.text,
-        publisher: publisherC.text,
-        date: dateC.text,
-        titlePage: selectedImagePath.value,
-      ));
-      clearAll();
-      customSnackbar(
-        'Success adding publication history',
-      );
-    } else {
-      customSnackbar(
-        'Please fill all fields!',
-      );
+  void patchField(PublicationResponse publicationData) {
+    titleC.text = publicationData.title ?? '';
+    authorC.text = publicationData.authorName ?? '';
+    selectedPublicationType.value = publicationData.type ?? 0;
+    publisherC.text = publicationData.publisher ?? '';
+    cityC.text = publicationData.city ?? '';
+    dateC.text = formatDate(publicationData.publishDate ?? DateTime.now());
+  }
+
+  void fetchPublications() async {
+    try {
+      isLoading.value = true;
+      var data = await PublicationService().fetchPublication();
+      publicationData.assignAll(data);
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
     }
   }
 
-  void deletePublication(int index) {
-    publication.removeAt(index);
-    customSnackbar(
-      'Success deleting education history!',
-    );
+  void createPublication(PublicationRequest request) async {
+    print(request.toJson());
+    try {
+      isLoading.value = true;
+      bool success = await PublicationService().createPublication(request);
+      if (success) {
+        fetchPublications();
+        clearAll();
+        customSnackbar(
+          'Success adding publication history!',
+        );
+      } else {
+        customSnackbar(
+          'Failed adding publication history!',
+          secondaryRedColor,
+        );
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void deletePublication(int id) async {
+    try {
+      isLoading.value = true;
+      bool success = await PublicationService().deletePublication(id);
+
+      if (success) {
+        fetchPublications();
+        customSnackbar(
+          'Success delete publication!',
+          null,
+          const Duration(milliseconds: 800),
+        );
+      } else {
+        customSnackbar(
+          'Failed delete publication!',
+          secondaryRedColor,
+        );
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void clearAll() {
@@ -136,7 +182,6 @@ class PublicationController extends GetxController {
     publisherC.clear();
     dateC.clear();
 
-    selectedDate.value = null;
     selectedFileName.value = 'No File Chosen';
     selectedImagePath.value = '';
     selectedImage.value = null;
@@ -150,5 +195,10 @@ class PublicationController extends GetxController {
     publisherC.dispose();
     dateC.dispose();
     super.onClose();
+  }
+  void setPublicationType(String? value) {
+    if (value != null) {
+      selectedPublicationType.value = publicationOptions.indexOf(value) + 1;
+    }
   }
 }
