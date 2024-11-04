@@ -8,6 +8,7 @@ import '../../analytics/views/analytics_view.dart';
 import '../../catalog/controllers/catalog_controller.dart';
 import '../../catalog/views/catalog_view.dart';
 import '../../home/event/controllers/event_controller.dart';
+import '../../home/job/controllers/job_controller.dart';
 import '../../home/views/home_view.dart';
 import '../../profile/achievement/controllers/achievement_controller.dart';
 import '../../profile/main_drawer/controllers/main_drawer_controller.dart';
@@ -19,6 +20,7 @@ class MainController extends GetxController with GetTickerProviderStateMixin {
     Get.put(CatalogController());
     Get.put(EventController());
     Get.put(AnalyticsController());
+    Get.put(JobController());
   }
 
   PageController pageController = PageController();
